@@ -1,0 +1,22 @@
+{
+  "tipo": "imagens sinteticas de uma cena tridimensional controlada",
+  "resolucao": [
+    640,
+    640
+  ],
+  "lente_mm": 35,
+  "sensor_horizontal_mm": 36,
+  "altura_base_m": 25,
+  "altura_alternativa_m": 50,
+  "referencia_altura": "plano z=0 do mundo; terreno proximo desse plano",
+  "camera": "perspectiva, nadir, pixels quadrados",
+  "cor": "RGB de 8 bits codificado; valores digitais, não radiância linear",
+  "mascaras": "superfície visível da pessoa; limiar de binarização em 128",
+  "variantes": [
+    "base",
+    "altura",
+    "orientacao do Sol",
+    "oclusor acrescentado"
+  ],
+  "avaliacao": "demonstracao controlada, sem estimativa de generalizacao"
+}
