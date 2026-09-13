@@ -7,7 +7,7 @@ import torch
 from IPython.display import HTML
 from matplotlib import font_manager, rc_context
 from matplotlib.patches import Rectangle
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms.functional import pil_to_tensor, to_pil_image
 from torchvision.utils import draw_bounding_boxes
 
@@ -61,11 +61,34 @@ def mostrar_caixas(imagem, caixas, rotulos=None):
         raise ValueError("Forneça um rótulo para cada caixa.")
     if len(caixas) == 0:
         return to_pil_image(imagem)
-    resultado = draw_bounding_boxes(
-        imagem, caixas, labels=rotulos, colors=COR_CAIXA, width=3,
-        font=font_manager.findfont("DejaVu Sans"), font_size=18,
-    )
-    return to_pil_image(resultado)
+    resultado = to_pil_image(draw_bounding_boxes(imagem, caixas, colors=COR_CAIXA, width=3))
+    if rotulos is None:
+        return resultado
+
+    desenho = ImageDraw.Draw(resultado)
+    largura, altura = resultado.size
+    caminho_fonte = font_manager.findfont("DejaVu Sans")
+    margem = 4
+    for caixa, rotulo in zip(caixas.tolist(), rotulos):
+        if not rotulo:
+            continue
+        fonte = ImageFont.truetype(caminho_fonte, 18)
+        limites = desenho.textbbox((0, 0), rotulo, font=fonte)
+        while (limites[2] - limites[0] + 2 * margem > largura
+               or limites[3] - limites[1] + 2 * margem > altura) and fonte.size > 1:
+            fonte = ImageFont.truetype(caminho_fonte, fonte.size - 1)
+            limites = desenho.textbbox((0, 0), rotulo, font=fonte)
+        texto_largura = limites[2] - limites[0] + 2 * margem
+        texto_altura = limites[3] - limites[1] + 2 * margem
+        x = max(0, min(round(caixa[0]), largura - texto_largura))
+        y = round(caixa[1]) - texto_altura
+        if y < 0:
+            y = round(caixa[1]) + 3
+        y = max(0, min(y, altura - texto_altura))
+        desenho.rectangle((x, y, x + texto_largura - 1, y + texto_altura - 1), fill="#202830")
+        desenho.text((x + margem - limites[0], y + margem - limites[1]),
+                     rotulo, font=fonte, fill="white")
+    return resultado
 
 
 def comparar_recortes(imagem):
