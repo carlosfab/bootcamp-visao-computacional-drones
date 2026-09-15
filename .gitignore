@@ -6,3 +6,6 @@ __pycache__/
 .DS_Store
 .env
 .env.*
+
+# Planejamento local do professor
+/projeto-1/planejamento/
