@@ -25,6 +25,9 @@ Este diretório é o material completo para quem está fazendo o projeto. Comece
   nesse caso, atualize o pyproject.toml, gere `uv lock` e verifique novamente o ambiente.
 - Para RunPod, use SETUP-RUNPOD-PROMPT.md. Confirme com o usuário os recursos pagos antes de criá-los.
 - Explique as etapas e os resultados. Não antecipe uma conclusão baseada em números de outra execução.
+- Ao salvar notebooks executados, confira textos, tabelas e uma imagem em cada célula que chama
+  plt.show(). Use o backend inline do Jupyter; Agg sozinho não incorpora figuras ao notebook.
+  Reabra o arquivo salvo e valide as saídas antes de publicar, além de conferir a ausência de erros.
 - Preserve os splits oficiais por cena. Selecione checkpoint e limiar somente na validação;
   congele o protocolo antes de avaliar no teste. Não ajuste parâmetros para melhorar o teste.
 - Ao mudar a configuração, use outro NOME_EXECUCAO. Preserve os registros e pesos anteriores.

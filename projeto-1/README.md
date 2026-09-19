@@ -33,8 +33,9 @@ O notebook 00 explora os dados originais, antes da conversão e do treinamento.
 | [AGENTS.md](AGENTS.md) | Contexto para um agente ajudar você a executar o experimento |
 | [tests/test_notebooks.py](tests/test_notebooks.py) | Verificações locais da lógica dos notebooks, sem treino ou download |
 
-Os tempos dependem de download, hardware e armazenamento. A duração com parada antecipada
-é uma projeção baseada no histórico anterior, ainda não uma medição da nova configuração.
+Os tempos dependem de download, hardware e armazenamento. Na execução de 19/09/2026,
+o treinamento com parada antecipada levou aproximadamente 53 minutos em uma RTX 4090. A estimativa total inclui preparação e avaliação; não é uma
+garantia de duração em outra máquina ou execução.
 
 ## Protocolo do artigo e adaptação didática
 
@@ -48,6 +49,12 @@ Essa escolha é uma adaptação nossa e deve ser mencionada ao comparar os resul
 artigo. A parada acompanha `0,1 × mAP50 + 0,9 × mAP50–95` na validação; o teste não participa
 da decisão. A época de encerramento e o resultado podem variar em uma nova execução.
 Se houver melhorias contínuas, o treinamento poderá cumprir as 100 épocas.
+
+Na execução didática de **19/09/2026**, a parada ocorreu na **época 35**, preservando o melhor
+checkpoint da **época 25**. A comparação dos 355 tensores do `best.pt` confirmou pesos
+numericamente idênticos aos do melhor checkpoint da nossa referência de 100 épocas. Esse
+resultado foi observado nesta repetição com a configuração fixada; não garante igualdade
+em outros treinamentos.
 
 O notebook registra o limite, a paciência e as épocas efetivas em `treinamento_concluido.json`
 e `protocolo_congelado.json`. Se o treino terminar cedo, poderá não executar a fase final
