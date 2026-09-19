@@ -2,6 +2,14 @@
 
 Material de apoio para acompanhar as práticas do bootcamp da Academia Sigmoidal.
 
+## Projeto 1 · Busca e salvamento com imagens térmicas
+
+A pasta **[projeto-1](projeto-1/README.md)** contém o experimento completo: preparação do
+ambiente e dos dados, treinamento do detector, avaliação e análise dos resultados.
+Comece pelo README da pasta e execute os notebooks 00, 01 e 02 na ordem indicada.
+A análise exploratória (00) usa um ambiente leve, sem PyTorch ou GPU. O projeto usa
+um ambiente próprio; o ambiente uv está definido em `projeto-1/pyproject.toml` e `projeto-1/uv.lock`.
+
 ## Aula 2 · PyTorch e visão computacional
 
 Os notebooks estão na pasta [aula-02](aula-02). Siga a sequência abaixo. Cada um pode ser executado de forma independente.

@@ -1,148 +1,207 @@
-# Projeto 1 · Detecção de pessoas em imagens térmicas aéreas para busca e salvamento
+# Projeto 1 · Detecção de pessoas em imagens térmicas aéreas
 
-Neste projeto você treina um detector de pessoas em imagens térmicas capturadas por drone e
-responde a uma pergunta que não se resolve com acurácia: **este modelo serve para uma operação
-real de busca e salvamento?**
+Você vai preparar os dados, treinar um detector YOLOv8s e avaliar se ele atende a um requisito
+experimental de busca e salvamento: **encontrar pelo menos 90% das pessoas, com no máximo um
+falso positivo por imagem**. Um resultado de mAP, sozinho, não responde a essa pergunta.
 
-A diferença importa. Em uma missão real, deixar de encontrar uma pessoa e disparar um alarme
-falso não custam a mesma coisa. Um modelo com ótimo mAP pode ser inútil se as pessoas que ele
-perde forem justamente as parcialmente ocultas pela vegetação — que são o caso difícil e,
-não por acaso, o caso real.
+Todo o material necessário começa nesta pasta. O experimento usa o **POP** (*Partially Occluded
+Person*), de Song et al. (2025): 8.768 imagens térmicas aéreas e 26.811 pessoas anotadas.
+O notebook 00 explora os dados originais, antes da conversão e do treinamento.
 
-Você vai reproduzir o protocolo experimental de um artigo publicado, comparar seus números com
-os dos autores, e aprender por que a **ordem** das decisões em um experimento determina se o
-resultado final significa alguma coisa.
+**Artigo de referência:** Song et al. (2025), [Scientific Data, 12, 300](https://doi.org/10.1038/s41597-025-04600-0).
+**Dataset oficial:** [POP no OSF](https://osf.io/kmcva/overview).
 
-## O que você vai construir
+## Comece aqui
 
-Um detector YOLOv8s treinado no dataset **POP** (*Partially Occluded Person*), de Song et al.
-(2025): 8.768 imagens térmicas aéreas, 26.811 pessoas anotadas, capturadas a 30, 50 e 70 metros
-de altitude em ambientes naturais.
+1. Clone o repositório e entre em `projeto-1`.
+2. Para começar pela exploração, prepare o ambiente leve descrito abaixo e coloque o POP em `dados/POP`.
+3. Execute **00_analise_exploratoria.ipynb**. Depois, no ambiente completo do projeto, execute
+   **01_preparacao_dados.ipynb** para converter e preparar os dados.
+4. Prepare a máquina com GPU. Se ela for outra máquina, clone o repositório e execute o notebook
+   01 nela também, para colocar os dados no mesmo ambiente do treinamento.
+5. Execute **02_experimento_completo.ipynb**, da configuração à análise final.
+6. Salve os resultados indicados ao final deste guia antes de encerrar a máquina.
 
-Ao final você terá:
+| Arquivo | Para que serve |
+|---|---|
+| [00_analise_exploratoria.ipynb](00_analise_exploratoria.ipynb) | Apresentação acadêmica do dataset, conferência da Tabela 4, exemplos visuais e distribuições; CPU, sem PyTorch |
+| [requirements-eda.txt](requirements-eda.txt) | Dependências leves exclusivas da análise exploratória |
+| [01_preparacao_dados.ipynb](01_preparacao_dados.ipynb) | Download, conversão COCO → YOLO, auditoria de cenas, escala dos alvos e inspeção visual; cerca de 10 minutos, sem GPU |
+| [02_experimento_completo.ipynb](02_experimento_completo.ipynb) | Treinamento, seleção do checkpoint na validação, calibração, congelamento e teste; cerca de 3 horas em uma RTX 4090 |
+| [pyproject.toml](pyproject.toml), [uv.lock](uv.lock) e [.python-version](.python-version) | Ambiente uv: dependências, versões resolvidas e Python padrão |
+| [SETUP-RUNPOD-PROMPT.md](SETUP-RUNPOD-PROMPT.md) | Configuração da GPU na nuvem, com um agente ou manualmente |
+| [AGENTS.md](AGENTS.md) | Contexto para um agente ajudar você a executar o experimento |
+| [tests/test_notebooks.py](tests/test_notebooks.py) | Verificações locais da lógica dos notebooks, sem treino ou download |
 
-- um modelo treinado e um **protocolo congelado** que registra, com hash criptográfico, qual
-  modelo foi avaliado e com que configuração;
-- métricas em duas camadas — a **técnica** (mAP) e a **da missão** (recall e falsos positivos
-  por imagem);
-- uma análise de **onde** o modelo erra: por cena, por altitude de voo e por tamanho aparente
-  da pessoa;
-- uma comparação honesta com os valores publicados pelos autores.
+Os tempos são referências de execução; download, hardware e armazenamento afetam a duração.
 
-## Os notebooks
+## Análise exploratória em CPU: notebook 00
 
-Execute nesta ordem:
+O [notebook 00](00_analise_exploratoria.ipynb) apresenta o POP em português técnico acadêmico e
+recalcula contagens por cena, altura e clima. Inclui exemplos anotados, escala dos alvos, posição
+das caixas, auditoria de arquivos e comparação das partições. Não importa PyTorch ou Ultralytics.
 
-| Notebook | O que faz | GPU? | Tempo |
-|---|---|---|---|
-| [`aluno/01_preparacao_dados.ipynb`](aluno/01_preparacao_dados.ipynb) | baixa o POP, verifica a integridade, converte o formato, audita os splits e procura vazamento | não | ~10 min |
-| [`aluno/02_experimento_completo.ipynb`](aluno/02_experimento_completo.ipynb) | treina, escolhe o modelo, define o ponto de operação e mede o desempenho final | **sim** | ~3 h |
+Baixe `POP.zip` no [OSF](https://osf.io/kmcva/overview) e extraia em `projeto-1/dados`, formando
+`dados/POP/train`, `dados/POP/val` e `dados/POP/test`. Há um exemplo mínimo, comentado, de download
+no início do notebook. Nenhum download é executado automaticamente. O ZIP tem aproximadamente
+613 MiB. Dados brutos e saídas auxiliares (`saidas-eda/`) permanecem fora do Git.
 
-O notebook 01 roda em qualquer máquina. Rode-o no seu computador antes de alugar GPU: é a parte
-em que você inspeciona o dataset, e entender os dados antes de treinar é o hábito que este
-projeto mais quer ensinar.
+Com [uv instalado](https://docs.astral.sh/uv/getting-started/installation/), dentro de `projeto-1`,
+no macOS (Intel ou Apple Silicon) ou Linux:
 
-Uma ressalva honesta: você vai precisar rodá-lo **de novo** na máquina com GPU, porque os dados
-precisam estar no mesmo lugar que o treinamento. São cerca de 6 minutos lá. O que você ganha
-rodando antes é entendimento, não tempo.
-
-## Como conseguir uma GPU
-
-O notebook 02 precisa de uma GPU com **pelo menos 16 GB de VRAM** (a configuração usa ~14,3 GB).
-
-⚠️ **A geração da placa também importa.** Como este projeto exige `torch < 2.6` (veja
-*Requisitos técnicos*), e essa versão do PyTorch só traz código compilado até a arquitetura
-`sm_90`, placas **Blackwell — como a RTX 5090 — não funcionam**: o treinamento falha com
-`CUDA error: no kernel image is available for execution on the device`. Escolha uma RTX 4090,
-RTX 3090, A100, A6000, L40S ou equivalente. A RTX 4090 é a referência deste material.
-
-Se você não tem uma GPU assim, há dois caminhos.
-
-### Caminho A · RunPod (recomendado)
-
-Aluguel de GPU por hora. Uma RTX 4090 sai por volta de **US$ 0,70/hora**, e o projeto completo
-custa aproximadamente **US$ 2,00 a US$ 2,50**.
-
-👉 **[Criar conta no RunPod](https://runpod.io?ref=oke6mnm6)**
-
-> Esse é um link de indicação. Usá-lo não altera o seu custo e ajuda a manter este material.
-
-**Nunca usou RunPod, SSH ou terminal remoto?** Não tem problema — não é pré-requisito deste
-projeto. Preparei um prompt pronto para você colar em um agente (Claude Code, Codex, ChatGPT)
-que conduz toda a configuração passo a passo, explicando cada etapa:
-
-📋 **[aluno/SETUP-RUNPOD-PROMPT.md](aluno/SETUP-RUNPOD-PROMPT.md)**
-
-Esse arquivo também traz o passo a passo manual, para quem preferir, e uma tabela dos erros mais
-comuns com a solução de cada um.
-
-**Atenção ao custo:** você paga pelo tempo em que o pod está ligado, mesmo parado sem fazer nada.
-Desligue ao terminar.
-
-**Atenção ao volume:** os resultados só sobrevivem ao desligamento se estiverem no volume de rede.
-O diretório `/workspace` existe mesmo quando nenhum volume foi anexado — e, nesse caso, tudo é
-apagado junto com a máquina. Os notebooks avisam quando detectam essa situação, mas confira ao
-criar o pod que o volume está montado em `/workspace` e que ele fica na mesma região da GPU.
-
-### Caminho B · Google Colab
-
-Em preparação. O Colab gratuito não dá conta deste treinamento: são ~2h30 de GPU contínua, acima
-do limite das sessões gratuitas, que também desconectam sem aviso. Um Colab pago é viável, mas
-exige adaptações (montar o Drive, salvar checkpoints periodicamente, retomar após desconexão)
-que ainda não estão prontas.
-
-Enquanto isso, se você tem Colab Pro e quer tentar, o notebook 02 já retoma automaticamente de
-`last.pt` se for reexecutado. Mas saiba o que terá de adaptar: no Colab a variável `RAIZ` aponta
-para `/content/projeto-pop`, que é apagado ao fim da sessão. Não basta montar o Drive — é preciso
-editar a célula de caminhos nos dois notebooks para que `RAIZ` fique dentro do Drive.
-
-## Requisitos técnicos
-
-```
-ultralytics == 8.2.0
-numpy       <  2
-torch       <  2.6   (use 2.5.1)
+```bash
+uv venv --python 3.12 .venv-eda
+uv pip install --python .venv-eda/bin/python -r requirements-eda.txt
+.venv-eda/bin/python -m jupyterlab
 ```
 
-Essas versões não são recomendação, são requisito.
+No Windows, dentro da mesma pasta, use PowerShell:
 
-A ultralytics 8.2.0 carrega checkpoints com `torch.load()` sem passar `weights_only=False`. A
-partir do torch 2.6 esse argumento passou a valer `True` por padrão, e o carregamento do
-`yolov8s.pt` falha. É um detalhe de compatibilidade entre bibliotecas, sem qualquer efeito sobre
-o experimento — mas é o erro que mais trava quem monta o ambiente sozinho.
+```powershell
+uv venv --python 3.12 .venv-eda
+uv pip install --python .venv-eda/Scripts/python.exe -r requirements-eda.txt
+.\.venv-eda\Scripts\python.exe -m jupyterlab
+```
 
-Fixar a versão da ultralytics tem outra razão, essa científica: entre versões mudam defaults de
-augmentation, de perda e de pós-processamento. Se você rodar com outra versão e obtiver números
-diferentes, não saberá se a diferença veio do seu hardware, da sua semente ou de um default que
-mudou sem aviso.
+Abra o notebook 00 com o kernel **Python 3** desse Jupyter. Este ambiente é independente do
+`uv.lock` do treinamento. Para o notebook 01 e o treinamento, siga a seção seguinte.
 
-## O que observar enquanto executa
+O notebook distingue explicitamente os dados observados dos metadados do artigo. O pacote POP
+não oferece pares RGB/térmicos alinhados nem rótulos individuais de oclusão para reproduzir todas
+as figuras publicadas; essas limitações são documentadas, sem criar categorias inexistentes.
 
-O projeto foi desenhado em torno de quatro ideias. Se ao final você levar só isso, já valeu:
+## Ambiente completo: preparação e treinamento
 
-1. **O split não pode ser aleatório.** As imagens vêm de voos: o drone avança a ~1 m/s e a
-   câmera registra uma imagem por segundo, então quadros seguidos cobrem quase o mesmo terreno.
-   Dividir aleatoriamente coloca imagens fortemente redundantes no treino e no teste, e o
-   resultado passa a medir memorização em vez de capacidade de generalizar. O notebook 01 mostra
-   essa redundância medida em pixels.
+O ambiente já está configurado para **uv**. Instale o [uv](https://docs.astral.sh/uv/getting-started/installation/)
+e tenha aproximadamente **10 GB livres** para os dados, além do ambiente Python. O uv usa
+Python 3.12 por padrão e pode baixá-lo automaticamente, se necessário.
 
-2. **Escolher o modelo é uma decisão, e ela tem lugar certo.** O checkpoint é escolhido na
-   validação. Se você escolhesse olhando o teste, o número reportado no teste deixaria de ser
-   uma estimativa honesta — passaria a medir o quanto você explorou aquele conjunto.
+Após clonar o repositório, os mesmos comandos funcionam no macOS, Linux e PowerShell:
 
-3. **mAP não é requisito de missão.** O notebook mede duas coisas separadas: a qualidade técnica
-   (mAP) e o que a operação exige (recall com um teto de alarmes falsos). São perguntas
-   diferentes, e a segunda é a que decide se o sistema é utilizável.
+```bash
+git clone https://github.com/carlosfab/bootcamp-visao-computacional-drones.git
+cd bootcamp-visao-computacional-drones
+git switch main
+cd projeto-1
+uv sync --locked
+uv run --locked python -m ipykernel install --sys-prefix --name pop-env --display-name "POP (torch 2.5.1)"
+uv run --locked jupyter lab
+```
 
-4. **Um requisito que nunca falha não é um requisito.** O alvo de recall pode não ser atingido —
-   e, quando isso acontece, o procedimento registra a falha em vez de relaxar o critério até
-   caber. Esse é o comportamento correto.
+O comando `uv sync --locked` cria `.venv` e instala as versões de `uv.lock`. Não é necessário ativar o
+ambiente manualmente. O kernel é registrado dentro dele, sem alterar outros ambientes.
+No Jupyter, selecione **POP (torch 2.5.1)** e abra o notebook 01.
 
-## Referências
+A configuração cobre **macOS Apple Silicon**, **Linux x86_64** e **Windows x64**. No Linux e
+Windows, o uv instala automaticamente o PyTorch com CUDA 12.1; no Mac, usa a distribuição
+compatível com Apple Silicon. A preparação também roda em CPU. O treinamento exige GPU NVIDIA
+compatível e driver apropriado; instalar o ambiente não transforma uma máquina sem GPU em uma.
 
-- Song, Y. et al. **An infrared dataset for partially occluded person detection in complex
-  environment for search and rescue.** *Scientific Data* 12, 2025.
-  https://doi.org/10.1038/s41597-025-04600-0
+Macs Intel podem executar o notebook 00 no ambiente leve acima. Para os notebooks 01 e 02,
+este ambiente completo não suporta Macs Intel: não há wheel de torch 2.5.1 para macOS x86_64.
+Nesse caso, execute os notebooks 01 e 02 em uma máquina Linux compatível, como o pod do guia.
 
-O dataset é baixado automaticamente pelo notebook 01, a partir do repositório oficial no OSF,
-com verificação de integridade por SHA-256.
+`pyproject.toml` declara as dependências; `uv.lock` fixa também as versões transitivas.
+Use `--locked` para impedir atualização silenciosa do lock. Os notebooks verificam o ambiente,
+sem instalar pacotes nas células. Se mudar o ambiente, reinicie o kernel antes de continuar.
+
+Para usar um agente, abra esta pasta nele e peça:
+
+> Leia README.md e AGENTS.md. Ajude-me a preparar o ambiente e executar o Projeto 1,
+> começando pelo notebook 00 de análise exploratória. Explique os resultados de cada etapa e verifique os arquivos
+> produzidos. Depois, ajude-me com a GPU e o notebook 02, preservando o protocolo experimental.
+
+## Treinar com GPU
+
+O notebook 02 exige **GPU NVIDIA com CUDA**. A referência é uma **RTX 4090 de 24 GB**; a execução
+original usou aproximadamente 14,3 GB de VRAM. Considere pelo menos 16 GB, com margem para variações.
+O ambiente fixado em PyTorch 2.5.1 não suporta GPUs Blackwell como a RTX 5090; use uma placa
+compatível, como RTX 3090/4090, A100, A6000 ou L40S.
+
+Se você já tem uma GPU compatível, execute `uv sync --locked` e siga no notebook 02.
+Para alugar uma máquina, siga **[Configurar RunPod](SETUP-RUNPOD-PROMPT.md)**. Consulte o preço no
+painel antes de criar recursos: some horas de GPU e armazenamento, incluindo períodos ociosos.
+
+O Colab não faz parte do roteiro validado. Se adaptar o projeto, use armazenamento persistente e
+confirme a compatibilidade do ambiente. Interrupções podem exigir retomada de `last.pt`.
+
+## Onde ficam os dados e resultados
+
+O notebook 00 lê `dados/POP` e grava suas tabelas e figuras em `saidas-eda`. O notebook 01
+reutiliza o ZIP e a pasta POP, quando disponíveis, para evitar download e extração repetidos.
+Os notebooks 01 e 02 escolhem a seguinte pasta de trabalho para a conversão e o experimento:
+
+| Ambiente | Pasta padrão |
+|---|---|
+| RunPod, quando `/workspace` existe | `/workspace/projeto-pop` |
+| Colab, quando `/content` existe | `/content/projeto-pop` |
+| Local, abrindo o Jupyter dentro de `projeto-1` | `projeto-1/projeto-pop` |
+
+Você pode definir a variável de ambiente `POP_RAIZ` antes de iniciar o Jupyter para escolher outra
+pasta. Use o mesmo valor nos dois notebooks. Ao transportar os dados para outra máquina ou caminho,
+execute novamente o notebook 01 para atualizar o YAML. O ZIP já íntegro é reutilizado.
+
+```text
+projeto-pop/
+├── ambiente_preparacao.json
+├── catalogo.csv
+├── data/
+│   ├── POP.zip
+│   ├── original/
+│   └── pop_yolo/                 # imagens, rótulos e pop.yaml
+└── runs/<nome-da-execucao>/
+    ├── ambiente_treino.json
+    ├── especificacao.json
+    ├── results.csv
+    ├── weights/                 # best.pt, last.pt e checkpoints intermediários
+    ├── modelo_congelado.pt
+    ├── protocolo_congelado.json
+    ├── resultado_teste.json
+    └── avaliacoes/
+```
+
+No RunPod, confirme no painel que o volume de rede está anexado. A existência de `/workspace`
+ou o aviso do notebook não bastam para determinar a política de persistência do armazenamento.
+
+**Para retomar:** use a mesma configuração e o mesmo `NOME_EXECUCAO`. O notebook reaproveita o
+experimento completo ou retoma o treinamento interrompido a partir de `last.pt`.
+**Para mudar parâmetros:** escolha outro `NOME_EXECUCAO` e reexecute desde o início. Isso inclui
+reduzir `BATCH` por falta de memória. Preserve os resultados anteriores para comparação.
+
+## O que entregar ao concluir
+
+- Os três notebooks com as saídas da sua execução.
+- A pasta da execução, incluindo especificação, registro do ambiente, pesos, protocolo e resultado.
+- Uma análise curta: o requisito foi atingido na validação e no teste? Quais cenas e tamanhos
+  concentraram os erros? Quais diferenças existem em relação ao artigo?
+
+O checkpoint é selecionado pelo maior mAP50-95 na validação entre `best.pt` e `last.pt`. O limiar
+operacional também vem da validação. Depois do congelamento, o teste serve para medir o resultado;
+ele não deve orientar novas escolhas de parâmetros.
+
+O POP contém pessoas em todas as imagens. Portanto, seu FPPI não determina o desempenho em
+terreno vazio. Este experimento é uma avaliação educacional, não uma validação de uso operacional.
+
+## Verificação local do código
+
+No ambiente instalado, dentro de `projeto-1`:
+
+```bash
+uv run --locked python -m unittest discover -s tests -v
+```
+
+Essas verificações cobrem conversão de caixas, leitura de rótulos, contagem de detecções,
+seleção do limiar e preservação do protocolo. Elas não substituem executar o treino na GPU.
+
+## Referências e versões
+
+- Song et al. (2025), [An infrared dataset for partially occluded person detection in complex
+  environment for search and rescue](https://doi.org/10.1038/s41597-025-04600-0).
+- [Dataset POP no OSF](https://osf.io/download/gm8u2/), baixado pelo notebook 01.
+- [Integração oficial do uv com PyTorch](https://docs.astral.sh/uv/guides/integration/pytorch/).
+- [Instalação de versões anteriores do PyTorch](https://pytorch.org/get-started/previous-versions/).
+- [Tipos de armazenamento no RunPod](https://docs.runpod.io/pods/storage/types).
+
+O projeto fixa Ultralytics 8.2.0, torch 2.5.1, torchvision 0.20.1 e NumPy 1.26.4. A versão da
+Ultralytics segue a referência do artigo; o par torch/torchvision evita incompatibilidades de
+carregamento de checkpoints. Não atualize essas versões durante uma execução.
