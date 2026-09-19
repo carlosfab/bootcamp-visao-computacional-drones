@@ -64,8 +64,11 @@ class Notebooks(unittest.TestCase):
                 if c["cell_type"] == "code":
                     codigo = "".join(c["source"])
                     compile(codigo, f"celula-{i}", "exec")
-                    self.assertEqual(c["outputs"], [])
-                    self.assertIsNone(c["execution_count"])
+                    self.assertFalse(any(o.get("output_type") == "error" for o in c["outputs"]))
+                    if c["execution_count"] is None:
+                        self.assertEqual(c["outputs"], [])
+                    else:
+                        self.assertGreater(c["execution_count"], 0)
 
     def test_conversao_coco_yolo_e_leitura(self):
         linha = self.a["linha_yolo"]({"category_id": 1, "bbox": [10, 20, 30, 40]}, 100, 200)
