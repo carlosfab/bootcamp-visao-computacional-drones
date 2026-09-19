@@ -9,3 +9,6 @@ __pycache__/
 
 # Planejamento local do professor
 /projeto-1/planejamento/
+
+# Orquestração interna do professor (caminhos pessoais e credenciais RunPod)
+/projeto-1/treino/
