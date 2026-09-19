@@ -1,0 +1,37 @@
+[project]
+name = "projeto-1-pop-sar"
+version = "0.1.0"
+description = "Experimento de detecção de pessoas em imagens térmicas aéreas com o dataset POP"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "torch==2.5.1",
+    "torchvision==0.20.1",
+    "ultralytics==8.2.0",
+    "numpy==1.26.4",
+    "opencv-python==4.11.0.86",
+    "pandas>=2.2,<3",
+    "matplotlib>=3.8,<3.11",
+    "Pillow>=10,<13",
+    "jupyterlab>=4.4,<5",
+    "ipykernel>=6.29,<7",
+]
+
+[tool.uv]
+package = false
+required-version = ">=0.8.12"
+environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+
+# CUDA 12.1 no Linux/Windows; no macOS Apple Silicon, usa os pacotes do PyPI.
+# A versão com CUDA também executa a preparação em CPU quando não há GPU.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu121", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+torchvision = [{ index = "pytorch-cu121", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true

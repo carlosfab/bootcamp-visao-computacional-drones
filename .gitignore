@@ -1,4 +1,5 @@
 .venv/
+.venv-eda/
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
@@ -6,6 +7,16 @@ __pycache__/
 .DS_Store
 .env
 .env.*
+
+/.interno/
+
+# Dados, modelos e resultados gerados ao executar os notebooks
+projeto-pop/
+*.pt
+*.cache
+/projeto-1/runs/
+/projeto-1/dados/
+/projeto-1/saidas-eda/
 
 /projeto-1/planejamento/
 
