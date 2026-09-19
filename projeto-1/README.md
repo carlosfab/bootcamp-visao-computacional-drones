@@ -38,9 +38,13 @@ Execute nesta ordem:
 | [`aluno/01_preparacao_dados.ipynb`](aluno/01_preparacao_dados.ipynb) | baixa o POP, verifica a integridade, converte o formato, audita os splits e procura vazamento | não | ~10 min |
 | [`aluno/02_experimento_completo.ipynb`](aluno/02_experimento_completo.ipynb) | treina, escolhe o modelo, define o ponto de operação e mede o desempenho final | **sim** | ~3 h |
 
-O notebook 01 roda em qualquer máquina. Rode-o antes de alugar GPU: além de preparar os dados,
-ele é a parte em que você inspeciona o dataset — e entender os dados antes de treinar é o hábito
-que este projeto mais quer ensinar.
+O notebook 01 roda em qualquer máquina. Rode-o no seu computador antes de alugar GPU: é a parte
+em que você inspeciona o dataset, e entender os dados antes de treinar é o hábito que este
+projeto mais quer ensinar.
+
+Uma ressalva honesta: você vai precisar rodá-lo **de novo** na máquina com GPU, porque os dados
+precisam estar no mesmo lugar que o treinamento. São cerca de 6 minutos lá. O que você ganha
+rodando antes é entendimento, não tempo.
 
 ## Como conseguir uma GPU
 
@@ -66,7 +70,12 @@ Esse arquivo também traz o passo a passo manual, para quem preferir, e uma tabe
 comuns com a solução de cada um.
 
 **Atenção ao custo:** você paga pelo tempo em que o pod está ligado, mesmo parado sem fazer nada.
-Desligue ao terminar. Os resultados ficam salvos no volume de rede, que sobrevive ao desligamento.
+Desligue ao terminar.
+
+**Atenção ao volume:** os resultados só sobrevivem ao desligamento se estiverem no volume de rede.
+O diretório `/workspace` existe mesmo quando nenhum volume foi anexado — e, nesse caso, tudo é
+apagado junto com a máquina. Os notebooks avisam quando detectam essa situação, mas confira ao
+criar o pod que o volume está montado em `/workspace` e que ele fica na mesma região da GPU.
 
 ### Caminho B · Google Colab
 
@@ -76,8 +85,9 @@ exige adaptações (montar o Drive, salvar checkpoints periodicamente, retomar a
 que ainda não estão prontas.
 
 Enquanto isso, se você tem Colab Pro e quer tentar, o notebook 02 já retoma automaticamente de
-`last.pt` se for reexecutado — mas você precisará garantir que os dados e os checkpoints estejam
-no Drive, e não no disco efêmero da sessão.
+`last.pt` se for reexecutado. Mas saiba o que terá de adaptar: no Colab a variável `RAIZ` aponta
+para `/content/projeto-pop`, que é apagado ao fim da sessão. Não basta montar o Drive — é preciso
+editar a célula de caminhos nos dois notebooks para que `RAIZ` fique dentro do Drive.
 
 ## Requisitos técnicos
 
@@ -103,10 +113,11 @@ mudou sem aviso.
 
 O projeto foi desenhado em torno de quatro ideias. Se ao final você levar só isso, já valeu:
 
-1. **O split não pode ser aleatório.** As imagens vêm de voos contínuos: dois quadros seguidos
-   são quase idênticos. Dividir aleatoriamente coloca imagens quase iguais no treino e no teste,
-   e o resultado mede memorização, não capacidade de generalizar. O notebook 01 mostra a
-   evidência disso medida em pixels.
+1. **O split não pode ser aleatório.** As imagens vêm de voos: o drone avança a ~1 m/s e a
+   câmera registra uma imagem por segundo, então quadros seguidos cobrem quase o mesmo terreno.
+   Dividir aleatoriamente coloca imagens fortemente redundantes no treino e no teste, e o
+   resultado passa a medir memorização em vez de capacidade de generalizar. O notebook 01 mostra
+   essa redundância medida em pixels.
 
 2. **Escolher o modelo é uma decisão, e ela tem lugar certo.** O checkpoint é escolhido na
    validação. Se você escolhesse olhando o teste, o número reportado no teste deixaria de ser

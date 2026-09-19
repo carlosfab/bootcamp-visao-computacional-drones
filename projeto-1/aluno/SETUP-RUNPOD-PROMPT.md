@@ -8,9 +8,15 @@ seu terminal. Ele vai conduzir a configuração, pedindo a você apenas o que s�
 Antes de colar, faça duas coisas:
 
 1. **Crie sua conta** em https://runpod.io?ref=oke6mnm6 e adicione crédito. US$ 10 são
-   suficientes com folga para este projeto.
-2. **Gere uma API key** em *Settings → API Keys* no painel do RunPod. Guarde-a: você vai
-   fornecê-la ao agente quando ele pedir.
+   suficientes com folga para este projeto. (Esse é um link de indicação; usá-lo não altera o
+   seu custo.)
+2. **Gere uma API key** em *Settings → API Keys* no painel do RunPod. Crie uma chave
+   **dedicada a este projeto** — você vai apagá-la ao terminar.
+
+> **Sobre a API key:** ela permite criar máquinas, ou seja, gastar o seu dinheiro. Ao colá-la
+> para um agente, ela passa pelo provedor daquele agente e fica registrada no histórico da
+> conversa. Por isso: crie uma chave só para este projeto, com o menor escopo que funcionar, e
+> **revogue-a ao final** (o prompt abaixo instrui o agente a lembrá-lo disso).
 
 > **Sobre custo:** uma RTX 4090 custa em torno de US$ 0,70/hora. O projeto completo leva
 > cerca de 3 horas, ou aproximadamente **US$ 2,00 a US$ 2,50**. Você paga pelo tempo em que
@@ -54,8 +60,9 @@ O QUE PRECISO QUE VOCÊ FAÇA
    privada e nunca a copie para outro lugar.
 
 2. API KEY
-   Me peça a minha API key do RunPod e guarde-a em uma variável de ambiente ou em um arquivo
-   local fora de qualquer repositório git. Não a escreva em nenhum arquivo que eu possa vir a
+   Me peça a minha API key do RunPod e guarde-a em um arquivo local com permissão 600, fora de
+   qualquer repositório git. Não use `export CHAVE=valor` digitado direto no terminal, porque
+   isso deixa a chave no histórico do shell. Não a escreva em nenhum arquivo que eu possa vir a
    publicar, e não a imprima no terminal depois de configurada.
 
 3. NETWORK VOLUME
@@ -78,8 +85,16 @@ O QUE PRECISO QUE VOCÊ FAÇA
    para que eu consiga entrar sozinho depois.
 
 6. AMBIENTE
-   Instale as dependências respeitando as versões da seção de restrições. Confirme que
-   funcionou carregando um modelo YOLO de teste — não apenas importando a biblioteca:
+   Instale as dependências respeitando as versões da seção de restrições. Se você criar um
+   ambiente virtual separado (provavelmente vai precisar, porque a imagem costuma trazer um
+   torch mais novo), instale o Jupyter DENTRO dele e registre o kernel, para que o notebook não
+   rode no Python do sistema:
+
+     <venv>/bin/pip install jupyterlab ipykernel
+     <venv>/bin/python -m ipykernel install --name pop-env --display-name "POP (torch 2.5.1)"
+
+   Confirme que funcionou carregando um modelo YOLO de teste — não apenas importando a
+   biblioteca, e executando DENTRO do kernel que eu vou usar no notebook:
 
      from ultralytics import YOLO
      m = YOLO("yolov8s.pt")
@@ -88,14 +103,17 @@ O QUE PRECISO QUE VOCÊ FAÇA
 
 7. NOTEBOOKS
    Suba os arquivos 01_preparacao_dados.ipynb e 02_experimento_completo.ipynb para
-   /workspace e inicie um Jupyter Lab acessível pelo navegador, me passando o link e o token.
-   Alternativa, se for mais simples: configure o acesso por túnel SSH e me explique como abrir.
+   /workspace e me dê acesso ao Jupyter. Prefira um túnel SSH, que não expõe nada na internet.
+   Se for mais simples abrir pelo navegador, garanta que o Jupyter exige token — nunca o inicie
+   com autenticação desativada, porque qualquer pessoa que descobrir a URL teria acesso de root
+   à máquina. Me diga qual kernel devo selecionar no notebook.
 
 8. AO FINAL
    Me explique como:
    - verificar quanto já gastei
    - DESLIGAR o pod quando eu terminar (e a diferença entre parar e terminar)
    - garantir que os resultados ficaram salvos no volume antes de desligar
+   - revogar a API key que criei para este projeto, em Settings -> API Keys
 
 REGRAS DE SEGURANÇA
 
@@ -127,9 +145,14 @@ A sequência é a mesma, sem o agente:
    /opt/pop-env/bin/pip install torch==2.5.1 torchvision==0.20.1 \
        --index-url https://download.pytorch.org/whl/cu121
    /opt/pop-env/bin/pip install "numpy<2" ultralytics==8.2.0
+   # Jupyter dentro do ambiente, senão o notebook roda no Python do sistema
+   /opt/pop-env/bin/pip install jupyterlab ipykernel
+   /opt/pop-env/bin/python -m ipykernel install --name pop-env \
+       --display-name "POP (torch 2.5.1)"
    ```
 
-6. **Notebooks** — envie com `scp` e rode via Jupyter, ou execute pelo terminal.
+6. **Notebooks** — envie com `scp` e rode via Jupyter, selecionando o kernel
+   **POP (torch 2.5.1)** — não o Python padrão.
 7. **Desligar** — *Terminate* remove o pod e para a cobrança. O volume continua existindo (e
    é cobrado à parte, por volta de US$ 0,07/GB por mês).
 
@@ -138,7 +161,8 @@ A sequência é a mesma, sem o agente:
 | Sintoma | Causa provável | O que fazer |
 |---|---|---|
 | `Weights only load failed` ao carregar o modelo | torch ≥ 2.6 | instale torch 2.5.1 |
-| `CUDA out of memory` durante o treino | GPU com menos de 16 GB | reduza `BATCH` para 8 e registre a mudança |
+| `CUDA out of memory` durante o treino | GPU com menos de 16 GB | reduza `BATCH` para 8, apague o diretório da execução e treine do zero — ao retomar de `last.pt` a Ultralytics reusa o batch antigo |
+| Resultados sumiram ao desligar | volume não estava montado em `/workspace` | recrie o pod com o volume anexado, na mesma região dele |
 | O pod não enxerga o dataset | volume montado em caminho errado | confirme que está em `/workspace` |
 | SSH recusa a conexão | chave pública não cadastrada, ou cadastrada após criar o pod | recrie o pod depois de cadastrar a chave |
 | Não há RTX 4090 disponível | região sem estoque | tente outra GPU ≥ 16 GB na **mesma região do volume** |

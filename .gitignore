@@ -12,3 +12,6 @@ __pycache__/
 
 # Orquestração interna do professor (caminhos pessoais e credenciais RunPod)
 /projeto-1/treino/
+
+# Rascunhos e material interno do professor na raiz do projeto-1
+/projeto-1/Projeto1_POP_SAR_*.ipynb
