@@ -28,6 +28,11 @@ Este diretório é o material completo para quem está fazendo o projeto. Comece
 - Preserve os splits oficiais por cena. Selecione checkpoint e limiar somente na validação;
   congele o protocolo antes de avaliar no teste. Não ajuste parâmetros para melhorar o teste.
 - Ao mudar a configuração, use outro NOME_EXECUCAO. Preserve os registros e pesos anteriores.
+- A versão didática usa EPOCAS=100 como limite e PACIENCIA=10. O artigo e nossa execução
+  de referência usaram 100 épocas completas; explicite a adaptação para reduzir tempo e custo.
+  A parada usa somente validação. Não prometa uma época de encerramento ou métricas específicas.
+  Preserve treinamento_concluido.json e reporte as épocas efetivas, inclusive quando menores
+  que 100. PACIENCIA=0 desativa a parada antecipada e exige outro nome de execução.
 - Os notebooks são independentes do estado em memória um do outro: a comunicação ocorre pelos
   arquivos em POP_RAIZ. Execute o notebook 01 na máquina de treinamento para preparar os caminhos.
 - Não publique credenciais, datasets baixados, pesos ou resultados pessoais no código do projeto.
