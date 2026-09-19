@@ -4,8 +4,10 @@ Este guia prepara uma máquina com GPU para executar os notebooks **01 e 02** do
 
 Crie sua conta no [RunPod](https://runpod.io/).
 Antes de contratar recursos, consulte os preços no painel. O treinamento de referência levou
-cerca de 2h30 em uma RTX 4090, mais preparação e avaliação. GPU ociosa e armazenamento também
-podem gerar cobrança.
+cerca de 2h30 para 100 épocas em uma RTX 4090, mais preparação e avaliação. A versão didática
+usa limite de 100 épocas e `patience=10`; se a curva anterior se repetir, a projeção para
+preparação, treino e avaliação é de 1h10–1h30. Reserve até cerca de 3 horas, pois a parada
+depende da validação. GPU ociosa e armazenamento também podem gerar cobrança.
 
 ## Configuração passo a passo
 

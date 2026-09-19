@@ -5,10 +5,12 @@ import hashlib
 import io
 import json
 import math
+import shutil
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest.mock import Mock
 
 import numpy as np
 import pandas as pd
@@ -174,6 +176,116 @@ class Notebooks(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             gravar(p, {"cfg_treino": {"batch": 8, "lr0": .001}})
         self.assertEqual(p.read_bytes(), original)
+
+    def estado_treino(self):
+        pesos = self.raiz / "weights"
+        pesos.mkdir()
+        spec = self.raiz / "especificacao.json"
+        cfg = {"epochs": 100, "patience": 10, "batch": 16}
+        spec.write_text(json.dumps({"cfg_treino": cfg}))
+        ns = dict(self.b, EXEC=self.raiz, PESOS=pesos,
+                  RESULTADOS=self.raiz / "results.csv",
+                  ARQ_CONCLUSAO=self.raiz / "treinamento_concluido.json",
+                  ARQ_ESPECIFICACAO=spec, especificacao={"cfg_treino": cfg},
+                  cfg_treino=cfg, EPOCAS=100, PACIENCIA=10,
+                  MODELO_BASE="yolov8s.pt", agora=lambda: "agora",
+                  YOLO=Mock(), torch=Mock())
+        # As funções extraídas usam o mesmo namespace das células executadas.
+        self.b.update(ns)
+        return self.b
+
+    def salvar_treino_simulado(self, ns, epocas):
+        pd.DataFrame({"epoch": range(1, epocas + 1)}).to_csv(ns["RESULTADOS"], index=False)
+        for nome in ("best", "last"):
+            (ns["PESOS"] / f"{nome}.pt").write_bytes(nome.encode())
+
+    def executar_treino(self, ns):
+        with contextlib.redirect_stdout(io.StringIO()):
+            exec(celula_com(EXPERIMENTO, 'PESOS = EXEC'), ns)
+
+    def test_parada_antecipada_concluida_nao_retoma_ao_reabrir(self):
+        ns = self.estado_treino()
+        ns["YOLO"].return_value.train.side_effect = lambda **kw: self.salvar_treino_simulado(ns, 35)
+        self.executar_treino(ns)
+        registro = json.loads(ns["ARQ_CONCLUSAO"].read_text())
+        self.assertEqual(registro["epocas_executadas"], 35)
+        self.assertEqual(registro["epocas_maximas"], 100)
+        self.assertEqual(registro["patience"], 10)
+        self.assertEqual(registro["motivo"], "parada_antecipada")
+        ns["YOLO"].reset_mock()
+        self.executar_treino(ns)
+        ns["YOLO"].assert_not_called()
+
+    def test_conclusao_no_limite_registra_cem_epocas(self):
+        ns = self.estado_treino()
+        ns["YOLO"].return_value.train.side_effect = lambda **kw: self.salvar_treino_simulado(ns, 100)
+        self.executar_treino(ns)
+        registro = json.loads(ns["ARQ_CONCLUSAO"].read_text())
+        self.assertEqual(registro["epocas_executadas"], 100)
+        self.assertEqual(registro["motivo"], "limite_de_epocas")
+
+    def test_interrupcao_nao_registra_conclusao(self):
+        ns = self.estado_treino()
+
+        def interromper(**kwargs):
+            self.salvar_treino_simulado(ns, 20)
+            raise KeyboardInterrupt()
+
+        ns["YOLO"].return_value.train.side_effect = interromper
+        with self.assertRaises(KeyboardInterrupt):
+            self.executar_treino(ns)
+        self.assertFalse(ns["ARQ_CONCLUSAO"].exists())
+        self.assertFalse(ns["treino_ja_concluido"]())
+
+    def test_treino_interrompido_retoma_e_registra_parada_antecipada(self):
+        ns = self.estado_treino()
+        self.salvar_treino_simulado(ns, 20)
+        ns["torch"].load.return_value = {"train_args": {"batch": 16}}
+        ns["YOLO"].return_value.train.side_effect = lambda **kw: self.salvar_treino_simulado(ns, 35)
+        self.executar_treino(ns)
+        ns["YOLO"].assert_called_once_with(str(ns["PESOS"] / "last.pt"))
+        ns["YOLO"].return_value.train.assert_called_once_with(resume=True)
+        self.assertTrue(ns["treino_ja_concluido"]())
+
+    def test_conclusao_recusa_pesos_historico_ou_especificacao_alterados(self):
+        ns = self.estado_treino()
+        self.salvar_treino_simulado(ns, 35)
+        ns["registrar_conclusao_treino"]()
+        for p in (ns["PESOS"] / "best.pt", ns["PESOS"] / "last.pt",
+                  ns["RESULTADOS"], ns["ARQ_ESPECIFICACAO"]):
+            with self.subTest(arquivo=p.name):
+                original = p.read_bytes()
+                p.write_bytes(original + b" ")
+                with self.assertRaises(RuntimeError):
+                    ns["treino_ja_concluido"]()
+                p.write_bytes(original)
+
+    def test_mudar_paciencia_exige_nova_execucao(self):
+        ns = self.estado_treino()
+        ns["especificacao"] = {"cfg_treino": {**ns["cfg_treino"], "patience": 20}}
+        with self.assertRaises(RuntimeError):
+            self.executar_treino(ns)
+        ns["YOLO"].assert_not_called()
+
+    def test_protocolo_registra_epocas_efetivas_da_parada_antecipada(self):
+        ns = self.estado_treino()
+        self.salvar_treino_simulado(ns, 35)
+        ns["registrar_conclusao_treino"]()
+        checkpoint = ns["PESOS"] / "best.pt"
+        ns.update(CHECKPOINT=checkpoint, SHA_CHECKPOINT_VALIDADO=ns["sha256"](checkpoint),
+                  NOME_EXECUCAO="teste-es10", POLITICA_CHECKPOINT="validação",
+                  IOU_NMS=.7, MAX_DET=300, CONF_MIN=.001, CONF_PAPER=.5,
+                  IMGSZ=1280, OTIMIZADOR="SGD", LR0=.001, SEMENTE=0,
+                  ultralytics=Mock(__version__="8.2.0"), val_paper={}, val_padrao={},
+                  IOU_MATCH=.5, RECALL_ALVO=.9, FPPI_MAX=1, ponto={}, metricas_val={},
+                  shutil=shutil)
+        with contextlib.redirect_stdout(io.StringIO()):
+            exec(celula_com(EXPERIMENTO, 'MODELO_CONGELADO = EXEC'), ns)
+        protocolo = json.loads(ns["ARQ_PROTOCOLO"].read_text())
+        self.assertEqual(protocolo["epocas_maximas"], 100)
+        self.assertEqual(protocolo["epocas_executadas"], 35)
+        self.assertEqual(protocolo["patience"], 10)
+        self.assertEqual(protocolo["motivo_encerramento"], "parada_antecipada")
 
     def test_modelo_antigo_nao_recebe_protocolo_novo(self):
         (self.raiz / "modelo_congelado.pt").write_bytes(b"modelo antigo")

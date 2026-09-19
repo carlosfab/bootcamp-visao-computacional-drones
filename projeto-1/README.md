@@ -27,12 +27,32 @@ O notebook 00 explora os dados originais, antes da conversão e do treinamento.
 | [00_analise_exploratoria.ipynb](00_analise_exploratoria.ipynb) | Apresentação acadêmica do dataset, conferência da Tabela 4, exemplos visuais e distribuições; CPU, sem PyTorch |
 | [requirements-eda.txt](requirements-eda.txt) | Dependências leves exclusivas da análise exploratória |
 | [01_preparacao_dados.ipynb](01_preparacao_dados.ipynb) | Download, conversão COCO → YOLO, auditoria de cenas, escala dos alvos e inspeção visual; cerca de 10 minutos, sem GPU |
-| [02_experimento_completo.ipynb](02_experimento_completo.ipynb) | Treinamento, seleção do checkpoint na validação, calibração, congelamento e teste; cerca de 3 horas em uma RTX 4090 |
+| [02_experimento_completo.ipynb](02_experimento_completo.ipynb) | Treinamento, seleção do checkpoint na validação, calibração, congelamento e teste; projeção de 1h10–1h30 com parada antecipada em uma RTX 4090, podendo chegar a cerca de 3 horas |
 | [pyproject.toml](pyproject.toml), [uv.lock](uv.lock) e [.python-version](.python-version) | Ambiente uv: dependências, versões resolvidas e Python padrão |
 | [GUIA-RUNPOD.md](GUIA-RUNPOD.md) | Configuração da GPU na nuvem e preservação dos resultados |
 | [tests/test_notebooks.py](tests/test_notebooks.py) | Verificações locais da lógica dos notebooks, sem treino ou download |
 
-Os tempos são referências de execução; download, hardware e armazenamento afetam a duração.
+Os tempos dependem de download, hardware e armazenamento. A duração com parada antecipada
+é uma projeção baseada no histórico anterior, ainda não uma medição da nova configuração.
+
+## Protocolo do artigo e adaptação didática
+
+Song et al. (2025) reportam treinamento por **100 épocas**. Na preparação deste material,
+também realizamos uma execução de referência com **100 épocas completas**. Para fins
+didáticos, esta versão mantém **100 como limite máximo** e usa **`patience=10`**, permitindo
+encerrar após 10 épocas consecutivas sem melhora no critério de validação da Ultralytics.
+O objetivo é reduzir o tempo de execução e o custo de GPU da atividade.
+
+Essa escolha é uma adaptação nossa e deve ser mencionada ao comparar os resultados com o
+artigo. A parada acompanha `0,1 × mAP50 + 0,9 × mAP50–95` na validação; o teste não participa
+da decisão. A época de encerramento e o resultado podem variar em uma nova execução.
+Se houver melhorias contínuas, o treinamento poderá cumprir as 100 épocas.
+
+O notebook registra o limite, a paciência e as épocas efetivas em `treinamento_concluido.json`
+e `protocolo_congelado.json`. Se o treino terminar cedo, poderá não executar a fase final
+sem mosaico, programada para as últimas 10 épocas do limite de 100.
+Para repetir o orçamento completo, use `PACIENCIA=0` nos notebooks 01 e 02 e um novo
+`NOME_EXECUCAO`; zero desativa a parada antecipada. Preserve a execução anterior.
 
 ## Análise exploratória em CPU: notebook 00
 
@@ -146,6 +166,7 @@ projeto-pop/
     ├── ambiente_treino.json
     ├── especificacao.json
     ├── results.csv
+    ├── treinamento_concluido.json # épocas efetivas, motivo de encerramento e hashes
     ├── weights/                 # best.pt, last.pt e checkpoints intermediários
     ├── modelo_congelado.pt
     ├── protocolo_congelado.json
@@ -157,7 +178,8 @@ No RunPod, confirme no painel que o volume de rede está anexado. A existência 
 ou o aviso do notebook não bastam para determinar a política de persistência do armazenamento.
 
 **Para retomar:** use a mesma configuração e o mesmo `NOME_EXECUCAO`. O notebook reaproveita o
-experimento completo ou retoma o treinamento interrompido a partir de `last.pt`.
+experimento concluído, inclusive por parada antecipada, ou retoma o treinamento interrompido
+a partir de `last.pt`. Preserve `treinamento_concluido.json` junto aos pesos e ao histórico.
 **Para mudar parâmetros:** escolha outro `NOME_EXECUCAO` e reexecute desde o início. Isso inclui
 reduzir `BATCH` por falta de memória. Preserve os resultados anteriores para comparação.
 
@@ -167,6 +189,7 @@ reduzir `BATCH` por falta de memória. Preserve os resultados anteriores para co
 - A pasta da execução, incluindo especificação, registro do ambiente, pesos, protocolo e resultado.
 - Uma análise curta: o requisito foi atingido na validação e no teste? Quais cenas e tamanhos
   concentraram os erros? Quais diferenças existem em relação ao artigo?
+  Informe também o limite de épocas, a paciência e o número de épocas efetivamente executadas.
 
 O checkpoint é selecionado pelo maior mAP50-95 na validação entre `best.pt` e `last.pt`. O limiar
 operacional também vem da validação. Depois do congelamento, o teste serve para medir o resultado;
