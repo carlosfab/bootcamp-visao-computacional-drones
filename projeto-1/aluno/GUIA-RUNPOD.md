@@ -33,8 +33,9 @@ A sequência é a mesma, sem o agente:
 | Sintoma | Causa provável | O que fazer |
 |---|---|---|
 | `Weights only load failed` ao carregar o modelo | torch ≥ 2.6 | instale torch 2.5.1 |
+| `no kernel image is available for execution on the device` | GPU Blackwell (RTX 5090): o torch 2.5.1 só tem código até `sm_90` | troque por uma RTX 4090, A100, A6000 ou L40S |
 | `CUDA out of memory` durante o treino | GPU com menos de 16 GB | reduza `BATCH` para 8, apague o diretório da execução e treine do zero — ao retomar de `last.pt` a Ultralytics reusa o batch antigo |
 | Resultados sumiram ao desligar | volume não estava montado em `/workspace` | recrie o pod com o volume anexado, na mesma região dele |
 | O pod não enxerga o dataset | volume montado em caminho errado | confirme que está em `/workspace` |
 | SSH recusa a conexão | chave pública não cadastrada, ou cadastrada após criar o pod | recrie o pod depois de cadastrar a chave |
-| Não há RTX 4090 disponível | região sem estoque | tente outra GPU ≥ 16 GB na **mesma região do volume** |
+| Não há RTX 4090 disponível | região sem estoque | tente outra GPU ≥ 16 GB, com compute capability ≤ 9.0, na **mesma região do volume** |

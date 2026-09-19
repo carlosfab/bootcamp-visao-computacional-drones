@@ -49,7 +49,14 @@ rodando antes é entendimento, não tempo.
 ## Como conseguir uma GPU
 
 O notebook 02 precisa de uma GPU com **pelo menos 16 GB de VRAM** (a configuração usa ~14,3 GB).
-Se você não tem uma, há dois caminhos.
+
+⚠️ **A geração da placa também importa.** Como este projeto exige `torch < 2.6` (veja
+*Requisitos técnicos*), e essa versão do PyTorch só traz código compilado até a arquitetura
+`sm_90`, placas **Blackwell — como a RTX 5090 — não funcionam**: o treinamento falha com
+`CUDA error: no kernel image is available for execution on the device`. Escolha uma RTX 4090,
+RTX 3090, A100, A6000, L40S ou equivalente. A RTX 4090 é a referência deste material.
+
+Se você não tem uma GPU assim, há dois caminhos.
 
 ### Caminho A · RunPod (recomendado)
 
