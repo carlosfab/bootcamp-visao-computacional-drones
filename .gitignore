@@ -27,3 +27,9 @@ projeto-pop/
 
 # Rascunhos e material interno do professor na raiz do projeto-1
 /projeto-1/Projeto1_POP_SAR_*.ipynb
+
+# Projeto 2: dados baixados e preparação local do professor
+/projeto-2/dados/
+/projeto-2/modelos/
+/projeto-2/resultados/
+/projeto-2/planejamento/
