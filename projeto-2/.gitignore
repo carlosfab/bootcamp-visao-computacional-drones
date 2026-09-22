@@ -1,0 +1,13 @@
+/.venv*/
+/dados/
+/modelos/
+/codigo/
+/resultados/
+/planejamento/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.part
+.env
+.env.*
+.DS_Store

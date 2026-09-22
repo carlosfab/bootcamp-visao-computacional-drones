@@ -1,0 +1,1875 @@
+{
+  "versao": 1,
+  "verificado_em": "2026-09-22",
+  "integridade": "Os SHA-256 deste manifesto são referências calculadas localmente a partir dos downloads oficiais usados na aula. Os CRC32 dos JPEGs VTUAV foram lidos do diretório central do ZIP oficial. O SHA-256 do ZIP VTUAV completo é desconhecido: validam-se o tamanho total, o índice e os 178 membros selecionados, sem alegar validação criptográfica integral do pacote.",
+  "codigo_qfdet": {
+    "url": "https://github.com/NNNNerd/mmdet-rgbtdroneperson",
+    "commit": "a79210c283597294ded255028bb8fe16e1c241cd",
+    "licenca_codigo": "Apache-2.0"
+  },
+  "rgbtdroneperson": {
+    "pagina_oficial": "https://nnnnerd.github.io/RGBTDronePerson/",
+    "pasta_oficial": "https://drive.google.com/drive/folders/1Mi3NXQ-YG1iiIWkPbe3GQoDK68dARMN6",
+    "licenca_dataset": "CC BY 4.0, conforme declaração na página oficial; atribuir Zhang et al., Drone-based RGBT tiny person detection (2023).",
+    "arquivo": {
+      "nome_original": "RGBTDronePerson.zip",
+      "destino": "dados/archives/RGBTDronePerson.zip",
+      "google_drive_id": "18zm2CaJS73a6eUHXUQ6_cjjbrurSkm9C",
+      "url": "https://drive.google.com/file/d/18zm2CaJS73a6eUHXUQ6_cjjbrurSkm9C/view",
+      "bytes": 1573829771,
+      "sha256": "8a52fcfa7d87bbdf70a0c9d1001f8868bf7f6ba73e0ca8b64d80c3cbae470972",
+      "origem_sha256": "Calculado localmente sobre o arquivo obtido da fonte oficial; não é checksum publicado pelos autores."
+    },
+    "anotacoes": [
+      {
+        "nome_original": "train_thermal.json",
+        "destino": "dados/anotacoes-oficiais-extras/train_thermal.json",
+        "google_drive_id": "1P5FNdig1_IEq9xGfL3zAzMxQf-Jeg7_2",
+        "url": "https://drive.google.com/file/d/1P5FNdig1_IEq9xGfL3zAzMxQf-Jeg7_2/view",
+        "bytes": 10265189,
+        "sha256": "6915b8f260b77364116e9dfb7b277f0540df610c5cc674bed41a7aab90b36dc1",
+        "origem_sha256": "Calculado localmente sobre o arquivo obtido da fonte oficial; não é checksum publicado pelos autores."
+      },
+      {
+        "nome_original": "val_thermal.json",
+        "destino": "dados/anotacoes-oficiais-extras/val_thermal.json",
+        "google_drive_id": "1H_hHqoqaVPBa3LBTEgveZLxE-eovaOmE",
+        "url": "https://drive.google.com/file/d/1H_hHqoqaVPBa3LBTEgveZLxE-eovaOmE/view",
+        "bytes": 2636638,
+        "sha256": "5aebf4217ba5ca24569fe672b03956723ad47b24a38bcf96a2cdb42e5c0b2c28",
+        "origem_sha256": "Calculado localmente sobre o arquivo obtido da fonte oficial; não é checksum publicado pelos autores."
+      }
+    ]
+  },
+  "pesos": {
+    "rgbtdroneperson": {
+      "nome_original": "epoch_11_qfdet_rgbtdroneperson.pth",
+      "destino": "modelos/epoch_11_qfdet_rgbtdroneperson.pth",
+      "google_drive_id": "1TuVXy_h0PxTK8qLY1MgqJTNiAumV8p0V",
+      "url": "https://drive.google.com/file/d/1TuVXy_h0PxTK8qLY1MgqJTNiAumV8p0V/view",
+      "bytes": 485108003,
+      "sha256": "c356e92c2f2f12b4e686cbbf30c81d5a1d52f4c2a3809411b367e506e5c2e19d",
+      "origem_sha256": "Calculado localmente sobre o checkpoint obtido do link no README oficial; não é checksum publicado pelos autores.",
+      "codigo_oficial": "https://github.com/NNNNerd/mmdet-rgbtdroneperson",
+      "configuracao": "qfdet_configs/qfdet_r50_fpn_1x_rgbtdroneperson.py"
+    },
+    "vtuav": {
+      "nome_original": "epoch_11_qfdet_vtuav.pth",
+      "destino": "modelos/epoch_11_qfdet_vtuav.pth",
+      "google_drive_id": "1Savf3oeiWek4eeXrvYLuaoBMoZW3nag8",
+      "url": "https://drive.google.com/file/d/1Savf3oeiWek4eeXrvYLuaoBMoZW3nag8/view",
+      "bytes": 485107939,
+      "sha256": "0c6d399dfe902d7e3d57b6a3d62fc0ff9c286e656568a5c2d2cd4fd21923513a",
+      "origem_sha256": "Calculado localmente sobre o checkpoint obtido do link no README oficial; não é checksum publicado pelos autores.",
+      "codigo_oficial": "https://github.com/NNNNerd/mmdet-rgbtdroneperson",
+      "configuracao": "qfdet_configs/qfdet_r50_fpn_1x_vtuav.py"
+    }
+  },
+  "vtuav": {
+    "pagina_oficial": "https://zhang-pengyu.github.io/DUT-VTUAV/",
+    "repositorio_oficial": "https://github.com/zhang-pengyu/DUT-VTUAV",
+    "citacao": "Pengyu Zhang, Jie Zhao, Dong Wang, Huchuan Lu e Xiang Ruan. Visible-Thermal UAV Tracking: A Large-Scale Benchmark and New Baseline. CVPR, 2022.",
+    "licenca_dataset": "Não foi identificada licença explícita de redistribuição na página e no README oficiais consultados. A licença CC BY 4.0 do RGBTDronePerson não se estende automaticamente ao VTUAV.",
+    "titular_imagens": "School of Information and Communication Engineering, Dalian University of Technology, conforme nota de copyright do VTUAV-det na página RGBTDronePerson.",
+    "arquivo": {
+      "nome_original": "train_ST_004.zip",
+      "destino": "dados/archives/train_ST_004.zip",
+      "google_drive_id": "1UdbUJlJaTB7loptBlBY2Jb47YVDIxrbj",
+      "url": "https://drive.google.com/file/d/1UdbUJlJaTB7loptBlBY2Jb47YVDIxrbj/view",
+      "bytes": 18850569348,
+      "sha256": null,
+      "origem_integridade": "Tamanho e índice do ZIP oficial verificados localmente; o pacote integral não foi baixado na preparação da aula."
+    },
+    "sequencia": "pedestrian_043",
+    "destino_sequencia": "dados/vtuav-demo/pedestrian_043",
+    "pares_reais": 89,
+    "quadros_video": 120,
+    "fps_fonte": 30,
+    "fps_video": 10,
+    "duracao_video": 12,
+    "observacao_particao": "O pacote original tem nome train_ST_004.zip; a lista de sequências do QFDet coloca pedestrian_043 em Test. Este recorte é demonstração qualitativa, não benchmark nem prova de generalização.",
+    "origem_sha256_membros": "Calculados localmente sobre os 178 JPEGs oficiais selecionados e cruzados com previsoes-referencia.json; não são checksums publicados pelos autores.",
+    "membros": [
+      {
+        "frame": 0,
+        "segundos": 0,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000000.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000000.jpg",
+        "bytes": 291837,
+        "crc32": 520355048,
+        "sha256": "41f3a209ce0bc8f8b6eb22b35c23d251b81fc6dc63d56f74158a0ce79b8e183b"
+      },
+      {
+        "frame": 0,
+        "segundos": 0,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000000.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000000.jpg",
+        "bytes": 189620,
+        "crc32": 3252328688,
+        "sha256": "61187cba6ae38fc26b64f0257cde767bba878daf1cf6e1150e8500b3ba6cec5e"
+      },
+      {
+        "frame": 3,
+        "segundos": 0.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000003.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000003.jpg",
+        "bytes": 292052,
+        "crc32": 3484573829,
+        "sha256": "7d8ecc4d03e9dbb98f0c714f6611160985e3aa1b8ed09ac539bd46db452a9e61"
+      },
+      {
+        "frame": 3,
+        "segundos": 0.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000003.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000003.jpg",
+        "bytes": 190475,
+        "crc32": 1623960264,
+        "sha256": "e1efa56c2acf53a07fefbe6cb8140f1ac113de02a3251f728e5f23fa87ab409f"
+      },
+      {
+        "frame": 6,
+        "segundos": 0.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000006.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000006.jpg",
+        "bytes": 293152,
+        "crc32": 967512316,
+        "sha256": "2aa71e7d2754d44fb7858b135eca836bb2a6117ec80659eeaffdcdc9b27be1d4"
+      },
+      {
+        "frame": 6,
+        "segundos": 0.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000006.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000006.jpg",
+        "bytes": 188907,
+        "crc32": 2073370832,
+        "sha256": "0cb29e37481c38c733845d0d9eabebc44e2812907ea7f1c6ec13c3acbfa9a412"
+      },
+      {
+        "frame": 9,
+        "segundos": 0.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000009.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000009.jpg",
+        "bytes": 291223,
+        "crc32": 3368285798,
+        "sha256": "b61bd5e3ff93210fedc3525e0bf67f2405a631710f545c16a45fb186d5664ad8"
+      },
+      {
+        "frame": 9,
+        "segundos": 0.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000009.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000009.jpg",
+        "bytes": 190149,
+        "crc32": 4161993034,
+        "sha256": "5bb7173def8a9d8f8b0119d67aabf4ef03ebb115d1052ef478a36567de1d167c"
+      },
+      {
+        "frame": 12,
+        "segundos": 0.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000012.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000012.jpg",
+        "bytes": 292358,
+        "crc32": 1500853378,
+        "sha256": "f5d4ffb0ee33933d8b36673fbdeb754624297ed928311c2ba1c916d0ba989865"
+      },
+      {
+        "frame": 12,
+        "segundos": 0.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000012.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000012.jpg",
+        "bytes": 191368,
+        "crc32": 1163114861,
+        "sha256": "4b9f35f6fed12bcbdd30b8f203c6d1e966e2002515e5600866d281fc9b6e8353"
+      },
+      {
+        "frame": 15,
+        "segundos": 0.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000015.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000015.jpg",
+        "bytes": 292225,
+        "crc32": 1997545632,
+        "sha256": "f45693e0fc27c6458668dbda7bdb90eda7045637f72360fc532aa0e5f8f3b1f5"
+      },
+      {
+        "frame": 15,
+        "segundos": 0.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000015.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000015.jpg",
+        "bytes": 191860,
+        "crc32": 3060513124,
+        "sha256": "44c9706103374bc42886cf85f281badb99ce9ffe13d6a9c97fb5e0c3a56832ac"
+      },
+      {
+        "frame": 18,
+        "segundos": 0.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000018.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000018.jpg",
+        "bytes": 292891,
+        "crc32": 2596648069,
+        "sha256": "f04c90162fc3323969caf948c507ae12670ca5233aee51d2c6364f00d0b67f65"
+      },
+      {
+        "frame": 18,
+        "segundos": 0.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000018.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000018.jpg",
+        "bytes": 192182,
+        "crc32": 2786393214,
+        "sha256": "d524b4644f086fcf770f11588d0fb0d1ad81e50102bb41b35efe6142de4a886e"
+      },
+      {
+        "frame": 21,
+        "segundos": 0.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000021.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000021.jpg",
+        "bytes": 291856,
+        "crc32": 1365896019,
+        "sha256": "ec0f48fc0dcf074a7c6702a3c123e559fc1a3af048deb16545198b1e5c8e6753"
+      },
+      {
+        "frame": 21,
+        "segundos": 0.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000021.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000021.jpg",
+        "bytes": 191760,
+        "crc32": 507493901,
+        "sha256": "f2e1142fa3a42f9b344c8e215efc454d0bc52e6d9663c7067f75953f02ff7f0d"
+      },
+      {
+        "frame": 30,
+        "segundos": 1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000030.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000030.jpg",
+        "bytes": 292251,
+        "crc32": 1968388415,
+        "sha256": "c62b43d3a2fa7066fa06917b1dea6f3e2c7460cb7cfc5b1b40eb6ab430d35038"
+      },
+      {
+        "frame": 30,
+        "segundos": 1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000030.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000030.jpg",
+        "bytes": 192917,
+        "crc32": 2213839237,
+        "sha256": "ef3e1da5b939b7c7fab9c8f19e4db8c33dd2ca22c1151ec83cd089a50899ef82"
+      },
+      {
+        "frame": 33,
+        "segundos": 1.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000033.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000033.jpg",
+        "bytes": 292881,
+        "crc32": 481433637,
+        "sha256": "8a5bd6406d1397a90dd8c040838263ef57d2aa61f490eaea79789ce57bda60d5"
+      },
+      {
+        "frame": 33,
+        "segundos": 1.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000033.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000033.jpg",
+        "bytes": 191812,
+        "crc32": 2341969046,
+        "sha256": "a835b07bb72f6a91b49f1fe2cd10a670e88b2e6647c6087a5b7be796a7f364c0"
+      },
+      {
+        "frame": 36,
+        "segundos": 1.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000036.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000036.jpg",
+        "bytes": 293904,
+        "crc32": 2021152267,
+        "sha256": "8a0166163852efc2969f6859fc9dd55a584cbfc2ada053203a271df8143d8909"
+      },
+      {
+        "frame": 36,
+        "segundos": 1.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000036.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000036.jpg",
+        "bytes": 193204,
+        "crc32": 2223250235,
+        "sha256": "171cc0c32d04d77ec6922f4924ed2177af8865b9fe6b39e380cb1d548a76b800"
+      },
+      {
+        "frame": 45,
+        "segundos": 1.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000045.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000045.jpg",
+        "bytes": 290390,
+        "crc32": 205618213,
+        "sha256": "bfc7c79658ff1b28a2a76413182dc8ccdb2e393fa9637a45426c30135c78dd74"
+      },
+      {
+        "frame": 45,
+        "segundos": 1.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000045.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000045.jpg",
+        "bytes": 194393,
+        "crc32": 857010922,
+        "sha256": "b02f09c6482e39a6e7b48e98d3a428e6e6ab2e7b3e94c11be907700b2c4d0938"
+      },
+      {
+        "frame": 51,
+        "segundos": 1.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000051.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000051.jpg",
+        "bytes": 291269,
+        "crc32": 324265299,
+        "sha256": "a3f02a1b525258ced32bb5c8f6e9675e1a57ec9b88e0ab667425720f055c71ad"
+      },
+      {
+        "frame": 51,
+        "segundos": 1.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000051.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000051.jpg",
+        "bytes": 196019,
+        "crc32": 4194825381,
+        "sha256": "224bf479fb9b6f495bfda7c6cd7c710500cf8652306da1ab2e9f82152a2528b6"
+      },
+      {
+        "frame": 54,
+        "segundos": 1.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000054.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000054.jpg",
+        "bytes": 291944,
+        "crc32": 1213010294,
+        "sha256": "1f774ce5e39c647c7f2c73b3d7f4733655749f89448d29fbfa6ba9d4c9253400"
+      },
+      {
+        "frame": 54,
+        "segundos": 1.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000054.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000054.jpg",
+        "bytes": 196128,
+        "crc32": 3653500868,
+        "sha256": "e9d84b4e8ba4f98fa4ce3b02be984de688c40cea7172d2b8f347c050fb059aec"
+      },
+      {
+        "frame": 57,
+        "segundos": 1.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000057.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000057.jpg",
+        "bytes": 291880,
+        "crc32": 2802686349,
+        "sha256": "ea53f0169fe85de7c2e9c9a661c8e6d7a31421635b21a29299abc5d11a83c9e5"
+      },
+      {
+        "frame": 57,
+        "segundos": 1.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000057.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000057.jpg",
+        "bytes": 195810,
+        "crc32": 2760697237,
+        "sha256": "3cdeb693012987a82036d47bb255edb01a10c1022061d6edfe86ce783efc194a"
+      },
+      {
+        "frame": 60,
+        "segundos": 2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000060.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000060.jpg",
+        "bytes": 291261,
+        "crc32": 1718878777,
+        "sha256": "39605900b580a7d2912518f37f89379903a80c128296699d12d6acc047e413d7"
+      },
+      {
+        "frame": 60,
+        "segundos": 2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000060.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000060.jpg",
+        "bytes": 196113,
+        "crc32": 1239653948,
+        "sha256": "2e8b90e4e6f355a1546edf20c729ee334183aae6019524d4d2f086e6aaf33b9b"
+      },
+      {
+        "frame": 63,
+        "segundos": 2.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000063.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000063.jpg",
+        "bytes": 290885,
+        "crc32": 3439348812,
+        "sha256": "f1be39d43c10a64fa19a0e586f88355d8739aabc1915f2ac8313553c33698d3e"
+      },
+      {
+        "frame": 63,
+        "segundos": 2.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000063.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000063.jpg",
+        "bytes": 196046,
+        "crc32": 3959192946,
+        "sha256": "5b181544180916004c6044e96673ea98c2f821b339ee4e8e9d2294be6eab7714"
+      },
+      {
+        "frame": 66,
+        "segundos": 2.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000066.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000066.jpg",
+        "bytes": 292711,
+        "crc32": 765668100,
+        "sha256": "a1f5728e55bd3b60539103b62bc1774c4b0dee9b6046320fb2220ceea23e464a"
+      },
+      {
+        "frame": 66,
+        "segundos": 2.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000066.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000066.jpg",
+        "bytes": 194538,
+        "crc32": 3153362187,
+        "sha256": "ea832caee510d937c92574faeea698c83940b48ed990bec428ba8b5dfb434e8d"
+      },
+      {
+        "frame": 69,
+        "segundos": 2.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000069.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000069.jpg",
+        "bytes": 289952,
+        "crc32": 752437750,
+        "sha256": "812e0f3fe50b26d6c1b99cf77b24f30e69f0bbae0baaa23a286da0818b4c06db"
+      },
+      {
+        "frame": 69,
+        "segundos": 2.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000069.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000069.jpg",
+        "bytes": 191154,
+        "crc32": 709739207,
+        "sha256": "652a1c1724b36f12745f70ae82449eff2e06e092dba19b9e4c7ec935b2ff9e6f"
+      },
+      {
+        "frame": 72,
+        "segundos": 2.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000072.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000072.jpg",
+        "bytes": 288971,
+        "crc32": 10500718,
+        "sha256": "199a86128e52879eaa4b47661555e928e77f9021d23d257073092d3428afcb45"
+      },
+      {
+        "frame": 72,
+        "segundos": 2.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000072.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000072.jpg",
+        "bytes": 191876,
+        "crc32": 3420906629,
+        "sha256": "8a471f599cd5af0de8dc804ecba02ed3c342fc97f8afd2c343157a166f2bb86a"
+      },
+      {
+        "frame": 75,
+        "segundos": 2.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000075.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000075.jpg",
+        "bytes": 289118,
+        "crc32": 3273875853,
+        "sha256": "5dfb25089b750fbf10b8068ba3c8cadae918d858d1686faca5afc87a10447410"
+      },
+      {
+        "frame": 75,
+        "segundos": 2.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000075.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000075.jpg",
+        "bytes": 190578,
+        "crc32": 1527049789,
+        "sha256": "51a0f6a742aef006bf2cf3be43c3ddd6468d24a2c5b5b3c1d208215c4a767179"
+      },
+      {
+        "frame": 78,
+        "segundos": 2.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000078.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000078.jpg",
+        "bytes": 289123,
+        "crc32": 3428963091,
+        "sha256": "b76bbd23fce95f9e737864c3f29ab309ba75b8a3078b5aef97fe3582b7ccbcaf"
+      },
+      {
+        "frame": 78,
+        "segundos": 2.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000078.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000078.jpg",
+        "bytes": 191330,
+        "crc32": 691083858,
+        "sha256": "b7ce78c1a48880d388d4ea812c20541ba1e444af7efda618d1124e9fae3f2dfa"
+      },
+      {
+        "frame": 84,
+        "segundos": 2.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000084.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000084.jpg",
+        "bytes": 288792,
+        "crc32": 2224709181,
+        "sha256": "bc6e5c3397553f4909b886fc62a2796f74fef3ea82c17c6754708c6afdf8ae49"
+      },
+      {
+        "frame": 84,
+        "segundos": 2.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000084.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000084.jpg",
+        "bytes": 190701,
+        "crc32": 4252494392,
+        "sha256": "ca8f056d7ada8fbc6d65d5c92c7c188966138363c2650c4f7af56abe84bd2a70"
+      },
+      {
+        "frame": 87,
+        "segundos": 2.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000087.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000087.jpg",
+        "bytes": 287982,
+        "crc32": 733393671,
+        "sha256": "b00e89b604f372f0bfa202f3bd5d4f7f63deb2f6600cb7216cae8111b274319f"
+      },
+      {
+        "frame": 87,
+        "segundos": 2.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000087.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000087.jpg",
+        "bytes": 190560,
+        "crc32": 863731598,
+        "sha256": "42e809eaa985207cb92a54d7bc8cb472634dabb289ab272747b3c59fcd4aa8fa"
+      },
+      {
+        "frame": 96,
+        "segundos": 3.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000096.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000096.jpg",
+        "bytes": 290603,
+        "crc32": 3716589165,
+        "sha256": "5a98664b7e41fbd25c2bfc699beeddbf87b97ac86fee7b88d92f0f1589ae5940"
+      },
+      {
+        "frame": 96,
+        "segundos": 3.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000096.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000096.jpg",
+        "bytes": 189318,
+        "crc32": 3714293647,
+        "sha256": "087eb145593b0d04752a6b26f79d8150829466813355231edd22692464eb96fc"
+      },
+      {
+        "frame": 99,
+        "segundos": 3.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000099.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000099.jpg",
+        "bytes": 289781,
+        "crc32": 3292663183,
+        "sha256": "534c9ee94a50ea3654b2b7c41dad227e5f428fb7bac853122721c0ea54201d99"
+      },
+      {
+        "frame": 99,
+        "segundos": 3.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000099.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000099.jpg",
+        "bytes": 191472,
+        "crc32": 3209904149,
+        "sha256": "ac633942eec2710858e5767a34276ea41eccac1dfb1ea4198563d720add8103c"
+      },
+      {
+        "frame": 102,
+        "segundos": 3.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000102.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000102.jpg",
+        "bytes": 290722,
+        "crc32": 1845788008,
+        "sha256": "be6db34ea9520b84a493a564d6293df3edef0627fe8deecd86277dd182c9fb49"
+      },
+      {
+        "frame": 102,
+        "segundos": 3.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000102.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000102.jpg",
+        "bytes": 192131,
+        "crc32": 1427381112,
+        "sha256": "a4c944a59ebdc0e7efe908b4a434c1dbe219a5bfb10c269571c730e6d35a9b16"
+      },
+      {
+        "frame": 105,
+        "segundos": 3.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000105.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000105.jpg",
+        "bytes": 290376,
+        "crc32": 953343693,
+        "sha256": "cf61e09bb1669fa0f473120e535ead3f2bf85122680a1454d6ea4ff240c3d47e"
+      },
+      {
+        "frame": 105,
+        "segundos": 3.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000105.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000105.jpg",
+        "bytes": 194049,
+        "crc32": 777855800,
+        "sha256": "2d91f88ab5f5dea11b7497757bdfb5b6767b5730b50b9a2f9d67fa2665b19dcf"
+      },
+      {
+        "frame": 111,
+        "segundos": 3.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000111.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000111.jpg",
+        "bytes": 290755,
+        "crc32": 417189060,
+        "sha256": "32cab4e437856b0549f96e92dfcd33ecfe4dd42fe8c8b56fae2ae8a9bbf3dacd"
+      },
+      {
+        "frame": 111,
+        "segundos": 3.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000111.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000111.jpg",
+        "bytes": 193800,
+        "crc32": 1189756617,
+        "sha256": "497e63479789486b99156eea5f487d9108add971fd02a35f50033b6c6b508136"
+      },
+      {
+        "frame": 114,
+        "segundos": 3.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000114.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000114.jpg",
+        "bytes": 291856,
+        "crc32": 1938973506,
+        "sha256": "a83acc3df55cac67b51023ff1df3f604e021abb51a85f7698f637bb8c1c6849d"
+      },
+      {
+        "frame": 114,
+        "segundos": 3.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000114.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000114.jpg",
+        "bytes": 192472,
+        "crc32": 3005487350,
+        "sha256": "b1147833960011e06f8e082aee61e7c8125b3295f745701eb498c2209554a7f5"
+      },
+      {
+        "frame": 117,
+        "segundos": 3.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000117.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000117.jpg",
+        "bytes": 292373,
+        "crc32": 1215924734,
+        "sha256": "986a01e9f345d95ab8c01bafbc7d26e0443b1cce8b0007b76a6e072a9d9264e1"
+      },
+      {
+        "frame": 117,
+        "segundos": 3.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000117.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000117.jpg",
+        "bytes": 190945,
+        "crc32": 1238946062,
+        "sha256": "5977a22003ff105d12f3a2fa5ce63bad4a94ac297fd21f2a849691b6c2492e33"
+      },
+      {
+        "frame": 120,
+        "segundos": 4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000120.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000120.jpg",
+        "bytes": 291952,
+        "crc32": 19117101,
+        "sha256": "ca2e7aaf7eb5c2c8a5695ee9d36bd854f5792428017bc585ea2bf74e863823f7"
+      },
+      {
+        "frame": 120,
+        "segundos": 4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000120.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000120.jpg",
+        "bytes": 190034,
+        "crc32": 1366981416,
+        "sha256": "87583bfe06e9f94888489445496dddd801b15ba70cd9b82d959b6eb9261fe73c"
+      },
+      {
+        "frame": 123,
+        "segundos": 4.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000123.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000123.jpg",
+        "bytes": 292221,
+        "crc32": 3801833212,
+        "sha256": "6d674faac6077bd07f3925c44f006acfee2d37f991c13fb2d1ad2218d4ebb02c"
+      },
+      {
+        "frame": 123,
+        "segundos": 4.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000123.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000123.jpg",
+        "bytes": 188871,
+        "crc32": 328255933,
+        "sha256": "eeedd432357fec56698dedae865c2a2c92ebe3759b1795d86de835b899a1b0d3"
+      },
+      {
+        "frame": 126,
+        "segundos": 4.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000126.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000126.jpg",
+        "bytes": 290745,
+        "crc32": 2102447715,
+        "sha256": "aeef5c2f4142d75aeadb645ced1e41825fce7a98fa1566059325867324c19b93"
+      },
+      {
+        "frame": 126,
+        "segundos": 4.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000126.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000126.jpg",
+        "bytes": 187218,
+        "crc32": 1985837089,
+        "sha256": "2e858cf93836608325bc394edab045aef421ca822de3772b0b5453297c39e182"
+      },
+      {
+        "frame": 138,
+        "segundos": 4.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000138.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000138.jpg",
+        "bytes": 290310,
+        "crc32": 2789184761,
+        "sha256": "1085104635b07634c0fea066bf77f739cce0713d5bd7c36d19db84f4c26beb89"
+      },
+      {
+        "frame": 138,
+        "segundos": 4.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000138.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000138.jpg",
+        "bytes": 186138,
+        "crc32": 3471887011,
+        "sha256": "0173241252058fb12044b416c46062e672db9d6143172b1f345ee696383e5922"
+      },
+      {
+        "frame": 141,
+        "segundos": 4.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000141.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000141.jpg",
+        "bytes": 290643,
+        "crc32": 1800217197,
+        "sha256": "0bf8e1c34c34835283a84196e16500c8f5e7c8484ada669cfef5143287c783f0"
+      },
+      {
+        "frame": 141,
+        "segundos": 4.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000141.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000141.jpg",
+        "bytes": 186013,
+        "crc32": 1725241086,
+        "sha256": "57e027d06aaf6b230623336bacae2d0978b07dfb1baa0a5900be95ba7dcebaa4"
+      },
+      {
+        "frame": 144,
+        "segundos": 4.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000144.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000144.jpg",
+        "bytes": 290114,
+        "crc32": 3872124229,
+        "sha256": "10f7803c98072dba0a356e1edfb9581a542458f9cb002e550c6e497bad107a73"
+      },
+      {
+        "frame": 144,
+        "segundos": 4.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000144.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000144.jpg",
+        "bytes": 185962,
+        "crc32": 1959205733,
+        "sha256": "fcbefadc95fe191f46b118022f0bb9873994575259a0ff85423c7f4320f28697"
+      },
+      {
+        "frame": 147,
+        "segundos": 4.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000147.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000147.jpg",
+        "bytes": 290815,
+        "crc32": 2741314754,
+        "sha256": "f00038d56302b6724c3b5f9f71bdc89913617aee6740aa2063da4bcc57bc722f"
+      },
+      {
+        "frame": 147,
+        "segundos": 4.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000147.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000147.jpg",
+        "bytes": 186513,
+        "crc32": 575104378,
+        "sha256": "7e635ae565e8e99ea711422889ce805d0dbfabf9a987323e569b7509fac00296"
+      },
+      {
+        "frame": 150,
+        "segundos": 5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000150.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000150.jpg",
+        "bytes": 291897,
+        "crc32": 2301626394,
+        "sha256": "fcb07e5d1cbdd408dd4e1f69c7368cc9ee24eea91a14e2a2464837c2e40e48ad"
+      },
+      {
+        "frame": 150,
+        "segundos": 5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000150.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000150.jpg",
+        "bytes": 187057,
+        "crc32": 4184054033,
+        "sha256": "5726336b1c7190cb7e76664ad3f34040c8af9d32b88270a4a25c42535e053733"
+      },
+      {
+        "frame": 153,
+        "segundos": 5.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000153.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000153.jpg",
+        "bytes": 292486,
+        "crc32": 1637200944,
+        "sha256": "c88d1bdb2f6d8276722c51ef187b963bcd7b53aac0d96c1b604c1da3596bb57d"
+      },
+      {
+        "frame": 153,
+        "segundos": 5.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000153.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000153.jpg",
+        "bytes": 187139,
+        "crc32": 4091154640,
+        "sha256": "0a61dc771164659eafc99d248d1b94daaae789b66cb49908bbb64213772fc459"
+      },
+      {
+        "frame": 156,
+        "segundos": 5.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000156.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000156.jpg",
+        "bytes": 292376,
+        "crc32": 3821854082,
+        "sha256": "8b77606b9e1a02cb5fc443b04b759c7a3e2f8dfb384a3941716582c20476e215"
+      },
+      {
+        "frame": 156,
+        "segundos": 5.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000156.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000156.jpg",
+        "bytes": 186950,
+        "crc32": 2157199317,
+        "sha256": "58393b9b0460fc9ecfbc5a39466a0edae26ab464db62014ed4a7b30b069574ab"
+      },
+      {
+        "frame": 159,
+        "segundos": 5.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000159.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000159.jpg",
+        "bytes": 290536,
+        "crc32": 3539651578,
+        "sha256": "4d1dace16abaae50a3a839cf816027fd6729c38cf8e96f417c5b01fc5ece2542"
+      },
+      {
+        "frame": 159,
+        "segundos": 5.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000159.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000159.jpg",
+        "bytes": 187303,
+        "crc32": 2013717570,
+        "sha256": "686681b2bc996f43e0d26abcc983ef1b21921fbdb1d1e421ac511b8ee6a81174"
+      },
+      {
+        "frame": 165,
+        "segundos": 5.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000165.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000165.jpg",
+        "bytes": 290254,
+        "crc32": 472594391,
+        "sha256": "e3a6346fa1ad14bdd98c7a750be43449211868a66f8468d7348a8d1517914d27"
+      },
+      {
+        "frame": 165,
+        "segundos": 5.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000165.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000165.jpg",
+        "bytes": 187159,
+        "crc32": 410980409,
+        "sha256": "1e186ea156b0d379083af5c7e7816ca3bf9cbcad810a281a0c87715a4d5d91bf"
+      },
+      {
+        "frame": 168,
+        "segundos": 5.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000168.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000168.jpg",
+        "bytes": 290794,
+        "crc32": 3093693450,
+        "sha256": "e0a5abb16faab500600efd2f8a1b7d248a23390c5145d907fcc539314b0366be"
+      },
+      {
+        "frame": 168,
+        "segundos": 5.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000168.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000168.jpg",
+        "bytes": 188383,
+        "crc32": 699272858,
+        "sha256": "1bcb14e3401af509767e73346bafd41de262a63ed529bc555a6efea531ba149c"
+      },
+      {
+        "frame": 171,
+        "segundos": 5.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000171.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000171.jpg",
+        "bytes": 291310,
+        "crc32": 4060018963,
+        "sha256": "834a62b7577dc5ab6392ef3ea58932c75583142821dadb7b7a9d0661430e6708"
+      },
+      {
+        "frame": 171,
+        "segundos": 5.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000171.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000171.jpg",
+        "bytes": 189060,
+        "crc32": 3035217637,
+        "sha256": "7d6ceba50e6b5339460c676d8f8c47a3bb4f3fe331d6bab9f18e739e6d3fd695"
+      },
+      {
+        "frame": 174,
+        "segundos": 5.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000174.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000174.jpg",
+        "bytes": 291304,
+        "crc32": 2454785911,
+        "sha256": "4e2bef1223703757c09b7a803834290595311cc00af1bbf9c447546158abccad"
+      },
+      {
+        "frame": 174,
+        "segundos": 5.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000174.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000174.jpg",
+        "bytes": 188967,
+        "crc32": 1468261719,
+        "sha256": "e0abdd43ca209e5048d262f55a7aa8c7b0d6ce40c426953cd33743f93808a6fa"
+      },
+      {
+        "frame": 183,
+        "segundos": 6.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000183.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000183.jpg",
+        "bytes": 292480,
+        "crc32": 2927702217,
+        "sha256": "e417721130add9dc26a9c55e63ae1b9182775ba40c91d578e9e5dac946d52525"
+      },
+      {
+        "frame": 183,
+        "segundos": 6.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000183.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000183.jpg",
+        "bytes": 188227,
+        "crc32": 2089555563,
+        "sha256": "4e1a1a735df504d33f6c1df77dc5812aaf4a832b7b3f18625ae773f43fd36181"
+      },
+      {
+        "frame": 186,
+        "segundos": 6.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000186.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000186.jpg",
+        "bytes": 292490,
+        "crc32": 4261585846,
+        "sha256": "b900808a736a2aa8040d67ba6d571f638bc8451851874a112e9bd9f5efc4590a"
+      },
+      {
+        "frame": 186,
+        "segundos": 6.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000186.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000186.jpg",
+        "bytes": 186954,
+        "crc32": 2086250138,
+        "sha256": "10d6d9ee348e7414f23bb34d7e93b83fa1542a25c6456af20f19a71784905159"
+      },
+      {
+        "frame": 189,
+        "segundos": 6.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000189.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000189.jpg",
+        "bytes": 291736,
+        "crc32": 4271540002,
+        "sha256": "53d95bcb8f980eae271ac819818af181db63f82f40aadd2fc5a388b888ebcb05"
+      },
+      {
+        "frame": 189,
+        "segundos": 6.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000189.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000189.jpg",
+        "bytes": 187213,
+        "crc32": 696547081,
+        "sha256": "11d163abf01f2dfff55d7f010ba90e50e8df6b489f98b4557b966dd3865ce366"
+      },
+      {
+        "frame": 192,
+        "segundos": 6.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000192.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000192.jpg",
+        "bytes": 291587,
+        "crc32": 557774417,
+        "sha256": "a48a4b0618fd049788baab2889fb7cb15b30df5def6ae691fbef7c6febd63a26"
+      },
+      {
+        "frame": 192,
+        "segundos": 6.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000192.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000192.jpg",
+        "bytes": 186167,
+        "crc32": 3594764222,
+        "sha256": "9cd73da34b1ab61d56f84e6ac83e297546b94768c373667bce1084bc32eec650"
+      },
+      {
+        "frame": 195,
+        "segundos": 6.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000195.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000195.jpg",
+        "bytes": 290710,
+        "crc32": 2764213513,
+        "sha256": "61d587a9f5ac65b08aa9c879692eaaa085d854cbe94ca8a4cfc5173ff37dfd5f"
+      },
+      {
+        "frame": 195,
+        "segundos": 6.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000195.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000195.jpg",
+        "bytes": 185159,
+        "crc32": 2333241705,
+        "sha256": "1f8d16dcc495c4497ce1c1ce2775cf02fa0110f75c985cf182e6f92e815bcc4a"
+      },
+      {
+        "frame": 198,
+        "segundos": 6.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000198.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000198.jpg",
+        "bytes": 290319,
+        "crc32": 2584606694,
+        "sha256": "ef5a512d487c3870ed91d87b89c20ca69b06be4f103603542c8ebda48f3fd4c2"
+      },
+      {
+        "frame": 198,
+        "segundos": 6.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000198.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000198.jpg",
+        "bytes": 185077,
+        "crc32": 4206642808,
+        "sha256": "777d24bead662b179ac270e6084685a51d3a3a6253c5c9ff57108c1be96b0940"
+      },
+      {
+        "frame": 207,
+        "segundos": 6.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000207.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000207.jpg",
+        "bytes": 290194,
+        "crc32": 2988262658,
+        "sha256": "fb85be6596a89f0e7b48c1fc8709edb3c0f4f530d60d53971d61ec2c6c266228"
+      },
+      {
+        "frame": 207,
+        "segundos": 6.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000207.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000207.jpg",
+        "bytes": 183449,
+        "crc32": 1182771411,
+        "sha256": "7ab8d28187582e1934d2010a3a5b4cd319dc281611b3211d126c0a2b03b43805"
+      },
+      {
+        "frame": 210,
+        "segundos": 7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000210.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000210.jpg",
+        "bytes": 290928,
+        "crc32": 2964804597,
+        "sha256": "fdd6ca20735a2d17eb86ac5512317c61dc2c9ed1c8f10b4f87f5a2520f12a1f4"
+      },
+      {
+        "frame": 210,
+        "segundos": 7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000210.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000210.jpg",
+        "bytes": 183897,
+        "crc32": 743674319,
+        "sha256": "6135e263ac943c57f48c0ae7aee7dd6a921499cf2f66ca3368dd97815a50d118"
+      },
+      {
+        "frame": 213,
+        "segundos": 7.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000213.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000213.jpg",
+        "bytes": 291318,
+        "crc32": 2854865286,
+        "sha256": "024476782102696ebdbf856c494a4fec42cb42b7103e74c717208afb3c6e0ab2"
+      },
+      {
+        "frame": 213,
+        "segundos": 7.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000213.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000213.jpg",
+        "bytes": 184174,
+        "crc32": 2351427780,
+        "sha256": "d0e8d5db4f320b0b515b9bc22d365801786e5a2ff75d144eb00d913804896a42"
+      },
+      {
+        "frame": 216,
+        "segundos": 7.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000216.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000216.jpg",
+        "bytes": 291785,
+        "crc32": 4112547372,
+        "sha256": "f38a5744fa97eee63b5a6cafa184140c00bb18c3e429e1b48b994e7835544dc8"
+      },
+      {
+        "frame": 216,
+        "segundos": 7.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000216.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000216.jpg",
+        "bytes": 182364,
+        "crc32": 2973599658,
+        "sha256": "b8cacd648cbb89e1950ffafe5e79604f6f4cabebf4d53dec4ca6eb316bd06c99"
+      },
+      {
+        "frame": 219,
+        "segundos": 7.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000219.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000219.jpg",
+        "bytes": 291589,
+        "crc32": 2258737344,
+        "sha256": "7d1c59e13b5051eebb89e10f233e0ece85964074defa751145185b577253e169"
+      },
+      {
+        "frame": 219,
+        "segundos": 7.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000219.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000219.jpg",
+        "bytes": 183883,
+        "crc32": 2317308165,
+        "sha256": "43c337a192e9c0bb23eb28941cdff421952bbbaba4bf001b48f225b358b1487e"
+      },
+      {
+        "frame": 222,
+        "segundos": 7.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000222.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000222.jpg",
+        "bytes": 288240,
+        "crc32": 1292300062,
+        "sha256": "4eab6f7bec0e78083089b6e4b21a2a2ec300d62254868c5352f912b943accc41"
+      },
+      {
+        "frame": 222,
+        "segundos": 7.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000222.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000222.jpg",
+        "bytes": 183744,
+        "crc32": 1997174567,
+        "sha256": "470b50526061fdcb06d2e08ffaab3f77634e2ac54863daafb080c2352e300600"
+      },
+      {
+        "frame": 225,
+        "segundos": 7.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000225.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000225.jpg",
+        "bytes": 288424,
+        "crc32": 2112408994,
+        "sha256": "516358b5755eef8349a63935618767ffb61c19e078afa254bcdb172fedf42800"
+      },
+      {
+        "frame": 225,
+        "segundos": 7.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000225.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000225.jpg",
+        "bytes": 183096,
+        "crc32": 1266610896,
+        "sha256": "0467b065ec699d5ea1c70bfda4b5552c162691a1161e05d1d378c1ed3515792f"
+      },
+      {
+        "frame": 234,
+        "segundos": 7.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000234.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000234.jpg",
+        "bytes": 289916,
+        "crc32": 1814615540,
+        "sha256": "cb59bca26bb8b8948fc12c1eb4f1d95f243696ccac9781b340269ce86916fb58"
+      },
+      {
+        "frame": 234,
+        "segundos": 7.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000234.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000234.jpg",
+        "bytes": 183508,
+        "crc32": 2081542641,
+        "sha256": "e1b7c38caa77f13219dc929408795985cdb168917d3a1cc0b8dfcc4ea0e466b2"
+      },
+      {
+        "frame": 237,
+        "segundos": 7.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000237.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000237.jpg",
+        "bytes": 290825,
+        "crc32": 1879933478,
+        "sha256": "9f753ac1380de1dde2b4e78221d528991bba7068e12ca8cf91b88008685a9bb5"
+      },
+      {
+        "frame": 237,
+        "segundos": 7.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000237.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000237.jpg",
+        "bytes": 184247,
+        "crc32": 118331402,
+        "sha256": "9eaf9d7334b7294a1f0851ec0549a8cd8bef870d0f954dbeeb480965bb845daa"
+      },
+      {
+        "frame": 240,
+        "segundos": 8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000240.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000240.jpg",
+        "bytes": 290825,
+        "crc32": 3585560130,
+        "sha256": "a3ababbb5e35299941b607e4aa3cb42851ea9f1f44c60a3a52c2ea16cad12a22"
+      },
+      {
+        "frame": 240,
+        "segundos": 8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000240.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000240.jpg",
+        "bytes": 184061,
+        "crc32": 2317496456,
+        "sha256": "87779ec60407a4abba7092eeae3cd7bb77d78f791bddd26566234d8c76ee43d5"
+      },
+      {
+        "frame": 243,
+        "segundos": 8.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000243.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000243.jpg",
+        "bytes": 290958,
+        "crc32": 3677213337,
+        "sha256": "f3d0a72687e81a4d2807785119afe449dad351aa884a74c8e64ec3302af781b7"
+      },
+      {
+        "frame": 243,
+        "segundos": 8.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000243.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000243.jpg",
+        "bytes": 184170,
+        "crc32": 1910972701,
+        "sha256": "469a7041ebc9433573501e20e5ac4d51a56344dfe18e7162b83fa33d2d74cb74"
+      },
+      {
+        "frame": 255,
+        "segundos": 8.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000255.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000255.jpg",
+        "bytes": 289057,
+        "crc32": 154033896,
+        "sha256": "5f10163b9a8dd779203389b0434dc8caf2161572e4193f4c1f3b13a99b66561c"
+      },
+      {
+        "frame": 255,
+        "segundos": 8.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000255.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000255.jpg",
+        "bytes": 182788,
+        "crc32": 2367941819,
+        "sha256": "7d1575666b3c86a23958b2f10faf49d58d4276bb143bc0c0fa35e15c18e7e4e1"
+      },
+      {
+        "frame": 258,
+        "segundos": 8.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000258.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000258.jpg",
+        "bytes": 288940,
+        "crc32": 3096572094,
+        "sha256": "bd4d31718fe1051dd3bea78836326ee94905c6f3f20ba8ad20d4a3246ab2fa38"
+      },
+      {
+        "frame": 258,
+        "segundos": 8.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000258.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000258.jpg",
+        "bytes": 183473,
+        "crc32": 3303915299,
+        "sha256": "d6e1870c2f39620208d9814be0b37b27a9d634dc53025b8c3e965ae5fd5e73fc"
+      },
+      {
+        "frame": 261,
+        "segundos": 8.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000261.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000261.jpg",
+        "bytes": 288675,
+        "crc32": 3941116336,
+        "sha256": "44bc5351406b346ad8df2a08aced48b779d76e7154ced1e27689c8996e87569c"
+      },
+      {
+        "frame": 261,
+        "segundos": 8.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000261.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000261.jpg",
+        "bytes": 184858,
+        "crc32": 2438269745,
+        "sha256": "261f139a0242901d9c0858c9a27926ddadb68973e993919574e05ab781bd31ed"
+      },
+      {
+        "frame": 264,
+        "segundos": 8.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000264.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000264.jpg",
+        "bytes": 289085,
+        "crc32": 1862767308,
+        "sha256": "86064a417f090a8d4126850729b92be59d990f22cc173798d212f8bab49178db"
+      },
+      {
+        "frame": 264,
+        "segundos": 8.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000264.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000264.jpg",
+        "bytes": 184829,
+        "crc32": 1917744372,
+        "sha256": "3212207c8ec5a1785b0efeb14966f64533db28b9e8ba5666c2d18ce53e615204"
+      },
+      {
+        "frame": 267,
+        "segundos": 8.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000267.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000267.jpg",
+        "bytes": 289010,
+        "crc32": 4035255523,
+        "sha256": "b3b0b959606ffc592e166fb401132678a0d14b37885eac04b15918f6dea7b202"
+      },
+      {
+        "frame": 267,
+        "segundos": 8.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000267.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000267.jpg",
+        "bytes": 185299,
+        "crc32": 2885124103,
+        "sha256": "e690720a6f384d9b9b581c0dbb64866df0c0638122119c6628c0201eb6ee9d01"
+      },
+      {
+        "frame": 270,
+        "segundos": 9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000270.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000270.jpg",
+        "bytes": 288259,
+        "crc32": 3554856623,
+        "sha256": "0652694dc1803c91af0a0572a746839e600f0bc5dc6679c607583da6436fee37"
+      },
+      {
+        "frame": 270,
+        "segundos": 9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000270.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000270.jpg",
+        "bytes": 185858,
+        "crc32": 2858877886,
+        "sha256": "a72b43995727b4a95edd2b190df9814111d8b57731bf57a38e0b05f8c356cf22"
+      },
+      {
+        "frame": 273,
+        "segundos": 9.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000273.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000273.jpg",
+        "bytes": 290072,
+        "crc32": 1146527331,
+        "sha256": "171eadcf40380d5dd2435c55fd531f4c71c50a9860bef7664486a131c40cad22"
+      },
+      {
+        "frame": 273,
+        "segundos": 9.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000273.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000273.jpg",
+        "bytes": 187162,
+        "crc32": 3673234970,
+        "sha256": "a8ca45aef5abbfd195c57af743c2f0c289084135ec55ca96be1c13e100c208c1"
+      },
+      {
+        "frame": 282,
+        "segundos": 9.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000282.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000282.jpg",
+        "bytes": 287498,
+        "crc32": 2393754061,
+        "sha256": "d52c0e7361099151fef468b18f3e5c9400a10bb1d5d79f843bd8d252ffe03fca"
+      },
+      {
+        "frame": 282,
+        "segundos": 9.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000282.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000282.jpg",
+        "bytes": 186479,
+        "crc32": 3072806609,
+        "sha256": "14455a27043719390dfb78e7b3d6f9b9f57f9351dbcdf8e65b96191ea91818fc"
+      },
+      {
+        "frame": 285,
+        "segundos": 9.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000285.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000285.jpg",
+        "bytes": 288981,
+        "crc32": 597315369,
+        "sha256": "a7aee918774a46543242b3b05f7093808fd0e151713874a310a3a1d0e8fd4003"
+      },
+      {
+        "frame": 285,
+        "segundos": 9.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000285.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000285.jpg",
+        "bytes": 186711,
+        "crc32": 2446459512,
+        "sha256": "f4b8956711178dcd01bc44a23bd130d91f3477cdf7ae0e335670bafb8ab47303"
+      },
+      {
+        "frame": 297,
+        "segundos": 9.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000297.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000297.jpg",
+        "bytes": 288053,
+        "crc32": 4128574637,
+        "sha256": "fc35b59a03dfa4571999e8448ff455f40a5ea39a9dbb93fa8a6e9d24a39d3105"
+      },
+      {
+        "frame": 297,
+        "segundos": 9.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000297.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000297.jpg",
+        "bytes": 188052,
+        "crc32": 416534745,
+        "sha256": "d6b0f14dc2dbd3d8c06a34fa1d5a9da6901e196fbb1c8c0b82725d8ff110db4a"
+      },
+      {
+        "frame": 300,
+        "segundos": 10,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000300.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000300.jpg",
+        "bytes": 289409,
+        "crc32": 2017858920,
+        "sha256": "b3857c2d4bde0ee7d68d6b4139c111248ba78e7c5e0fcc737ab066db17407dac"
+      },
+      {
+        "frame": 300,
+        "segundos": 10,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000300.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000300.jpg",
+        "bytes": 188062,
+        "crc32": 3139387340,
+        "sha256": "a9c24cab3a016c8d74c958ba322ae7e4fda2cf13397243a49cfa780a0c887962"
+      },
+      {
+        "frame": 306,
+        "segundos": 10.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000306.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000306.jpg",
+        "bytes": 290630,
+        "crc32": 85766558,
+        "sha256": "4e36ccf5346b7b7f292ba443c032902569e9200ffe4944434eecd83f564c7f9d"
+      },
+      {
+        "frame": 306,
+        "segundos": 10.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000306.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000306.jpg",
+        "bytes": 188319,
+        "crc32": 2427169328,
+        "sha256": "a94acbba9c27d1f15b9ec5775362a2f3e2dd45525eac8c0a6c3911458d56f01f"
+      },
+      {
+        "frame": 309,
+        "segundos": 10.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000309.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000309.jpg",
+        "bytes": 287351,
+        "crc32": 471731967,
+        "sha256": "32d2fb9f0d5f7632838e824ecfc2e5e87298d600f41e6bfe08f1dca172222e37"
+      },
+      {
+        "frame": 309,
+        "segundos": 10.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000309.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000309.jpg",
+        "bytes": 188190,
+        "crc32": 1859319974,
+        "sha256": "d307c1ec01cda880343c39f9e3b711f6385da39b812e8c700de1fefc0be4375c"
+      },
+      {
+        "frame": 312,
+        "segundos": 10.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000312.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000312.jpg",
+        "bytes": 286198,
+        "crc32": 2964040653,
+        "sha256": "e341b425d4f1ce30151e8e881f440d663a1b2a834389f93b99a38ad4d53aaee0"
+      },
+      {
+        "frame": 312,
+        "segundos": 10.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000312.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000312.jpg",
+        "bytes": 188086,
+        "crc32": 2320941881,
+        "sha256": "72cacc3d69697aa15843b5dddc8704405315f568e0d38d6c4ca48b415870d5b8"
+      },
+      {
+        "frame": 315,
+        "segundos": 10.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000315.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000315.jpg",
+        "bytes": 286496,
+        "crc32": 2636466095,
+        "sha256": "bd97b3576e77b4b5c9d37f20b41300762b33290a927fe58799b50d2b70c362a6"
+      },
+      {
+        "frame": 315,
+        "segundos": 10.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000315.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000315.jpg",
+        "bytes": 187690,
+        "crc32": 4031715033,
+        "sha256": "3edea999d285a39abe066ee8865160575cfa194bc26ab18b8f45936bb0bdcb85"
+      },
+      {
+        "frame": 318,
+        "segundos": 10.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000318.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000318.jpg",
+        "bytes": 287361,
+        "crc32": 1154180689,
+        "sha256": "c97b191b92acc6c53362a246fe533f2c4bc86c5909c213977d36317033ab5d14"
+      },
+      {
+        "frame": 318,
+        "segundos": 10.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000318.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000318.jpg",
+        "bytes": 186066,
+        "crc32": 2497033705,
+        "sha256": "feb06da31d4ce148cf9c91799ef89e31a24b807594005480cee038353bf23174"
+      },
+      {
+        "frame": 324,
+        "segundos": 10.8,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000324.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000324.jpg",
+        "bytes": 286686,
+        "crc32": 3433388635,
+        "sha256": "e8d2e15141f15498f87f8f92be279f1bd2fb374f451bcc33bb7993ddfc895b00"
+      },
+      {
+        "frame": 324,
+        "segundos": 10.8,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000324.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000324.jpg",
+        "bytes": 184139,
+        "crc32": 4237794710,
+        "sha256": "a77c5d437f7953133c6c76807435f435f6dd35f5c0fb24b28f88e12669c7387e"
+      },
+      {
+        "frame": 327,
+        "segundos": 10.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000327.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000327.jpg",
+        "bytes": 286485,
+        "crc32": 2712120964,
+        "sha256": "95dd7de9c6d161561555d10d7e72dbea0a06484f670b204d3a38e132c8b8c55b"
+      },
+      {
+        "frame": 327,
+        "segundos": 10.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000327.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000327.jpg",
+        "bytes": 183725,
+        "crc32": 2676262861,
+        "sha256": "2b802d9508c49f779e78c67c286564d4d7d2e58889aa5d0201d666d0fa016e3c"
+      },
+      {
+        "frame": 333,
+        "segundos": 11.1,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000333.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000333.jpg",
+        "bytes": 285842,
+        "crc32": 700316753,
+        "sha256": "02791636dcb8dae1b17a8fa41dedff21942ecbb93b5f22497ac28eeb0a93f928"
+      },
+      {
+        "frame": 333,
+        "segundos": 11.1,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000333.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000333.jpg",
+        "bytes": 181982,
+        "crc32": 1045774941,
+        "sha256": "6d5a468238dbc2c4b05b2d7442a4b9459ee1a3922986eac68f01aa95b5d5e8ca"
+      },
+      {
+        "frame": 336,
+        "segundos": 11.2,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000336.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000336.jpg",
+        "bytes": 286496,
+        "crc32": 1605496406,
+        "sha256": "40ee26318a6e310971e5a8f6a16ab98495541ced8078d8a1d9f7343460e4fb5f"
+      },
+      {
+        "frame": 336,
+        "segundos": 11.2,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000336.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000336.jpg",
+        "bytes": 180329,
+        "crc32": 1784244050,
+        "sha256": "d7b00ef000499c0c3b0eda336828dadff4276137fb3af506b8f39c2a67e58d97"
+      },
+      {
+        "frame": 339,
+        "segundos": 11.3,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000339.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000339.jpg",
+        "bytes": 286326,
+        "crc32": 2452298283,
+        "sha256": "d13d7e12a322d367c6232b5f751ba5fc28e9a2f008c4af683291fd7635f43ced"
+      },
+      {
+        "frame": 339,
+        "segundos": 11.3,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000339.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000339.jpg",
+        "bytes": 181876,
+        "crc32": 3089247131,
+        "sha256": "53e6f29fda99e49da6736bd2a2552262cf86d56ab9985a4df6f070cf7ecc407a"
+      },
+      {
+        "frame": 342,
+        "segundos": 11.4,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000342.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000342.jpg",
+        "bytes": 286776,
+        "crc32": 603688381,
+        "sha256": "fcbf56d00caec7565bc3a597fc8cdedc28e6e42ee4558b447ec920c1b7554f58"
+      },
+      {
+        "frame": 342,
+        "segundos": 11.4,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000342.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000342.jpg",
+        "bytes": 182539,
+        "crc32": 458001933,
+        "sha256": "9882a0d3821671924ae4f12aa909a355a5224bc8c0221a43836299c0714e6813"
+      },
+      {
+        "frame": 345,
+        "segundos": 11.5,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000345.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000345.jpg",
+        "bytes": 287481,
+        "crc32": 501873888,
+        "sha256": "756b29114846877d31d87574aaa201f356cddc2dc8a72c9ee9adea52c2da204a"
+      },
+      {
+        "frame": 345,
+        "segundos": 11.5,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000345.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000345.jpg",
+        "bytes": 181893,
+        "crc32": 3939748655,
+        "sha256": "e46fcaed6113e32fb5dbe67c23e5ef9bc09c7bd3bc44b7ae16d178669f735b5b"
+      },
+      {
+        "frame": 348,
+        "segundos": 11.6,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000348.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000348.jpg",
+        "bytes": 288176,
+        "crc32": 746579324,
+        "sha256": "4b677956eb0c393e3847c95aed83ef9574dfb9d60ffb42965563e184e305c9b3"
+      },
+      {
+        "frame": 348,
+        "segundos": 11.6,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000348.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000348.jpg",
+        "bytes": 182176,
+        "crc32": 779821033,
+        "sha256": "80dd0d5e80f594e0cbe96c0c3ceb5f36839aa8f3847913a30ec3b1175de040f7"
+      },
+      {
+        "frame": 351,
+        "segundos": 11.7,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000351.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000351.jpg",
+        "bytes": 287486,
+        "crc32": 2428663899,
+        "sha256": "de0bdf4e658d66d2f0bf919420f09429b25ab5c5bcb7419c3b6756b5da34d00a"
+      },
+      {
+        "frame": 351,
+        "segundos": 11.7,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000351.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000351.jpg",
+        "bytes": 183591,
+        "crc32": 2902716568,
+        "sha256": "ebea480f86d1b90766c006ce5f805b6233cc55bff3cabf3ff2a6244ddf8e5e29"
+      },
+      {
+        "frame": 357,
+        "segundos": 11.9,
+        "modalidade": "visible",
+        "nome_original": "pedestrian_043/rgb/000357.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/visible/000357.jpg",
+        "bytes": 287960,
+        "crc32": 1524337453,
+        "sha256": "2443e539e4f5d3f0fbd5a55aae24ca6968825b355bf3db6a303742e86d7d2754"
+      },
+      {
+        "frame": 357,
+        "segundos": 11.9,
+        "modalidade": "thermal",
+        "nome_original": "pedestrian_043/ir/000357.jpg",
+        "destino": "dados/vtuav-demo/pedestrian_043/thermal/000357.jpg",
+        "bytes": 183499,
+        "crc32": 1133266176,
+        "sha256": "fb3384f6145ccacdd14fe1cc3046732cf4bbafc11cea6905b5e9303c21b93e53"
+      }
+    ]
+  }
+}
