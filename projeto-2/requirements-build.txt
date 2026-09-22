@@ -1,0 +1,6 @@
+# Ferramentas usadas na compilação de mmcv-full 1.6.1.
+# NumPy e Torch são instalados antes da compilação pelo script.
+pip==23.3.2
+setuptools==68.2.2
+wheel==0.43.0
+ninja==1.11.1.4
