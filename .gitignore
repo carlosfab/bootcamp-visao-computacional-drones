@@ -24,11 +24,6 @@ projeto-pop/
 
 /projeto-1/Projeto1_POP_SAR_*.ipynb
 
-/projeto-2/dados/
-/projeto-2/modelos/
-/projeto-2/resultados/
-/projeto-2/planejamento/
-
 # Projeto 3: ambiente, downloads e resultados regeneráveis
 /projeto-3/.venv/
 /projeto-3/dados/
