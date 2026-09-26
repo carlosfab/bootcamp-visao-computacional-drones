@@ -2,7 +2,7 @@
 
 Este projeto parte das previsões de um detector e constrói um sistema de análise temporal. O objetivo é compreender as representações e as decisões geométricas antes de interpretar o vídeo anotado como uma medição.
 
-Comece por [FUNDAMENTOS.md](FUNDAMENTOS.md), que reúne sete infográficos e a discussão de pontos de interesse, descritores, associação, ByteTrack e coordenadas. Em seguida, execute os notebooks na ordem abaixo. Cada um é independente e contém seus próprios downloads e preparação.
+Comece por [FUNDAMENTOS.md](FUNDAMENTOS.md), que reúne dez infográficos numerados sobre detecção, gradientes, descritores, associação, ByteTrack e coordenadas. O [índice visual](assets/infograficos/README.md) permite abrir cada figura, e o [roteiro de narração](ROTEIRO_VOICE_OVER.md) acompanha a mesma ordem, com falas técnicas e indicações de apresentação. Em seguida, execute os notebooks na ordem abaixo. Cada um é independente e contém seus próprios downloads e preparação.
 
 | Material | Conteúdo | Resultado |
 |:--|:--|:--|

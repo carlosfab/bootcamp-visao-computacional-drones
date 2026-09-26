@@ -1,0 +1,102 @@
+[
+  {
+    "filename": "01-deteccao-rastreamento.png",
+    "order": 1,
+    "title": "Detecção e rastreamento",
+    "alt": "Dois veículos observados em três quadros: a detecção informa classe e localização, enquanto o rastreamento associa observações e mantém IDs de trajetória.",
+    "style": "conceito técnico isolado",
+    "sha256": "e5568f1b55fe62f8f56acec46fd0a71664e479246cb9866367bf7b49230623ea",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "02-derivadas-gradiente.png",
+    "order": 2,
+    "title": "Derivadas espaciais e gradiente",
+    "alt": "Uma transição vertical do escuro para o claro produz um perfil crescente em x, derivada horizontal positiva e derivada vertical nula; o gradiente aponta para a direita, em direção ao aumento de intensidade.",
+    "style": "conceito técnico isolado",
+    "sha256": "5b3d085478238392a03620269d5c943ec49449344c70ca2edf77f0d256e8a55c",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "03-pontos-descritores.png",
+    "order": 3,
+    "title": "Pontos de interesse e descritores locais",
+    "alt": "Um ponto selecionado sobre um veículo define uma vizinhança local, cujas variações de aparência são representadas por um vetor descritor.",
+    "style": "conceito técnico isolado",
+    "sha256": "9387970e7ea09b6beafad4eea4ba3bf611a98611c4a7a9f488c6b824fa79eb51",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "04-sift-surf-orb.png",
+    "order": 4,
+    "title": "SIFT, SURF e ORB",
+    "alt": "Comparação de características locais: SIFT usa DoG e gradientes em 128 valores; SURF combina Hessiana aproximada e respostas Haar, com 64 valores na forma padrão; ORB usa FAST e BRIEF orientados, com 256 bits na configuração padrão.",
+    "style": "conceito técnico isolado",
+    "sha256": "a0d07d36b319b3cdb31dc84ae87e66e235cf531c626b85d750792797b74c68b7",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "05-aparencia-aprendida.png",
+    "order": 5,
+    "title": "Características aprendidas e aparência",
+    "alt": "Dois recortes do mesmo veículo passam por um extrator aprendido e produzem vetores de aparência comparáveis, que fornecem evidências para associação.",
+    "style": "conceito técnico isolado",
+    "sha256": "14508d934c2444aea334e2c9f96aaa00187b84936180cdc0c4dd4a9280898a0f",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "06-associacao-geometrica.png",
+    "order": 6,
+    "title": "Associação geométrica e movimento",
+    "alt": "Uma sequência de previsão, comparação por interseção sobre união e atribuição um a um associa caixas detectadas a trajetórias previstas.",
+    "style": "técnico-aula",
+    "sha256": "ba9c711ebf3a3caec451e3b472ec3c7a7da6b3d924d574d8c233803e53be9a82",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "07-sort-deepsort-bytetrack.png",
+    "order": 7,
+    "title": "SORT, Deep SORT e ByteTrack",
+    "alt": "SORT compara detecção e posição prevista; Deep SORT compara aparência atual e histórico da trajetória; ByteTrack associa alta confiança e depois usa baixa confiança para trajetórias restantes, sem ReID nesta prática.",
+    "style": "conceito técnico isolado",
+    "sha256": "3190146ecfdc6cba1d03de3169db0870cae8055082c22c5454e477de59c227a7",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "08-bytetrack.png",
+    "order": 8,
+    "title": "ByteTrack: associação em duas etapas",
+    "alt": "A primeira associação usa detecções de alta confiança; a segunda tenta recuperar trajetórias restantes com detecções de baixa confiança, sem criar uma nova identidade a partir da caixa fraca sem correspondência.",
+    "style": "técnico-aula",
+    "sha256": "c5a42c37b353ef6b4caa6bc6e4f0b250a6d76b8be458b929bbb6379dbb85b81f",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "09-coordenadas.png",
+    "order": 9,
+    "title": "Coordenadas e representações de caixas",
+    "alt": "A mesma caixa aparece nos formatos xyxy, xywh e cxcywh, com origem superior esquerda, eixo x para a direita e eixo y para baixo.",
+    "style": "conceito técnico isolado",
+    "sha256": "1c03d5f0ede4217cf582b45c21717087f8c85d0c90e0f93cb7d4a9d2c94dbd14",
+    "width": 1672,
+    "height": 941
+  },
+  {
+    "filename": "10-desafios.png",
+    "order": 10,
+    "title": "Desafios do rastreamento",
+    "alt": "Quatro dificuldades do rastreamento visual: oclusão, objetos com poucos pixels, ambiguidade entre veículos semelhantes e deslocamento da cena causado pela câmera.",
+    "style": "conceito técnico isolado",
+    "sha256": "82f7e54d4b57e17c85670eddb625737bb44d6df69a111bd2b6342765547a3b1a",
+    "width": 1672,
+    "height": 941
+  }
+]

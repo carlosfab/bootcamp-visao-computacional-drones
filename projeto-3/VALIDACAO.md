@@ -37,10 +37,14 @@ O teste de oscilação sobre a linha verifica uma propriedade da regra geométri
 
 ## Inspeção e revisão
 
-Um revisor independente examinou o código, as fontes, os outputs, os fundamentos e os sete infográficos. A revisão conferiu a implementação atual de ByteTrack, os sistemas de coordenadas, as regras de estado e a ausência de caminhos privados ou credenciais nas células. As correções de notação e terminologia foram incorporadas.
+Na entrega inicial, um revisor independente examinou o código, as fontes, os outputs, os fundamentos e os sete infográficos originais. A revisão conferiu a implementação atual de ByteTrack, os sistemas de coordenadas, as regras de estado e a ausência de caminhos privados ou credenciais nas células. As correções de notação e terminologia foram incorporadas.
+
+Na ampliação de 26/09/2026, foram acrescentados três infográficos — derivadas/gradiente, SIFT/SURF/ORB e SORT/Deep SORT/ByteTrack — e um [roteiro de narração](ROTEIRO_VOICE_OVER.md) com dez blocos. Um revisor independente inspecionou individualmente as novas imagens, as fontes e a correspondência com as falas, sem apontamentos de prioridade P1/P2 nessa revisão. As durações são estimadas por contagem de palavras e pausas; não houve gravação de áudio.
 
 As figuras dos notebooks foram abertas, assim como os quadros de início, meio e fim dos vídeos. Casos de oclusão, veículos distantes e sobreposição de rótulos permanecem visíveis para discussão; os resultados não foram editados para ocultar falhas.
 
-Os sete infográficos foram gerados integralmente e preservados na resolução nativa de 1672 × 941 pixels, aproximadamente 16:9. A proporção difere em 0,0531% do formato exato; não foram aplicados recorte ou redimensionamento procedural.
+Os dez infográficos foram gerados integralmente e preservados na resolução nativa de 1672 × 941 pixels, aproximadamente 16:9. A proporção difere em 0,0531% do formato exato; não foram aplicados recorte ou redimensionamento procedural. Os sete originais foram preservados byte a byte, com renumeração para a sequência 01–10. A numeração aparece nos arquivos, no índice e no roteiro; as imagens mantêm a composição sem cabeçalho ou rodapé recorrente. Dimensões e hashes estão em [assets/infograficos/MANIFESTO.json](assets/infograficos/MANIFESTO.json).
+
+Esta ampliação alterou imagens e textos de apoio. Os três notebooks, as dependências e os resultados executáveis permanecem idênticos à entrega local `5b6fb20`; por isso, a execução de GPU acima continua sendo a evidência de validação, sem uma nova rodada de inferência para alterações editoriais.
 
 Os vídeos desta entrega têm hashes e metadados em [assets/videos/MANIFESTO.json](assets/videos/MANIFESTO.json). As fontes dos vídeos, pesos e referências técnicas estão documentadas nos notebooks e em [REFERENCIAS.md](REFERENCIAS.md).
