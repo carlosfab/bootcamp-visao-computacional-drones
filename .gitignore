@@ -33,3 +33,10 @@ projeto-pop/
 /projeto-2/modelos/
 /projeto-2/resultados/
 /projeto-2/planejamento/
+
+# Projeto 3: ambiente, downloads e resultados regeneráveis
+/projeto-3/.venv/
+/projeto-3/dados/
+/projeto-3/pesos/
+/projeto-3/resultados/
+/projeto-3/*.partial

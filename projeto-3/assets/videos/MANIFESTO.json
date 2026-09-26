@@ -1,0 +1,58 @@
+{
+  "files": [
+    {
+      "file": "RF-DETR-Medium_Roboflow-VEHICLES_tracking.mp4",
+      "bytes": 2433738,
+      "sha256": "d8a36c1600b49ff6c0d0e3864301117f9d04d253c3de75e54f4ab86facc12557",
+      "codec_name": "h264",
+      "width": 1280,
+      "height": 720,
+      "r_frame_rate": "25/1",
+      "duration": "8.000000",
+      "nb_frames": "200",
+      "role": "Execução atual dos notebooks de alunos"
+    },
+    {
+      "file": "RF-DETR-Medium_VisDrone-MOT_uav0000117_02622_v_tracking.mp4",
+      "bytes": 17612482,
+      "sha256": "e07ec142a9ab3f9bd48e149dbf5056afe89e51b544a42939cfbc75cba8234db9",
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "25/1",
+      "duration": "12.000000",
+      "nb_frames": "300",
+      "role": "Exemplo complementar preservado",
+      "playback_fps_assumed": 25,
+      "original_capture_fps": null,
+      "source": "https://huggingface.co/datasets/Voxel51/visdrone-mot/tree/3330e2096cf866ec0a70ae663681b6a5c8a967d9"
+    },
+    {
+      "file": "RF-DETR-Medium_VisDrone-MOT_uav0000305_00000_v_tracking.mp4",
+      "bytes": 11965372,
+      "sha256": "d4f8c5d3e18b11e19773c19513cae882dd6675183f24a41517ca459c214c44dd",
+      "codec_name": "h264",
+      "width": 1904,
+      "height": 1072,
+      "r_frame_rate": "25/1",
+      "duration": "7.360000",
+      "nb_frames": "184",
+      "role": "Exemplo complementar preservado",
+      "playback_fps_assumed": 25,
+      "original_capture_fps": null,
+      "source": "https://huggingface.co/datasets/Voxel51/visdrone-mot/tree/3330e2096cf866ec0a70ae663681b6a5c8a967d9"
+    },
+    {
+      "file": "YOLOv8x_Roboflow-Traffic-Analysis_contagem.mp4",
+      "bytes": 4236690,
+      "sha256": "edbc886208441c5b38728b5f19f1149a07b6023983e68c2d75cffbfcd4a5831e",
+      "codec_name": "h264",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "2997/100",
+      "duration": "26.893560",
+      "nb_frames": "806",
+      "role": "Execução atual dos notebooks de alunos"
+    }
+  ]
+}
