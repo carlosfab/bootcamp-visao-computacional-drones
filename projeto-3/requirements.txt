@@ -1,0 +1,14 @@
+# Ambiente validado: Python 3.12, Linux x86_64, GPU NVIDIA e CUDA 12.8.
+# Os notebooks incluem a mesma instalação para funcionar isoladamente no Colab.
+torch==2.8.0
+torchvision==0.23.0
+supervision==0.30.5
+trackers==2.6.1
+rfdetr==1.11.0
+ultralytics==8.4.163
+numpy==2.3.5
+transformers==5.17.0
+opencv-python==5.0.0.93
+imageio-ffmpeg==0.6.0
+matplotlib==3.10.7
+pandas==2.3.3

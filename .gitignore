@@ -23,3 +23,10 @@ projeto-pop/
 /projeto-1/treino/
 
 /projeto-1/Projeto1_POP_SAR_*.ipynb
+
+# Projeto 3: ambiente, downloads e resultados regeneráveis
+/projeto-3/.venv/
+/projeto-3/dados/
+/projeto-3/pesos/
+/projeto-3/resultados/
+/projeto-3/*.partial
