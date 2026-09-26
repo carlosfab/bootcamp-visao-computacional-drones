@@ -13,8 +13,11 @@ depende da validação. GPU ociosa e armazenamento também podem gerar cobrança
 
 1. **SSH:** cadastre sua chave pública em *Settings → SSH Public Keys*. Se não tiver uma chave,
    gere-a com `ssh-keygen -t ed25519`, sem sobrescrever uma existente.
-2. **Armazenamento e GPU:** confira disponibilidade na mesma região. Crie o volume de rede,
-   selecione uma GPU compatível e anexe o volume a `/workspace`. Exponha a porta SSH.
+2. **Armazenamento e GPU:** escolha uma GPU NVIDIA com pelo menos **16 GB de VRAM**,
+   compatível com o PyTorch 2.5.1, como RTX 3090/4090, A100, A6000 ou L40S. GPUs Blackwell,
+   como a RTX 5090, não são compatíveis com este ambiente. Confira GPU e volume disponíveis
+   na mesma região, o custo por hora e a cobrança de armazenamento antes de contratar.
+   Crie o volume de rede, anexe-o a `/workspace` e exponha a porta SSH.
 3. **Conexão:** copie do painel o comando `ssh root@<ip> -p <porta>` e execute `nvidia-smi` no pod.
 4. **Ambiente:** dentro do pod, com [uv instalado](https://docs.astral.sh/uv/getting-started/installation/):
 

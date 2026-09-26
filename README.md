@@ -18,6 +18,12 @@ Comece pelo README da pasta e execute os notebooks 00, 01 e 02 na ordem indicada
 A análise exploratória (00) usa um ambiente leve, sem PyTorch ou GPU. O projeto usa
 um ambiente próprio; o ambiente uv está definido em `projeto-1/pyproject.toml` e `projeto-1/uv.lock`.
 
+## Projeto 2 · Detecção com imagens RGB e térmicas
+
+A pasta **[projeto-2](projeto-2/README.md)** contém quatro notebooks: exploração dos
+dados, preparação de imagens e anotações, inferência com QFDet e comparação em vídeo.
+Siga o README para configurar os ambientes locais e execute os notebooks na ordem indicada.
+
 ## Aula 2 · PyTorch e visão computacional
 
 Os notebooks estão na pasta [aula-02](aula-02). Siga a sequência abaixo. Cada um pode ser executado de forma independente.
