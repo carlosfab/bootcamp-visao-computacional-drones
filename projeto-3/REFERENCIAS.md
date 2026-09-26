@@ -8,11 +8,18 @@ As páginas `latest` e o blog podem mudar após a consulta. Por isso, a reprodu�
 
 | Fonte primária | Uso no material |
 |:--|:--|
+| Torralba, Isola e Freeman. [Image Derivatives — Foundations of Computer Vision](https://visionbook.mit.edu/derivatives.html). | Derivadas espaciais, vetor gradiente, magnitude, direção e aproximações discretas. A aula declara a convenção raster com eixo vertical para baixo. |
+| Torralba, Isola e Freeman. [Gradient Descent — Foundations of Computer Vision](https://visionbook.mit.edu/gradient_descent.html). | Distinguir derivadas da intensidade em relação à posição e derivadas do custo em relação aos parâmetros do modelo. |
 | Lowe. [Distinctive Image Features from Scale-Invariant Keypoints](https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf), IJCV, 2004. | Distinguir localização de pontos de interesse e construção de descritores locais; invariância e correspondência têm hipóteses e limites. |
+| Bay, Tuytelaars e Van Gool. [SURF: Speeded Up Robust Features](https://people.ee.ethz.ch/~surf/eccv06.pdf), ECCV, 2006. | Hessiana aproximada, respostas Haar e descritores de 64 componentes, com variante estendida de 128. |
 | OpenCV. [ORB: Oriented FAST and Rotated BRIEF](https://docs.opencv.org/4.13.0/d1/d89/tutorial_py_orb.html). | Exemplo de combinação entre detector e descritor; uma característica local não equivale a um objeto ou ID temporal. |
 | Bewley et al. [Simple Online and Realtime Tracking](https://arxiv.org/abs/1602.00763), 2016. | Rastreamento por detecção, previsão de movimento e associação entre quadros. |
 | Wojke, Bewley e Paulus. [Simple Online and Realtime Tracking with a Deep Association Metric](https://arxiv.org/abs/1703.07402), 2017. | Contextualizar aparência aprendida e associação; esse componente não faz parte do ByteTrack usado nas aulas. |
 | Zhang et al. [ByteTrack: Multi-Object Tracking by Associating Every Detection Box](https://arxiv.org/abs/2110.06864), versão de 2022. | Recuperação de trajetórias com detecções de menor confiança. Os resultados publicados pertencem aos benchmarks do artigo, não aos vídeos desta aula. |
+
+Consulte também as APIs oficiais [SURF](https://docs.opencv.org/4.13.0/d5/df7/classcv_1_1xfeatures2d_1_1SURF.html) e [ORB](https://docs.opencv.org/4.13.0/db/d95/classcv_1_1ORB.html), além do tutorial [Image Gradients](https://docs.opencv.org/4.13.0/d5/d0f/tutorial_py_gradients.html). Essas páginas versionadas fundamentam os conceitos; não introduzem execução de SIFT/SURF/ORB nem novas dependências nos notebooks.
+
+Em SURF, a assinatura `extended=false` confirma 64 componentes por padrão, apesar de uma frase contraditória no tutorial introdutório. Em ORB, os 256 bits ilustrados correspondem a 32 bytes e `WTA_K=2`; com 3 ou 4, a comparação usa `NORM_HAMMING2`. O artigo ByteTrack admite ReID na primeira associação de variantes BYTE; “sem ReID nesta prática” descreve a implementação fixada, cuja associação usa IoU nas duas etapas.
 
 ## Documentação de implementação
 
