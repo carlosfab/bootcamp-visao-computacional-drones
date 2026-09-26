@@ -1,0 +1,14 @@
+# Arquivos locais de execução e material privado do professor
+/.venv*/
+/dados/
+/modelos/
+/codigo/
+/resultados/
+/planejamento/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.part
+.env
+.env.*
+.DS_Store
