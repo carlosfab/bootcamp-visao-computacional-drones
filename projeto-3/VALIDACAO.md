@@ -1,6 +1,6 @@
 # Validação da entrega
 
-Data: **26/09/2026, UTC**. Os três notebooks foram executados integralmente, cada um em uma pasta de dados nova e em um kernel novo, com as células de instalação e downloads presentes no material do aluno. As células de código entregues foram comparadas com as efetivamente executadas.
+Data: **26/09/2026, UTC**. Este registro descreve a execução integral da entrega inicial `5b6fb20`, com cada notebook em uma pasta de dados nova e em um kernel novo, incluindo instalação e downloads. As células daquela entrega foram comparadas com as efetivamente executadas. Os ajustes posteriores de preparação para merge estão discriminados ao final.
 
 ## Ambiente testado
 
@@ -45,6 +45,14 @@ As figuras dos notebooks foram abertas, assim como os quadros de início, meio e
 
 Os dez infográficos foram gerados integralmente e preservados na resolução nativa de 1672 × 941 pixels, aproximadamente 16:9. A proporção difere em 0,0531% do formato exato; não foram aplicados recorte ou redimensionamento procedural. Os sete originais foram preservados byte a byte, com renumeração para a sequência 01–10. A numeração aparece nos arquivos, no índice e no roteiro; as imagens mantêm a composição sem cabeçalho ou rodapé recorrente. Dimensões e hashes estão em [assets/infograficos/MANIFESTO.json](assets/infograficos/MANIFESTO.json).
 
-Esta ampliação alterou imagens e textos de apoio. Os três notebooks, as dependências e os resultados executáveis permanecem idênticos à entrega local `5b6fb20`; por isso, a execução de GPU acima continua sendo a evidência de validação, sem uma nova rodada de inferência para alterações editoriais.
+Na ampliação visual `5e5aa25`, os três notebooks, as dependências e os resultados executáveis permaneceram idênticos à entrega `5b6fb20`; as mudanças foram restritas a imagens e textos de apoio.
 
 Os vídeos desta entrega têm hashes e metadados em [assets/videos/MANIFESTO.json](assets/videos/MANIFESTO.json). As fontes dos vídeos, pesos e referências técnicas estão documentadas nos notebooks e em [REFERENCIAS.md](REFERENCIAS.md).
+
+## Preparação para merge
+
+Os notebooks 01 e 02 passaram a baixar o vídeo para um arquivo temporário, conferir o SHA-256 e só então substituir o destino. A reexecução pode recuperar um arquivo incompleto; um arquivo íntegro é reutilizado. Testes direcionados verificaram primeiro download, cache, destino incompleto, interrupção, hash divergente e recuperação em ambos os notebooks, totalizando 12 casos.
+
+A descrição do ambiente foi corrigida para distinguir versões instaladas de módulos já carregados. A documentação da `LineZone` explicita a faixa finita das âncoras. A validação do CSV manual foi revista para não descartar silenciosamente entradas com acentos, caixa ou espaços diferentes e para interromper a comparação diante de valores inválidos.
+
+As saídas históricas de inferência foram preservadas durante essa preparação. A tabela anterior não deve ser interpretada como execução das células novas; uma nova execução integral a partir dos arquivos publicados no branch será registrada separadamente.

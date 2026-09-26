@@ -55,7 +55,7 @@ Os nomes identificam **modelo e fonte do vídeo**, não necessariamente o conjun
 
 ## Como interpretar o projeto final
 
-A regra de passagem usa os quatro cantos da caixa. Quando a caixa ainda atravessa a linha, não há um lado inequívoco. Isso evita transformar pequenas oscilações do centro de um veículo parado em sucessivos eventos de entrada e saída.
+A regra de passagem usa os quatro cantos da caixa. Quando a caixa ainda atravessa a linha, não há um lado inequívoco. A `LineZone` também exige que todas as âncoras estejam na faixa delimitada pelas perpendiculares aos extremos do segmento. Uma observação fora dessa faixa é desconsiderada, sem apagar automaticamente o histórico da trajetória. Isso evita interpretar a linha como uma fronteira infinita e reduz eventos causados por pequenas oscilações de um veículo parado sobre ela.
 
 Um resultado de contagem precisa ser conferido por evento: direção, instante e veículo. **Totais iguais podem esconder omissões e duplicações que se cancelam.** A quantidade de IDs distintos também não equivale automaticamente à quantidade de veículos únicos.
 
