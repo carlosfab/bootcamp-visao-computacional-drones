@@ -2,6 +2,14 @@
 
 Material de apoio para acompanhar as práticas do bootcamp da Academia Sigmoidal.
 
+## Projeto 3 · Detecção, rastreamento e contagem de veículos
+
+A pasta **[projeto-3](projeto-3/README.md)** contém os fundamentos ilustrados e três
+notebooks executados: Supervision e coordenadas, tracking com ByteTrack e projeto
+final de contagem na rotatória. O README do projeto contém links diretos para abrir
+cada notebook no Colab. Os dados são baixados pelas células de preparação. O projeto
+utiliza um ambiente próprio, com dependências e instruções documentadas na pasta.
+
 ## Projeto 1 · Busca e salvamento com imagens térmicas
 
 A pasta **[projeto-1](projeto-1/README.md)** contém o experimento completo: preparação do
