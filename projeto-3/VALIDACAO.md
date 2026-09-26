@@ -1,8 +1,24 @@
 # Validação da entrega
 
-Data: **26/09/2026, UTC**. Este registro descreve a execução integral da entrega inicial `5b6fb20`, com cada notebook em uma pasta de dados nova e em um kernel novo, incluindo instalação e downloads. As células daquela entrega foram comparadas com as efetivamente executadas. Os ajustes posteriores de preparação para merge estão discriminados ao final.
+Data: **26/09/2026, UTC**. A versão atual foi reexecutada integralmente após o envio do branch ao GitHub: **70 de 70 células, sem erros**. Os arquivos foram obtidos diretamente do commit `52a1216b96ab34ecc1bd71da756502118f68fc42`, com diretório de dados e kernel novos para cada notebook. As fontes e os IDs das células foram comparados antes e depois da execução; as saídas entregues são as dessa reexecução.
 
-## Ambiente testado
+## Reexecução da versão publicada
+
+Ambiente: Linux x86_64, Python 3.12.3, GPU NVIDIA RTX 2000 Ada Generation de 16 GB, driver 570.195.03 e CUDA 12.8. As 12 dependências diretas fixadas em [requirements.txt](requirements.txt) foram conferidas, incluindo pandas 2.3.3; `pip check` não reportou conflitos.
+
+| Notebook | Células executadas | Erros | Tempo registrado |
+|:--|--:|--:|--:|
+| 01_supervision.ipynb | 19 de 19 | 0 | 36,56 s |
+| 02_tracking.ipynb | 18 de 18 | 0 | 40,18 s |
+| 03_projeto_final.ipynb | 33 de 33 | 0 | 113,89 s |
+
+Os tempos não incluem provisionamento da GPU e instalação inicial do ambiente. Não constituem estimativa garantida para Colab ou CPU. O Colab interativo e a execução integral em CPU continuam fora do escopo validado.
+
+As novas células de download foram executadas com o vídeo oficial real. O notebook 02 gerou 200 quadros em H.264, 1280 × 720 e 25 FPS. O projeto final gerou 806 quadros em H.264, 1920 × 1080 e aproximadamente 29,97 FPS; seu processamento levou 46,98 s. A contagem permaneceu em **7 entradas e 9 saídas**, com 16 eventos e 806 registros temporais consistentes. Foram emitidos 129 IDs distintos, sem interpretar esse total como veículos únicos. A referência manual permaneceu vazia.
+
+Foram conferidos 84 arquivos de retorno por tamanho e SHA-256, além dos 70 contadores de execução. As figuras de detecção, âncoras e seleção espacial e os quadros inicial, intermediário e final dos vídeos foram abertos para inspeção. A integração das saídas preservou integralmente o código, o texto e os IDs das células executadas. As quatro demonstrações em `assets/videos/` mantêm os arquivos e hashes de sua execução de origem, já documentados no manifesto.
+
+## Histórico: ambiente da execução inicial
 
 - Linux x86_64, Ubuntu 24.04, Python 3.12.3.
 - GPU NVIDIA GeForce RTX 3090, 24 GB, driver 580.65.06, CUDA 12.8.
@@ -11,7 +27,7 @@ Data: **26/09/2026, UTC**. Este registro descreve a execução integral da entre
 
 **O Colab interativo não foi validado nesta sessão:** a ferramenta de navegador não disponibilizou um navegador conectado. As instruções de upload e preparação estão incluídas, mas a execução comprovada é a do ambiente Linux acima. A execução integral em CPU também não foi medida.
 
-## Execução
+## Histórico: execução inicial — 5b6fb20
 
 | Notebook | Células de código executadas | Erros | Tempo da execução registrada |
 |:--|--:|--:|--:|
@@ -55,4 +71,4 @@ Os notebooks 01 e 02 passaram a baixar o vídeo para um arquivo temporário, con
 
 A descrição do ambiente foi corrigida para distinguir versões instaladas de módulos já carregados. A documentação da `LineZone` explicita a faixa finita das âncoras. A validação do CSV manual foi revista para não descartar silenciosamente entradas com acentos, caixa ou espaços diferentes e para interromper a comparação diante de valores inválidos.
 
-As saídas históricas de inferência foram preservadas durante essa preparação. A tabela anterior não deve ser interpretada como execução das células novas; uma nova execução integral a partir dos arquivos publicados no branch será registrada separadamente.
+A validação direcionada do CSV incluiu 34 verificações: categorias canônicas, acentos/espaços/caixa, desconhecidos, campos inválidos, limites temporais e referência vazia. O limite inclusivo de um quadro tem tolerância aritmética de `1e-9` segundo para não rejeitar valores válidos por arredondamento de ponto flutuante. Somadas aos 12 casos de download, são **46 verificações direcionadas**. A revisão independente das correções não deixou pendências; a execução integral de 70 células acima cobre o fluxo completo da versão publicada.
