@@ -15,6 +15,8 @@ O percurso compara um detector genérico, o mesmo modelo ajustado a imagens aér
 
 O primeiro notebook usa CPU. Os demais selecionam CUDA quando disponível e CPU como alternativa; o treinamento e a inferência em recortes são recomendados em GPU. O notebook de recortes usa um checkpoint de referência para poder funcionar independentemente do notebook de treino.
 
+O percurso contém **dois experimentos pareados pelas mesmas imagens de teste**. Baseline versus fine-tuning mantém arquitetura e inferência e muda os pesos. Imagem inteira versus recortes, no último notebook, mantém exatamente o mesmo checkpoint de referência. Esse checkpoint pode diferir do treinamento do aluno: identifique cada resultado pelo hash e não atribua diferenças entre checkpoints apenas ao tiling.
+
 ## Dados e pergunta de generalização
 
 Usamos uma adaptação do [ICAERUS, versão 2](https://doi.org/10.5281/zenodo.11048412), de Louise Helary e Adrien Lebreton, Institut de l’Elevage. A fonte organiza fotografias de drone por fazenda e voo e inclui imagens sem bovinos. O recorte didático contém 300 imagens, redimensionadas proporcionalmente para lado máximo de 2.048 pixels.
@@ -35,13 +37,27 @@ A [pesquisa de fontes](PESQUISA.md) compara essa escolha a alternativas, incluin
 
 Abra um notebook pelo botão no próprio arquivo. Escolha uma GPU **T4** para os notebooks de detecção, treino e recortes e execute as células em ordem, em uma sessão nova. O setup obtém apenas `projeto-4` e instala as dependências fixadas. Cada notebook prepara seus próprios dados, sem depender de variáveis de outro notebook.
 
-Salve uma cópia do notebook no Drive. Baixe `resultados/` antes de encerrar a sessão; armazenamento temporário do Colab não é persistente. O treinamento preserva execuções anteriores em diretórios diferentes.
+Salve uma cópia do notebook no Drive. Para repetir o treinamento na mesma sessão, escolha outro valor de `name` na configuração; o notebook interrompe a execução se a pasta de treino já existir. As pastas de métricas, configurações e figuras têm nomes fixos e seus arquivos são atualizados ao reexecutar. **Baixe os resultados antes de repetir** ou encerrar a sessão.
+
+No final da execução, copie este trecho opcional para uma nova célula do Colab:
+
+```python
+import shutil
+from datetime import datetime
+from google.colab import files
+shutil.copy("assets/manifesto.json", "resultados/manifesto.json")
+nome = "resultados-projeto4-" + datetime.now().strftime("%Y%m%d-%H%M%S")
+arquivo = shutil.make_archive(nome, "zip", "resultados")
+files.download(arquivo)
+```
+
+O ZIP contém resultados, manifesto e pesos treinados presentes em `resultados/`. Salve também o notebook com saídas na cópia do Drive ou em **Arquivo > Fazer download > Fazer download do .ipynb**. Salvar o notebook não preserva automaticamente os arquivos temporários do runtime. O checkpoint de referência do último notebook permanece disponível no projeto, identificado por hash.
 
 A versão de Python/PyTorch fornecida pelo Colab pode mudar. Os notebooks registram o ambiente realmente usado; consulte [VALIDACAO.md](VALIDACAO.md) para o ambiente e as execuções conferidos nesta entrega.
 
 ## Executar localmente
 
-Use um ambiente separado dos projetos anteriores. Em Linux, com Python e PyTorch compatíveis com sua GPU já instalados:
+Use um ambiente separado dos projetos anteriores. Em Linux, com uma versão de Python compatível com PyTorch, crie e ative a `.venv`:
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse --branch codex/projeto-4-gado https://github.com/carlosfab/bootcamp-visao-computacional-drones.git
@@ -50,12 +66,16 @@ git sparse-checkout set projeto-4
 cd projeto-4
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install torch torchvision
+```
+
+**Dentro dessa `.venv`**, instale PyTorch e torchvision com o comando indicado pelo [seletor oficial](https://pytorch.org/get-started/locally/) para o sistema e a GPU. Uma instalação existente fora da `.venv` não é automaticamente reutilizada. Depois execute:
+
+```bash
 python -m pip install -r requirements.txt jupyterlab
 python -m jupyterlab
 ```
 
-A instalação de PyTorch é específica do sistema; use o [seletor oficial](https://pytorch.org/get-started/locally/). O arquivo `requirements.txt` preserva NumPy 1.26 no macOS para compatibilidade com o ambiente Intel usado na conferência local. Isso não significa que todos os sistemas e GPUs foram validados.
+O arquivo `requirements.txt` preserva NumPy 1.26 no macOS para compatibilidade com o ambiente Intel usado na conferência local. Isso não significa que todos os sistemas e GPUs foram validados. Localmente, compacte `resultados/` para guardar uma execução; o trecho acima de compactação também funciona removendo a importação de `google.colab` e a chamada `files.download`.
 
 ## Como avaliar
 

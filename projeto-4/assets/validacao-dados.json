@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "scope": "Data integrity only; no model evaluation.",
+  "manifest_sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+  "decoded_jpegs": 300,
+  "verified_label_files": 300,
+  "verified_sample_files": 600,
+  "counts": {
+    "train": {
+      "images": 180,
+      "positive": 120,
+      "boxes": 1480
+    },
+    "val": {
+      "images": 60,
+      "positive": 18,
+      "boxes": 278
+    },
+    "test": {
+      "images": 60,
+      "positive": 20,
+      "boxes": 111
+    }
+  },
+  "packages": 9,
+  "package_total_bytes": 328045036,
+  "largest_package_bytes": 37938186,
+  "duplicate_original_hashes": 0,
+  "duplicate_derived_hashes": 0,
+  "cross_split_flight_groups": 0,
+  "cross_split_farm_date_groups": 0
+}

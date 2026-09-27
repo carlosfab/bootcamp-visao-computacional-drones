@@ -60,7 +60,7 @@ nos manifestos; não devem ser atribuídos como resultados dos artigos.
 9. **Ciaglia, F. et al. (2022).** *Roboflow 100: A Rich, Multi-Domain Object
    Detection Benchmark*. [Artigo](https://arxiv.org/abs/2211.13523),
    [aerial-cows no Roboflow](https://universe.roboflow.com/roboflow-100/aerial-cows) e
-   [espelho de Francesco Saverio Zuppichini](https://huggingface.co/datasets/Francesco/aerial-cows).
+   [espelho Francesco no Hugging Face](https://huggingface.co/datasets/Francesco/aerial-cows).
    O [arquivo de metadados na revisão consultada](https://huggingface.co/datasets/Francesco/aerial-cows/raw/5f996521a6bfdd65fb2a0fc5fe1ffcbb4207f70e/dataset_info.json)
    permite conferir classe, licença, contagens e o redimensionamento a 640 × 640.
    A página do Roboflow atribui o conjunto original a Omar Kapur, `wwblodge`,

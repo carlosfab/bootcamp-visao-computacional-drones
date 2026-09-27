@@ -11,6 +11,7 @@ python scripts/auditar_fonte.py
 python scripts/reconstruir_manifesto.py
 python suporte/preparar_dados.py --destino dados/gado-icaerus-v1 --workers 4
 python suporte/preparar_dados.py --destino dados/gado-icaerus-v1 --empacotar
+python scripts/verificar_dados.py
 ```
 
 1. O inventário lê o diretório central do ZIP remoto por faixas, sem baixar todas
@@ -29,6 +30,9 @@ python suporte/preparar_dados.py --destino dados/gado-icaerus-v1 --empacotar
 5. O empacotamento exige reconstrução completa, rejeita hashes de imagens
    duplicados e grupos de captura compartilhados entre partições e congela as
    partes ZIP em `assets/`, com índice de tamanhos e hashes em `pacotes.json`.
+6. A verificação final extrai os pacotes em `dados/gado`, decodifica os 300 JPEGs,
+   confere os 300 TXT, dimensões, caixas e grupos e grava `assets/validacao-dados.json`.
+   Essa etapa não carrega modelos nem utiliza o teste para escolher parâmetros.
 
 O MD5 integral publicado pelo Zenodo é registrado para identificação do arquivo,
 mas não é recalculado no download parcial. A integridade dos membros é conferida

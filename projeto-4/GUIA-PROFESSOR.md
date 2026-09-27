@@ -18,10 +18,16 @@ A unidade de avaliação é **uma imagem e suas anotações**. Essa escolha perm
 examinar cada omissão e cada falso positivo. Fotografias sobrepostas não permitem,
 por simples soma, concluir quantos animais diferentes existem no rebanho.
 
-O produto final será uma recomendação fundamentada entre três configurações:
-detector genérico, detector ajustado ao conjunto e detector ajustado com inferência
-em recortes. O aluno deve conseguir recomendar manter uma configuração mais simples
-se a alternativa não oferecer benefício suficiente.
+O produto final será uma recomendação fundamentada em dois experimentos pareados
+pelas imagens de teste. Baseline versus fine-tuning mantém arquitetura e inferência,
+mudando os pesos. No notebook de recortes, imagem inteira versus recortes usa
+exatamente o mesmo checkpoint de referência. O aluno deve conseguir recomendar
+manter uma configuração mais simples se a alternativa não oferecer benefício suficiente.
+
+O peso de referência pode diferir daquele treinado pelo aluno. Exija o hash em
+cada linha do relatório e não permita substituir a linha de imagem inteira do
+segundo experimento pelo resultado do treino do primeiro. Diferenças entre esses
+checkpoints não podem ser atribuídas exclusivamente ao tiling.
 
 ## O que o aluno já sabe e o que acrescentamos
 
@@ -236,6 +242,33 @@ corretas em fotografias isoladas.
 
 Feche pedindo três frases: o que o experimento demonstrou; o que permaneceu
 incerto; qual seria a próxima coleta ou medição para reduzir essa incerteza.
+
+## Preservar os resultados no Colab
+
+O nome de uma pasta de treino existente é protegido. As pastas de métricas,
+configurações e figuras têm nomes fixos e são atualizadas ao reexecutar; mudar
+somente o `name` do treino não preserva todos os relatórios. Antes de repetir ou
+encerrar o runtime, peça ao aluno que baixe um ZIP da execução.
+
+O trecho abaixo é opcional: deve ser copiado para uma nova célula no Colab e
+executado pelo aluno quando quiser baixar os arquivos. Não integra a execução
+automática dos notebooks.
+
+```python
+import shutil
+from datetime import datetime
+from google.colab import files
+shutil.copy("assets/manifesto.json", "resultados/manifesto.json")
+nome = "resultados-projeto4-" + datetime.now().strftime("%Y%m%d-%H%M%S")
+arquivo = shutil.make_archive(nome, "zip", "resultados")
+files.download(arquivo)
+```
+
+O ZIP contém métricas, figuras, registros e os pesos de treino em `resultados/`,
+além do manifesto. O peso de referência do notebook de recortes é distribuído no
+projeto e identificado pelo hash salvo na configuração. Salve também o notebook
+com saídas no Drive ou em **Arquivo > Fazer download > Fazer download do .ipynb**.
+Salvar o notebook não preserva automaticamente os arquivos temporários da sessão.
 
 ## Preparação e pendências antes da aula
 

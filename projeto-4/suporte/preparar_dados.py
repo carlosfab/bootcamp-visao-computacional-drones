@@ -45,8 +45,11 @@ def obter_dados(destino: str | Path | None = None) -> Path:
         raise RuntimeError('Versões dos dados e pacotes são diferentes.')
     destination.mkdir(parents=True,exist_ok=True)
     expected = {s[k] for s in manifest['samples'] for k in ('image', 'label')}
+    # Ultralytics cria labels/train.cache e labels/val.cache após o treino.
+    # Metadados locais não são imagens/rótulos extras nem alteram o manifesto.
     existing = {str(p.relative_to(destination)) for folder in ('images', 'labels')
-                for p in (destination/folder).rglob('*') if p.is_file()}
+                for p in (destination/folder).rglob('*') if p.is_file()
+                and p.suffix != '.cache' and p.name != '.DS_Store'}
     extras = existing - expected
     if extras:
         raise RuntimeError('Destino contém imagens/rótulos de outra seleção; escolha uma pasta vazia. '
@@ -158,6 +161,8 @@ def empacotar(destination: Path, assets: Path | None = None) -> dict:
     if len({s['derived_sha256'] for s in samples}) != len(samples):
         raise RuntimeError('Imagens derivadas idênticas na seleção; revisar antes de publicar.')
     manifest = {k:v for k,v in built.items() if k not in ('images', 'samples')}
+    manifest['source_manifest_file_sha256'] = sha256((ROOT/'assets'/'manifesto-fonte-icaerus-v1.json').read_bytes())
+    manifest['source_audit_file_sha256'] = sha256((ROOT/'assets'/'auditoria-fonte.json').read_bytes())
     manifest['samples'] = samples
     manifest['counts'] = {split: {'images': sum(s['split']==split for s in samples),
                                  'positive': sum(s['split']==split and s['count']>0 for s in samples),
@@ -165,7 +170,9 @@ def empacotar(destination: Path, assets: Path | None = None) -> dict:
                           for split in ('train', 'val', 'test')}
     groups = {}
     for sample in samples:
-        for group in ((sample['farm'], sample['flight']), (sample['farm'], sample['date'])):
+        for group in (('farm_flight', sample['farm'], sample['flight']),
+                      ('flight', sample['flight']),
+                      ('farm_date', sample['farm'], sample['date'])):
             if group in groups and groups[group] != sample['split']:
                 raise RuntimeError(f'Grupo de captura cruza partições: {group}')
             groups[group] = sample['split']

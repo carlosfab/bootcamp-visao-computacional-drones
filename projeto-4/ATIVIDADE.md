@@ -38,6 +38,19 @@ fixadas em `requirements.txt`, e cada notebook registra a versão do PyTorch e d
 Python do ambiente. Não é necessária conta no Roboflow, chave de API ou acesso a
 GPU pago para obter os dados. O tempo de execução depende do hardware disponível.
 
+Há **dois experimentos pareados pelas mesmas imagens de teste**:
+
+- Baseline versus fine-tuning: mesma arquitetura e mesmo caminho de inferência,
+  com pesos iniciais e pesos ajustados distintos.
+- Imagem inteira versus recortes: exatamente o mesmo checkpoint de referência
+  nos dois métodos do notebook `03`.
+
+O checkpoint de referência pode diferir do seu treino no notebook `02`. O
+relatório deve identificar o hash dos pesos em cada linha e manter os dois pares
+explícitos. Não atribua diferenças entre checkpoints exclusivamente ao tiling.
+Para estudar recortes no seu próprio peso, avalie novamente **inteira e recortes**
+com esse peso, calibrando ambos na validação antes da avaliação congelada.
+
 | Etapa | O que investigar | Evidência esperada |
 |---|---|---|
 | Dados | Origem, licença, imagens, anotações e separação entre partições | Resumo da auditoria e exemplos anotados |
@@ -74,6 +87,7 @@ podem orientar a criação dos recortes de treinamento nem a seleção de parâm
 - Confira o mapeamento da classe de bovino entre o detector genérico e o conjunto.
 - Use a mesma regra documentada de associação entre caixas em todas as configurações.
 - Ao comparar imagem inteira e recortes, mantenha o mesmo checkpoint ajustado.
+- Identifique o SHA-256 dos pesos e o par experimental de cada resultado.
 - Declare qualquer alteração adicional que impeça atribuir o efeito a uma única mudança.
 
 Se um experimento posterior for motivado por um resultado do teste, identifique-o
@@ -143,7 +157,8 @@ Entregue uma pasta ou arquivo compactado contendo:
 - Registro do ambiente e das configurações de treino, inferência e avaliação.
 - Checkpoint ajustado ou referência estável para obtê-lo, acompanhado de seu hash.
 - Previsões e contagens por imagem, identificadas por configuração.
-- Tabela comparativa e imagens anotadas usadas na análise de falhas.
+- Tabela comparativa com hash dos pesos e par experimental de cada linha, e imagens
+  anotadas usadas na análise de falhas.
 - Relatório curto com recomendação final e limitações do experimento.
 
 O relatório deve responder: qual configuração você recomenda para as imagens
@@ -153,6 +168,11 @@ revisão humana; o que falta para estudar uma fazenda ou um voo ainda não obser
 Preserve licença e atribuições na redistribuição de dados, imagens ou pesos.
 Não inclua chaves de acesso ou credenciais. Resultados de referência devem ser
 identificados como tal e distinguidos daqueles recalculados na sua execução.
+
+As pastas de métricas e figuras são atualizadas ao reexecutar. O nome de uma
+pasta de treino existente é protegido, mas essa proteção não se estende a todos
+os relatórios. Antes de repetir, use as instruções de compactação e download ao
+final de cada notebook ou no README. Salve separadamente o notebook com saídas.
 
 ## Critérios de avaliação
 

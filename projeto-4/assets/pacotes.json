@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "dataset": "gado-icaerus-v1",
+  "manifest_sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+  "total_size": 328045036,
+  "packages": [
+    {
+      "filename": "gado-icaerus-v1-parte-01.zip",
+      "size": 37001822,
+      "sha256": "776bf00376ac4f9ead7fd97f8ff91b46fcc7a9f46c7a4b86a9a375c32b82d32b",
+      "files": 65
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-02.zip",
+      "size": 37295633,
+      "sha256": "c17d2c8a6ab5e364440dd39fd1320cd61931f2a5969a92ace789760d89aff0a8",
+      "files": 72
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-03.zip",
+      "size": 37431314,
+      "sha256": "6d04df92e92cc6b2d15ad67c16713ecf2693c71200bb01a45e0e3d4134536b55",
+      "files": 68
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-04.zip",
+      "size": 37929326,
+      "sha256": "47c7465786bfb76631694ac1adb0e8f4efde264aa6b6a20dc93912390d8bd2c2",
+      "files": 70
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-05.zip",
+      "size": 37763873,
+      "sha256": "2941c615b1e691b34b0f9a8fe072b678aace7303f5a1888167e429ebe7ab4b06",
+      "files": 68
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-06.zip",
+      "size": 36935020,
+      "sha256": "ecac32ea4265494f3f5d7345c655900ad948db6dd3fa4fff794ed0a9bcf781a7",
+      "files": 66
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-07.zip",
+      "size": 37938186,
+      "sha256": "b044bde8c06452ba46237c0077ce4488dd7b9d1ff154dec83ee6f27d06169704",
+      "files": 66
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-08.zip",
+      "size": 37083894,
+      "sha256": "fa21cd467c5cc9926054f18d051a0735d5d9402fb8bca8623351409481242810",
+      "files": 68
+    },
+    {
+      "filename": "gado-icaerus-v1-parte-09.zip",
+      "size": 28665968,
+      "sha256": "3f48dfca4a54f09db90b98176a54b7e50f1ef2f0faf522a39bcdaac5f8389ba8",
+      "files": 58
+    }
+  ]
+}

@@ -27,6 +27,12 @@ def digest(path):
 
 
 def execute(path):
+    import nbformat
+    source_hash = digest(path)
+    source = nbformat.read(path, as_version=4)
+    code_hash = hashlib.sha256(json.dumps(
+        [cell.source for cell in source.cells if cell.cell_type == 'code'],
+        ensure_ascii=False).encode()).hexdigest()
     start = time.monotonic()
     log = RESULTS / (path.stem + '.log')
     with log.open('w') as output:
@@ -34,13 +40,13 @@ def execute(path):
             sys.executable, '-m', 'nbconvert', '--to', 'notebook', '--execute',
             '--inplace', '--ExecutePreprocessor.timeout=1800', str(path),
         ], stdout=output, stderr=subprocess.STDOUT)
-    import nbformat
     notebook = nbformat.read(path, as_version=4)
     code = [cell for cell in notebook.cells if cell.cell_type == 'code']
     errors = [out for cell in code for out in cell.outputs if out.output_type == 'error']
     report = {'notebook': path.name, 'seconds': time.monotonic() - start,
               'code_cells': len(code), 'executed_cells': sum(c.execution_count is not None for c in code),
               'errors': len(errors), 'returncode': completed.returncode,
+              'sha256_input': source_hash, 'sha256_code_cells': code_hash,
               'sha256_executed': digest(path)}
     (RESULTS / (path.stem + '.json')).write_text(json.dumps(report, indent=2))
     print(json.dumps(report), flush=True)
@@ -98,6 +104,9 @@ def main():
                    'gpu': torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
                    'cuda': torch.version.cuda,
                    'packages': {name: importlib.metadata.version(name) for name in packages}}
+    environment['repository_commit'] = subprocess.check_output(
+        ['git', 'rev-parse', 'HEAD'], text=True).strip()
+    environment['dataset_manifest_sha256'] = digest(ROOT / 'assets' / 'manifesto.json')
     (RESULTS / 'ambiente.json').write_text(json.dumps(environment, indent=2))
     print(json.dumps(environment), flush=True)
     reports = []

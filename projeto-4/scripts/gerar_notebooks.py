@@ -41,7 +41,7 @@ def opening(filename, title, objective, gpu=False):
 
     A primeira célula obtém os arquivos da versão do projeto e instala as dependências. O PyTorch fornecido pelo ambiente será preservado; sua versão será registrada. Se já importou bibliotecas antes desta instalação, reinicie o ambiente e execute novamente desde o início.
 
-    Os arquivos de trabalho ficam em `dados/`, `pesos/` e `resultados/`. Antes de encerrar o Colab, salve seus resultados no Drive ou faça download da pasta correspondente.
+    Os arquivos de trabalho ficam em `dados/`, `pesos/` e `resultados/`. As pastas de métricas e figuras têm nomes fixos e seus arquivos são atualizados ao reexecutar. Antes de repetir o experimento ou encerrar o Colab, baixe o ZIP seguindo as instruções ao final.
     '''), code(f'''
     from pathlib import Path
     import os
@@ -119,6 +119,28 @@ def data_cells():
     assert [len(treino), len(validacao), len(teste)] == [180, 60, 60]
     print("Imagens de treino, validação e teste:", len(treino), len(validacao), len(teste))
     ''')]
+
+
+def backup_instructions():
+    return md('''
+    ## Salvar a execução
+
+    A pasta de um treinamento concluído é protegida contra reutilização; uma nova tentativa exige outro `name`. Já as pastas de métricas, configurações e figuras têm nomes fixos e são atualizadas ao reexecutar os notebooks. Baixe os resultados **antes de repetir** ou encerrar o runtime.
+
+    No Colab, copie o trecho opcional abaixo para uma nova célula e execute-o quando quiser baixar a execução. O ZIP inclui `resultados/` inteiro, os pesos treinados que estiverem nessa pasta e o manifesto. O checkpoint de referência do notebook de recortes continua disponível nos arquivos do projeto e é identificado pelo hash da configuração.
+
+    ```python
+    import shutil
+    from datetime import datetime
+    from google.colab import files
+    shutil.copy("assets/manifesto.json", "resultados/manifesto.json")
+    nome = "resultados-projeto4-" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    arquivo = shutil.make_archive(nome, "zip", "resultados")
+    files.download(arquivo)
+    ```
+
+    Salve também este notebook com suas saídas em **Arquivo > Salvar** na cópia do Drive, ou use **Arquivo > Fazer download > Fazer download do .ipynb**. A cópia do notebook não salva automaticamente os arquivos temporários do runtime. Localmente, compacte `resultados/` ou use as mesmas linhas sem importar `google.colab` e sem chamar `files.download`.
+    ''')
 
 
 def gallery(folder, rows="previsoes_teste", threshold="limiar"):
@@ -237,6 +259,43 @@ def notebook00():
         eixo.axis("off")
     plt.show()
     '''), md('''
+    ## Comparar a mesma região em detalhe
+
+    As duas fotografias inteiras ocupam quase o mesmo espaço na tela, o que pode esconder a perda de detalhe. Vamos ampliar a região do primeiro bovino anotado neste exemplo de validação, incluindo uma margem e respeitando os limites da imagem.
+
+    O recorte é definido na imagem disponível. Para localizar a mesma região na versão reduzida, multiplicamos suas coordenadas pela proporção entre as dimensões das duas imagens. Arredondamos os limites para cobrir pixels inteiros e mantemos o mesmo campo de visão nos dois painéis.
+    '''), code('''
+    caixa_zoom = ler_caixas(pequeno["label"], foto.width, foto.height)[0]
+    centro = (caixa_zoom[:2] + caixa_zoom[2:]) / 2
+    raio = max(32, 2 * float(np.max(caixa_zoom[2:] - caixa_zoom[:2])))
+    inicio_zoom = np.maximum(0, np.floor(centro - raio)).astype(int)
+    fim_zoom = np.minimum(foto.size, np.ceil(centro + raio)).astype(int)
+    escala = np.array(reduzida.size) / np.array(foto.size)
+    inicio_red = np.floor(inicio_zoom * escala).astype(int)
+    fim_red = np.minimum(reduzida.size, np.ceil(fim_zoom * escala)).astype(int)
+    '''), code('''
+    zoom_original = foto.crop((*inicio_zoom, *fim_zoom))
+    zoom_reduzido = reduzida.crop((*inicio_red, *fim_red))
+    campo_original = [inicio_zoom[0], fim_zoom[0], fim_zoom[1], inicio_zoom[1]]
+    campo_reduzido = [inicio_red[0] / escala[0], fim_red[0] / escala[0],
+                     fim_red[1] / escala[1], inicio_red[1] / escala[1]]
+    print("Pixels no recorte disponível:", zoom_original.size)
+    print("Pixels no recorte reduzido:", zoom_reduzido.size)
+    '''), code('''
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    paineis = [(zoom_original, campo_original, "Imagem disponível"),
+               (zoom_reduzido, campo_reduzido, "Após redução para 640")]
+    for eixo, (imagem, campo, titulo) in zip(axes, paineis):
+        eixo.imshow(imagem, extent=campo, interpolation="nearest")
+        eixo.set_xlim(inicio_zoom[0], fim_zoom[0])
+        eixo.set_ylim(fim_zoom[1], inicio_zoom[1])
+        eixo.set_title(titulo)
+        eixo.axis("off")
+    fig.savefig(SAIDA / "zoom_resolucao.png", dpi=120)
+    plt.show()
+    '''), md('''
+    A exibição usa o vizinho mais próximo para deixar os pixels visíveis, sem suavizar a ampliação. Os dois painéis mostram a mesma região, mas o recorte reduzido dispõe de menos pixels para representar o bovino. Aumentar o painel não recupera a informação descartada.
+    '''), md('''
     ## Antes de treinar
 
     Registre uma hipótese sobre as dificuldades do detector: tamanho aparente, sombra, fundo ou proximidade entre bovinos. Use exemplos de treino ou validação como evidência. Não atribua mudanças de escala à altitude sem metadados que sustentem essa interpretação.
@@ -337,7 +396,7 @@ def notebook02():
 
     Usaremos 25 épocas, batch de 8 imagens, entrada de 640 pixels e semente 42. A GPU é recomendada; a CPU pode executar, mas seu tempo não representa o percurso planejado para aula. Não instalamos outra versão de PyTorch sobre a fornecida pelo Colab.
 
-    O diretório de treino deve ser novo. Para investigar outra configuração, escolha outro nome e registre a mudança antes de consultar o teste. A semente não garante resultados idênticos entre diferentes ambientes.
+    O diretório de treino deve ser novo. Para investigar outra configuração, escolha outro `name` e registre a mudança antes de consultar o teste. Isso protege a pasta de treino; a pasta fixa `resultados/fine_tuning` de métricas e figuras será atualizada. Baixe o ZIP da execução anterior antes de reexecutar desde o início. A semente não garante resultados idênticos entre diferentes ambientes.
     '''), code('''
     modelo = YOLO("yolo11n.pt")
     cfg = dict(data=str(RAIZ.relative_to(Path.cwd()) / "data.yaml"), epochs=25, batch=8, imgsz=640,
@@ -414,6 +473,8 @@ def notebook02():
     Se o baseline foi executado neste mesmo diretório, a tabela abaixo reúne seus resultados. Caso contrário, o notebook continua independente e apresenta apenas o treino atual; execute o notebook do baseline e reúna os arquivos ao preparar a entrega.
 
     Compare as mesmas imagens, versões e regras. Um F1 maior não implica necessariamente um MAE menor, pois omissões e falsos positivos podem se compensar na contagem.
+
+    Este é o primeiro experimento: **pesos iniciais versus pesos ajustados**, com arquitetura e inferência mantidas. Identifique cada linha do relatório pelo hash dos pesos. No notebook seguinte, o segundo experimento usa um checkpoint de referência em imagem inteira e recortes; o peso de referência pode ser diferente do seu treino. Não atribua uma diferença entre esses checkpoints apenas aos recortes.
     '''), code('''
     comparacao = {"fine_tuning": {chave: resumo[chave] for chave in chaves}}
     arquivo_baseline = Path("resultados/baseline/test/resumo.json")
@@ -446,6 +507,8 @@ def notebook03():
     ## Um checkpoint fixado
 
     O pacote de pesos permite executar este notebook sem treinar antes. Os hashes verificam se usamos os mesmos bytes da distribuição, sem garantir qualidade preditiva. A avaliação será recalculada nesta sessão.
+
+    O projeto contém dois experimentos pareados pelas imagens de teste. No primeiro, baseline e fine-tuning mantêm arquitetura e inferência e mudam os pesos. Neste segundo, **imagem inteira e recortes mantêm exatamente o mesmo checkpoint de referência**. Não substitua a linha de imagem inteira deste notebook pelo resultado de seu treino anterior: seus hashes podem ser diferentes.
 
     Para comparar seu próprio treinamento posteriormente, troque o checkpoint antes de calibrar e use outra pasta de resultados. Não misture pesos diferentes na comparação entre imagem inteira e recortes.
     '''), code('''
@@ -574,7 +637,7 @@ def notebook03():
     '''), md('''
     ## Uma recomendação baseada em evidências
 
-    Recomende uma configuração para o cenário avaliado. Use MAE, viés, F1, erros em positivos e negativos, custo e pelo menos quatro exemplos para justificar. Distinga o que os resultados demonstram do que permanece uma hipótese.
+    Recomende uma configuração para o cenário avaliado. Use MAE, viés, F1, erros em positivos e negativos, custo e pelo menos quatro exemplos para justificar. Identifique o hash dos pesos em cada linha da tabela final. O efeito dos recortes é medido pelo par deste notebook, com o mesmo checkpoint; diferenças para o treino do notebook anterior não podem ser atribuídas só ao tiling. Distinga o que os resultados demonstram do que permanece uma hipótese.
 
     Este experimento não resolve identidade entre fotografias, contagem de um rebanho inteiro ou funcionamento em qualquer fazenda. A próxima avaliação poderia reservar outros voos e fazendas, com referência independente e um protocolo de cobertura definido.
     ''')]
@@ -584,6 +647,7 @@ def notebook03():
 def main():
     for factory in (notebook00, notebook01, notebook02, notebook03):
         name, cells, gpu = factory()
+        cells.append(backup_instructions())
         metadata = {"colab": {"provenance": []},
                     "kernelspec": {"name": "python3", "display_name": "Python 3"},
                     "language_info": {"name": "python"}}
