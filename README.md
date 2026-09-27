@@ -4,9 +4,9 @@ Material de apoio para acompanhar as práticas do bootcamp da Academia Sigmoidal
 
 ## Projeto 4 · Contagem de gado em imagens de drone
 
-A pasta **[projeto-4](projeto-4/README.md)** reúne quatro notebooks: auditoria de
-dados, baseline de detecção, fine-tuning e comparação entre imagem inteira e
-recortes. O projeto fornece 300 imagens com anotações e partições fixas, atividade
+A pasta **[projeto-4](projeto-4/README.md)** reúne cinco notebooks: auditoria de
+dados, baseline, fine-tuning, inferência em recortes e treino com recortes.
+O projeto fornece 300 imagens com anotações e partições fixas, uma reserva adicional de capturas, atividade
 avaliativa, guia do professor e referências. A avaliação combina localização e
 erro de contagem por fotografia; consulte o registro de validação para resultados,
 ambiente e limites do experimento.

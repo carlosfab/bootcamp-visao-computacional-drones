@@ -1,0 +1,228 @@
+{
+  "archive": "referencia-inicial.zip",
+  "sha256": "e3e576922bf8b8f9e5b698f36a903e696e791d0e3d82f85312bbc3b308dc2813",
+  "bytes": 440187,
+  "files": [
+    {
+      "file": "baseline/ambiente.json",
+      "sha256": "d5a1fac063ebf0fd93060ed372d9799318242f9b06d0456516b8b2bb6c748a79"
+    },
+    {
+      "file": "baseline/calibracao.csv",
+      "sha256": "a3335ad55deb157ace8173bee45d07ae5a514ef5bdb1fa6264e1bdbc8a76ce96"
+    },
+    {
+      "file": "baseline/configuracao.json",
+      "sha256": "716e8e030a197effde2921917a11c153a19e67db3ca3e498ac1f5b263ffb8756"
+    },
+    {
+      "file": "baseline/test/per_image.csv",
+      "sha256": "6cc326fb50e771ee6ef8089782af4d8c96d057797ed05b2818604a983e950e9e"
+    },
+    {
+      "file": "baseline/test/predictions.json",
+      "sha256": "01930e1552e4e0cf3867dd60a168dd5a380d447641625f03b7e2e7220b36e2ec"
+    },
+    {
+      "file": "baseline/test/resumo.json",
+      "sha256": "b382d3f69cc3f476f4878515127310330012bebac8ca0339e403a9d715153489"
+    },
+    {
+      "file": "baseline/val/per_image.csv",
+      "sha256": "ebab79abf5143204c2f8c2d4de8947cc7ec465817f5557ed56dfcdee06e2792a"
+    },
+    {
+      "file": "baseline/val/predictions.json",
+      "sha256": "c89634cfeb640fcac9e47f82dcd7165b42ef455c16639fe4da66905d6df9ffb1"
+    },
+    {
+      "file": "baseline/val/resumo.json",
+      "sha256": "3d57f085b96bc23f46f9bbf7db198e88557c747c328f130e36673101be27ef0a"
+    },
+    {
+      "file": "dados/ambiente.json",
+      "sha256": "393b4cceb11b690d3e9f724bc86195fcd8335785c05a88fb1057b5b0a11965db"
+    },
+    {
+      "file": "dados/inventario_desenvolvimento.csv",
+      "sha256": "ccdeb1ad625af7f3f048b80d1360f950ed45d86f8e6b0aecf80b9218761d4047"
+    },
+    {
+      "file": "dados/resumo_desenvolvimento.csv",
+      "sha256": "8e26e5f0b45d8f25754c7bba4a28ff97b6f0d84dcc6842bfecce739b0965cf4c"
+    },
+    {
+      "file": "fine_tuning/ambiente.json",
+      "sha256": "d5a1fac063ebf0fd93060ed372d9799318242f9b06d0456516b8b2bb6c748a79"
+    },
+    {
+      "file": "fine_tuning/calibracao.csv",
+      "sha256": "54fbead0aa983f1b484d1a28d2373452c7b3dc29b0e961095ab263b020517554"
+    },
+    {
+      "file": "fine_tuning/comparacao.csv",
+      "sha256": "30ca959133f4920ba09d67c32ac788b895639af8d31c1a853b082380cf9cf050"
+    },
+    {
+      "file": "fine_tuning/configuracao_avaliacao.json",
+      "sha256": "7324aeb8c867331265e90addf484aa7a2170cbd40c054bd5bc8fa9cc7f184469"
+    },
+    {
+      "file": "fine_tuning/configuracao_treino.json",
+      "sha256": "0a853c4c781832c81897b9361dd1c3e14186ff5925e3aca88ae8ecfe5e8b3a8f"
+    },
+    {
+      "file": "fine_tuning/test/per_image.csv",
+      "sha256": "d76ab05a9b047dd918e888d359f4f5bd0bac5cb869b9d054a364a49c9ff2fea0"
+    },
+    {
+      "file": "fine_tuning/test/predictions.json",
+      "sha256": "21b3610d398079c91aa31efad2add514f149cb315f608560715718dc28167da0"
+    },
+    {
+      "file": "fine_tuning/test/resumo.json",
+      "sha256": "88f95c6b14f3b40efe098d45804e71be382ce69b6dd1e64c9089c5fc78b43e0e"
+    },
+    {
+      "file": "fine_tuning/treinamento_concluido.json",
+      "sha256": "c40ddf8ed80ab2085ecfd392d02b3014ba28082587b4c61939da3956c56ebd51"
+    },
+    {
+      "file": "fine_tuning/val/per_image.csv",
+      "sha256": "105c6866fd66ed0ed0c04b3758d47b7d02c46b79ec6efa3fb8c5426892b130de"
+    },
+    {
+      "file": "fine_tuning/val/predictions.json",
+      "sha256": "253ad13a46c00b322086e9daffc902aec0840fa827d2238cffbafbf87b7ba7c5"
+    },
+    {
+      "file": "fine_tuning/val/resumo.json",
+      "sha256": "609fc42a10977e6d476e4dbf7cb912674caa432c40a0f810721640d508736e98"
+    },
+    {
+      "file": "recortes/ambiente.json",
+      "sha256": "d5a1fac063ebf0fd93060ed372d9799318242f9b06d0456516b8b2bb6c748a79"
+    },
+    {
+      "file": "recortes/calibracao_inteira.csv",
+      "sha256": "54fbead0aa983f1b484d1a28d2373452c7b3dc29b0e961095ab263b020517554"
+    },
+    {
+      "file": "recortes/calibracao_recortes.csv",
+      "sha256": "7f73faaeb7f6aab675553b1843125c8d9480c9fd3e0a5d42519fdab8f0e783eb"
+    },
+    {
+      "file": "recortes/comparacao.csv",
+      "sha256": "c0bb7bc5ece26eeec79f2be7bcb12510e5ccd34044ec3407de854dad9ac5af5d"
+    },
+    {
+      "file": "recortes/configuracao.json",
+      "sha256": "6f7416c355ba7df0e29f175083d382b76a4a0f0c1d210bcbd7c6490993e90547"
+    },
+    {
+      "file": "recortes/janelas_por_imagem.csv",
+      "sha256": "eae4a54922ffd684fd61df94e116700e969ae6ca4f2ce5c7cdcaff88771d69bc"
+    },
+    {
+      "file": "recortes/test_inteira/per_image.csv",
+      "sha256": "f6a87f86097993e630b9949984a24cc0f1834233284ff900d7bd2fe3c8876869"
+    },
+    {
+      "file": "recortes/test_inteira/predictions.json",
+      "sha256": "84c3032f1e2d89fdb6e4c1ce87a7b818eb60ac4eed10604728abfa0a46bedf27"
+    },
+    {
+      "file": "recortes/test_inteira/resumo.json",
+      "sha256": "6f0783c9c4cb2f2f2578642ad48527cae439144d05ec0c6146f5c183c012d081"
+    },
+    {
+      "file": "recortes/test_recortes/per_image.csv",
+      "sha256": "ad732cdbf4a8ff4022a1f9840db9016765982a61553d27f06d4be77d79130cda"
+    },
+    {
+      "file": "recortes/test_recortes/predictions.json",
+      "sha256": "cd9597c4fd1a6ec6b536941ba64e4acaf764d3729f40d493423645512541ad51"
+    },
+    {
+      "file": "recortes/test_recortes/resumo.json",
+      "sha256": "d2f611f7941522729e2c570cc29d12d6ee2708ac57339091612ed969ff052a89"
+    },
+    {
+      "file": "recortes/val_inteira/per_image.csv",
+      "sha256": "2c4bedd9f2453377b5b5835301df647aedeb48254c1bc331b8eab48a073c0081"
+    },
+    {
+      "file": "recortes/val_inteira/predictions.json",
+      "sha256": "be4bb1fe12cdffd7de8e88c4673a034d022561e1466df2e8d46d663b04c0e127"
+    },
+    {
+      "file": "recortes/val_inteira/resumo.json",
+      "sha256": "126e626120ea64874259979a031b7f6be1296e3f2b7782591a8cc147e759d7c6"
+    },
+    {
+      "file": "recortes/val_recortes/per_image.csv",
+      "sha256": "7163c8ddce33d8f691e308cfaf412ca0126bf9dba3cbd3e17689eb796c1216c4"
+    },
+    {
+      "file": "recortes/val_recortes/predictions.json",
+      "sha256": "e729667069dcc72709252fbca007892e86a5f2db0b1be6d21015614fed4a027c"
+    },
+    {
+      "file": "recortes/val_recortes/resumo.json",
+      "sha256": "c6162efe2e02fc4429f61cb015062de1fcb812788b0ecdc978bad69559cbf91b"
+    },
+    {
+      "file": "treino/gado/args.yaml",
+      "sha256": "3a28fe3ef3d2afd21ed52f02f871875b4b896add42c23b5f9102f318a6bba17f"
+    },
+    {
+      "file": "treino/gado/results.csv",
+      "sha256": "ab8f83c0cd928d394af350ba84faafaf60cfa4afea9b00aaec5de5b8a3649ac4"
+    },
+    {
+      "file": "validacao/00_dados_e_problema.json",
+      "sha256": "5746276ee48e7c737aaaa4f2e5acbb16043e4d840f4aa52302710daf2f3e975b"
+    },
+    {
+      "file": "validacao/00_dados_e_problema.log",
+      "sha256": "e2ae823b9f411a2b7f25fa089e728fc5ced7121ab8596b119930828a61c190fe"
+    },
+    {
+      "file": "validacao/01_baseline_e_contagem.json",
+      "sha256": "48bdcfa1459d5ca6bec2242b52aaa991ff4bb4777cd54106860cb176d70bc86d"
+    },
+    {
+      "file": "validacao/01_baseline_e_contagem.log",
+      "sha256": "1b70500ed9b5e991df4bad1dda7175d5fddb6da11c5bf7910be916853f5b9b1d"
+    },
+    {
+      "file": "validacao/02_fine_tuning.json",
+      "sha256": "7cda3edac12edc1e00c07585c679b7896a112970639c314108deab6a8c0b8d7b"
+    },
+    {
+      "file": "validacao/02_fine_tuning.log",
+      "sha256": "1def326e2f8876a6a084792c379f417c118dc15c0aba09af79f41aeb3ae0aac6"
+    },
+    {
+      "file": "validacao/03_objetos_pequenos.json",
+      "sha256": "67bb65b86e117635c6b9254da5cfa6da35ccc4aab2377e02922b169767af2b30"
+    },
+    {
+      "file": "validacao/03_objetos_pequenos.log",
+      "sha256": "c40b0f84e803cedc3e065f5ef8aa0b182ca5dce2a2f4bd5701d29979dac5c056"
+    },
+    {
+      "file": "validacao/ambiente.json",
+      "sha256": "1002afae9e526a9116077278b830060b0f856251074951e1294b41d643c18851"
+    },
+    {
+      "file": "validacao/execucoes.json",
+      "sha256": "e900519daa0b7f9cf52efbd5ade256a82df67c2707015c0985e7d23f8713be9f"
+    },
+    {
+      "file": "validacao/historico/00_antes_ajuste_titulo.json",
+      "sha256": "f50c9f4ff0475a4fc025206d9275ff9b21c329126b4dd57e9a7791dea3c9de2c"
+    }
+  ],
+  "scope": "Execuções reais 00–03 no Colab T4; resultados insatisfatórios preservados; caminhos /content são registros do runtime."
+}

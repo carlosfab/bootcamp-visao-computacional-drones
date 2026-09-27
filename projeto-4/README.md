@@ -2,20 +2,23 @@
 
 **Pergunta do projeto:** quantos bovinos aparecem nesta fotografia e quais erros sustentam a nossa resposta?
 
-O percurso compara um detector genérico, o mesmo modelo ajustado a imagens aéreas e a inferência em recortes sobrepostos. A entrega final combina caixas, contagens, uma tabela de erros e uma recomendação fundamentada. O modelo é **YOLO11n**, pequeno o suficiente para um experimento de aula em GPU T4. A arquitetura é mantida para tornar a comparação mais clara.
+O percurso compara um detector genérico, ajuste em fotografias inteiras, inferência em recortes e treinamento com recortes. A entrega final combina caixas, contagens, uma tabela de erros e uma recomendação fundamentada. O modelo é **YOLO11n** e a arquitetura é mantida para tornar a comparação mais clara.
 
 ## Percurso
 
-| Notebook | Aprendizado | Resultado |
+| Notebook | Aprendizado | Abrir diretamente |
 |---|---|---|
-| [Dados e problema](00_dados_e_problema.ipynb) | Anotações, imagens negativas, escala dos animais e divisão por voo/fazenda | Auditoria e imagens com a referência |
-| [Baseline e contagem](01_baseline_e_contagem.ipynb) | Classe COCO `cow`, confiança e associação 1:1 | Baseline com precisão, recall, F1 e erro de contagem |
-| [Fine-tuning](02_fine_tuning.ipynb) | Transferência de aprendizado e seleção por validação | Checkpoint ajustado e comparação no teste |
-| [Objetos pequenos](03_objetos_pequenos.ipynb) | Recortes, coordenadas globais e remoção de duplicatas | Comparação de qualidade e custo com a imagem inteira |
+| [Dados e problema](00_dados_e_problema.ipynb) | Anotações, negativos, escala e partições | [Colab](https://colab.research.google.com/github/carlosfab/bootcamp-visao-computacional-drones/blob/codex/projeto-4-gado/projeto-4/00_dados_e_problema.ipynb) |
+| [Baseline e contagem](01_baseline_e_contagem.ipynb) | Classe `cow`, confiança e associação 1:1 | [Colab](https://colab.research.google.com/github/carlosfab/bootcamp-visao-computacional-drones/blob/codex/projeto-4-gado/projeto-4/01_baseline_e_contagem.ipynb) |
+| [Fine-tuning](02_fine_tuning.ipynb) | Ajuste em fotografias inteiras e validação | [Colab](https://colab.research.google.com/github/carlosfab/bootcamp-visao-computacional-drones/blob/codex/projeto-4-gado/projeto-4/02_fine_tuning.ipynb) |
+| [Objetos pequenos](03_objetos_pequenos.ipynb) | Recortes, coordenadas globais e duplicatas | [Colab](https://colab.research.google.com/github/carlosfab/bootcamp-visao-computacional-drones/blob/codex/projeto-4-gado/projeto-4/03_objetos_pequenos.ipynb) |
+| [Treino com recortes](04_treino_com_recortes.ipynb) | Compatibilidade de escala e avaliação adicional | [Colab](https://colab.research.google.com/github/carlosfab/bootcamp-visao-computacional-drones/blob/codex/projeto-4-gado/projeto-4/04_treino_com_recortes.ipynb) |
 
-O primeiro notebook usa CPU. Os demais selecionam CUDA quando disponível e CPU como alternativa; o treinamento e a inferência em recortes são recomendados em GPU. O notebook de recortes usa um checkpoint de referência para poder funcionar independentemente do notebook de treino.
+O primeiro notebook usa CPU. Os demais selecionam CUDA quando disponível e CPU como alternativa; o treinamento e a inferência em recortes são recomendados em GPU. O notebook 03 usa um checkpoint de referência para poder funcionar independentemente do notebook 02. O notebook 04 prepara seus próprios recortes de treino e validação e treina outro checkpoint.
 
-O percurso contém **dois experimentos pareados pelas mesmas imagens de teste**. Baseline versus fine-tuning mantém arquitetura e inferência e muda os pesos. Imagem inteira versus recortes, no último notebook, mantém exatamente o mesmo checkpoint de referência. Esse checkpoint pode diferir do treinamento do aluno: identifique cada resultado pelo hash e não atribua diferenças entre checkpoints apenas ao tiling.
+Os experimentos iniciais revelaram uma limitação real: recortar somente na inferência não melhorou o resultado em Derval. O [plano adicional](PLANO-RECORTES.md) registra a hipótese de compatibilizar a escala de treino e inferência. Os resultados anteriores são preservados como parte da análise.
+
+Os notebooks 01–03 contêm **dois experimentos pareados pelas mesmas imagens de teste**. Baseline versus fine-tuning mantém arquitetura e inferência e muda os pesos. Imagem inteira versus recortes, no notebook 03, mantém exatamente o mesmo checkpoint de referência. Esse checkpoint pode diferir do treinamento do aluno: identifique cada resultado pelo hash e não atribua diferenças entre checkpoints apenas ao tiling. O notebook 04 acrescenta outro treino e uma avaliação em novas capturas.
 
 ## Dados e pergunta de generalização
 
@@ -32,6 +35,13 @@ A seleção do treino foi enriquecida com imagens positivas; as outras partiçõ
 O teste pergunta como o sistema se comporta **nesta fazenda reservada**. Uma única fazenda de teste não demonstra generalização para fazendas brasileiras, raças, estações, altitudes ou sensores diferentes. Quadros do mesmo voo são correlacionados: 60 fotos não equivalem a 60 fazendas independentes.
 
 A [pesquisa de fontes](PESQUISA.md) compara essa escolha a alternativas, incluindo Roboflow. O [manifesto](assets/manifesto.json) documenta origem, partição, transformação e hashes de cada arquivo. A reconstrução parte de faixas verificadas do ZIP científico; o aluno recebe pacotes compactos prontos e não precisa baixar os 16,6 GB originais nem fornecer chave de API.
+
+O conjunto inicial ocupa **328 MB em nove partes ZIP**. O experimento adicional
+usa uma reserva de 62 fotos, com 1.355 caixas, proveniente de cinco voos da pasta
+`Other_farms`. Todas são positivas. Essa pasta agrega origens e não comprova
+independência geográfica; a reserva avalia novas capturas deste acervo, não a
+capacidade de detectar ausência de bovinos. Como Derval já foi observada antes
+da nova hipótese, sua reavaliação no notebook 04 é explicitamente exploratória.
 
 ## Executar no Colab
 
@@ -51,7 +61,7 @@ arquivo = shutil.make_archive(nome, "zip", "resultados")
 files.download(arquivo)
 ```
 
-O ZIP contém resultados, manifesto e pesos treinados presentes em `resultados/`. Salve também o notebook com saídas na cópia do Drive ou em **Arquivo > Fazer download > Fazer download do .ipynb**. Salvar o notebook não preserva automaticamente os arquivos temporários do runtime. O checkpoint de referência do último notebook permanece disponível no projeto, identificado por hash.
+O ZIP contém resultados, manifesto e pesos treinados presentes em `resultados/`. Salve também o notebook com saídas na cópia do Drive ou em **Arquivo > Fazer download > Fazer download do .ipynb**. Salvar o notebook não preserva automaticamente os arquivos temporários do runtime. O checkpoint de referência do notebook 03 permanece disponível no projeto, identificado por hash.
 
 A versão de Python/PyTorch fornecida pelo Colab pode mudar. Os notebooks registram o ambiente realmente usado; consulte [VALIDACAO.md](VALIDACAO.md) para o ambiente e as execuções conferidos nesta entrega.
 
@@ -99,4 +109,4 @@ Os recortes têm 640 pixels, sobreposição de 20% e NMS global com IoU 0,5. Ess
 
 As imagens e anotações ICAERUS, inclusive este recorte, são **CC BY 4.0**. Preserve autores, fonte, licença e a indicação de seleção/redimensionamento/recompressão. Consulte a atribuição que acompanha os pacotes. Não há endosso dos autores originais.
 
-Ultralytics e os pesos YOLO seguem as condições de sua distribuição, incluindo AGPL-3.0 na modalidade aberta. Consulte a [licença oficial](https://github.com/ultralytics/ultralytics/blob/v8.3.203/LICENSE) antes de reutilizar o modelo fora da atividade. A licença dos dados não substitui a licença do código ou dos pesos.
+Ultralytics e os pesos YOLO seguem as condições de sua distribuição, incluindo AGPL-3.0 na modalidade aberta. Uma [cópia integral da licença da versão 8.3.203](assets/LICENSE-ultralytics.txt) acompanha este projeto e seus pesos de referência; consulte também a [licença oficial](https://github.com/ultralytics/ultralytics/blob/v8.3.203/LICENSE). A origem e o hash dessa cópia estão em [REFERENCIAS.md](REFERENCIAS.md). A licença dos dados não substitui a licença do código ou dos pesos.

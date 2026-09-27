@@ -1,0 +1,13 @@
+{
+  "archive_sha256": "c14633d9f91128570c03e136131fe0e27f4d70591a52bd0ed1208685ae8b5157",
+  "weights_sha256": "f23ef5633831b70ec604d999290a2029744c754cebc11e11f461d46fd540e674",
+  "architecture": "YOLO11n",
+  "dataset": "gado-icaerus-v1",
+  "source": "Treinamento do notebook 02; checkpoint selecionado na validação.",
+  "base_weights": "Ultralytics YOLO11n COCO",
+  "license": "AGPL-3.0",
+  "dataset_manifest_sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+  "training_completion_sha256": "c40ddf8ed80ab2085ecfd392d02b3014ba28082587b4c61939da3956c56ebd51",
+  "epochs_completed": 25,
+  "initial_weights_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1"
+}

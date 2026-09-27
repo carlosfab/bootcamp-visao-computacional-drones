@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "scope": "Data integrity only. No visual inspection or model evaluation.",
+  "images": 62,
+  "labels": 62,
+  "positive_images": 62,
+  "boxes": 1355,
+  "base_files_verified_unchanged": 600,
+  "manifest_sha256": "9d98d88d780cc89b32785c70633ebb6d434a6ad371c6224a9e0d70d16f83f3e2",
+  "base_manifest_sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+  "packages": 2,
+  "package_total_bytes": 60521470,
+  "largest_package_bytes": 37160067
+}

@@ -7,6 +7,11 @@ Antes da aula, conferir os registros de execução e inspecionar os resultados
 produzidos no ambiente escolhido. Este guia não atribui métricas ou tempos a uma
 execução que ainda não tenha sido realizada.
 
+O percurso inclui um quinto notebook sobre treino com recortes. Ele foi motivado
+pela avaliação anterior em Derval e inclui 62 capturas adicionais reservadas de
+`Other_farms`, todas positivas. A reavaliação em Derval é exploratória; a reserva
+não possui garantia de independência geográfica.
+
 ## O problema que organiza a aula
 
 Uma equipe quer estimar quantos bovinos aparecem em fotografias aéreas e localizar
@@ -28,6 +33,11 @@ O peso de referência pode diferir daquele treinado pelo aluno. Exija o hash em
 cada linha do relatório e não permita substituir a linha de imagem inteira do
 segundo experimento pelo resultado do treino do primeiro. Diferenças entre esses
 checkpoints não podem ser atribuídas exclusivamente ao tiling.
+
+No quinto notebook, um terceiro comparativo confronta treino com recortes e COCO
+usando a mesma inferência em recortes. O foco didático é formular uma hipótese
+após uma falha, reservar novas capturas antes de avaliar a estratégia e explicitar
+o que essa reserva ainda não consegue demonstrar.
 
 ## O que o aluno já sabe e o que acrescentamos
 
@@ -59,6 +69,7 @@ tamanho do conjunto. Ajuste a divisão após o ensaio completo.
 |---|---|---|
 | Primeiro | Problema, auditoria, baseline e significado dos erros | 90 minutos |
 | Segundo | Fine-tuning, resolução, recortes e decisão final | 90 minutos |
+| Extensão | Treino com recortes, conjunto reservado e revisão das conclusões | Planejar após medir o treino e a inferência |
 | Trabalho independente | Executar, investigar falhas e organizar a entrega | 2 a 4 horas, além de eventuais esperas de processamento |
 
 Prepare uma execução completa antes da aula. Ela permite discutir resultados caso
@@ -211,6 +222,41 @@ que o método será superior.
 
 ## Avaliação final e decisão
 
+### Quando a avaliação motiva uma nova hipótese
+
+O notebook `04_treino_com_recortes.ipynb` deve ser apresentado como um novo ciclo,
+motivado pelo resultado observado em Derval. A hipótese é que treinar em
+fotografias inteiras reduzidas e inferir em recortes pode expor o modelo a escalas
+diferentes. Isso é uma hipótese sobre a falha, não uma causa já demonstrada.
+
+Somente treino e validação geram recortes de 640 pixels, com sobreposição de 20%.
+O recorte inteiro é descartado quando uma caixa intersectante retém menos de 50%
+da área ou fica com lado menor que 2 pixels. Os positivos válidos são preservados;
+no treino, selecionam-se no máximo tantos negativos quanto positivos. Discuta o
+custo de descartar fragmentos ambíguos e a diferença entre quantidade de recortes
+e quantidade de capturas independentes.
+
+O ajuste usa 20 épocas, batch 16, `mosaic=0` e `scale=0.25`, além de entrada 640 e
+semente 42. Como várias decisões mudam, uma eventual melhora não pode ser
+atribuída exclusivamente ao recorte. A validação em recortes seleciona `best.pt`;
+a confiança é calibrada nas 60 fotografias originais de validação, com inferência
+em recortes. A referência COCO passa por esse mesmo percurso e tem seu próprio
+limiar calibrado.
+
+A configuração é gravada antes da reavaliação de Derval e da abertura da reserva.
+As 62 capturas adicionais não haviam sido usadas para selecionar seus parâmetros.
+Entretanto, `Other_farms` é uma pasta agregada: não se pode afirmar que seja uma
+única fazenda, que represente uma população de fazendas, nem que tenha independência
+geográfica comprovada em relação às demais. Todas as capturas são positivas, e a
+taxa de alarmes em cenas vazias permanece não estimável.
+
+Peça duas tabelas com escopos distintos: Derval exploratória e reserva com COCO
+versus ajuste em recortes. Identifique hashes, limiares e quantidade de imagens.
+Não permita ajustar parâmetros após abrir a reserva mantendo a interpretação de
+um teste intocado. Novas hipóteses exigem novo conjunto reservado.
+
+### Interpretar cada comparação
+
 Antes da avaliação final, registre as configurações que serão comparadas. Congele
 checkpoint, limiar, tamanho de entrada, recortes e deduplicação. A tabela final deve
 usar as mesmas imagens de teste e indicar o número de imagens efetivamente avaliadas.
@@ -286,4 +332,4 @@ Salvar o notebook não preserva automaticamente os arquivos temporários da sess
 
 As referências, a licença e as atribuições devem acompanhar a distribuição dos
 dados e o material final. A conclusão desta lista exige alinhamento com o enunciado
-em [ATIVIDADE.md](ATIVIDADE.md) e com as saídas reais dos quatro notebooks.
+em [ATIVIDADE.md](ATIVIDADE.md) e com as saídas reais dos cinco notebooks.

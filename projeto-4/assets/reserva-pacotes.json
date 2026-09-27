@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "dataset": "reserva-icaerus-v1",
+  "manifest_sha256": "9d98d88d780cc89b32785c70633ebb6d434a6ad371c6224a9e0d70d16f83f3e2",
+  "total_size": 60521470,
+  "packages": [
+    {
+      "filename": "reserva-icaerus-v1-parte01.zip",
+      "size": 37160067,
+      "sha256": "821e75cd494f9ee35081d2a594b9a659088f96b7515f43179a9597aaa49d9adb",
+      "files": 83
+    },
+    {
+      "filename": "reserva-icaerus-v1-parte02.zip",
+      "size": 23361403,
+      "sha256": "82dc7472cedcc381e43bbd47c6e79352e48a9ce063e3c2e049762304f9a3dadd",
+      "files": 42
+    }
+  ]
+}

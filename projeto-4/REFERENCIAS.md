@@ -91,3 +91,19 @@ Foram selecionadas, separadas por grupos de captura, redimensionadas e
 recomprimidas. O arquivo `ATRIBUICAO.md`, incluído nos pacotes, registra autores,
 DOI, alterações e ausência de endosso. A licença dos dados não substitui a licença
 das bibliotecas ou dos pesos utilizados nos experimentos.
+
+## Licença Ultralytics e dos pesos de referência
+
+A [cópia integral AGPL-3.0 distribuída com o projeto](assets/LICENSE-ultralytics.txt)
+foi copiada, sem alterações, de `ultralytics-8.3.203.dist-info/licenses/LICENSE`
+do pacote instalado **Ultralytics 8.3.203**. A versão, o campo de licença e a origem
+GitHub foram conferidos nos metadados do pacote; o conteúdo confere com o SHA-256
+registrado no arquivo `RECORD` da distribuição. A
+[licença no tag oficial v8.3.203](https://github.com/ultralytics/ultralytics/blob/v8.3.203/LICENSE)
+permite consultar a fonte correspondente.
+
+A cópia tem **34.523 bytes** e SHA-256
+`0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0`.
+Ela acompanha os pesos YOLO e os checkpoints de referência do projeto na modalidade
+aberta AGPL-3.0; os metadados de cada peso identificam seu arquivo e hash.
+Os dados ICAERUS permanecem sob CC BY 4.0, com atribuição própria.

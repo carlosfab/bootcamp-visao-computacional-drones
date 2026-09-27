@@ -4,6 +4,11 @@ O projeto usa o recorte didático `gado-icaerus-v1`, derivado do ICAERUS v2.
 São **300 imagens: 180 de treino, 60 de validação e 60 de teste**, com uma classe,
 `cow`. Os pacotes, as partições e os hashes acompanham o repositório.
 
+O quinto notebook acrescenta uma investigação de treinamento com recortes e um
+desafio de **62 capturas reservadas**, todas positivas. Essa extensão foi motivada
+pelos resultados já observados em Derval; não transforma sua reavaliação em um
+novo teste independente.
+
 ## Situação
 
 Uma equipe deseja contar e localizar bovinos em fotografias de drone. Você deverá
@@ -24,7 +29,7 @@ da comparação e da interpretação das evidências.
 ## Percurso
 
 Execute os notebooks na ordem abaixo. Cada arquivo também pode ser executado de
-forma independente; o último inclui um checkpoint de referência para a comparação
+forma independente; o notebook `03` inclui um checkpoint de referência para a comparação
 entre imagem inteira e recortes. Preserve as partições fornecidas e salve os
 resultados antes de encerrar o runtime.
 
@@ -32,13 +37,16 @@ resultados antes de encerrar o runtime.
 - `01_baseline_e_contagem.ipynb`: YOLO11n genérico, calibração e teste.
 - `02_fine_tuning.ipynb`: treinamento de 25 épocas, calibração e teste.
 - `03_objetos_pequenos.ipynb`: mesmo checkpoint, imagem inteira e recortes de 640 pixels.
+- `04_treino_com_recortes.ipynb`: treino de 20 épocas em recortes; calibração nas
+  fotografias originais de validação; reavaliação exploratória de Derval e
+  comparação com COCO em 62 capturas reservadas.
 
 Recomenda-se GPU para inferência e treinamento. As bibliotecas têm versões
 fixadas em `requirements.txt`, e cada notebook registra a versão do PyTorch e do
 Python do ambiente. Não é necessária conta no Roboflow, chave de API ou acesso a
 GPU pago para obter os dados. O tempo de execução depende do hardware disponível.
 
-Há **dois experimentos pareados pelas mesmas imagens de teste**:
+Nos quatro primeiros notebooks há **dois experimentos pareados pelas mesmas imagens de teste**:
 
 - Baseline versus fine-tuning: mesma arquitetura e mesmo caminho de inferência,
   com pesos iniciais e pesos ajustados distintos.
@@ -51,12 +59,23 @@ explícitos. Não atribua diferenças entre checkpoints exclusivamente ao tiling
 Para estudar recortes no seu próprio peso, avalie novamente **inteira e recortes**
 com esse peso, calibrando ambos na validação antes da avaliação congelada.
 
+O quinto notebook introduz um terceiro comparativo: modelo treinado em recortes
+versus COCO, **ambos com inferência em recortes**. Cada limiar é calibrado
+separadamente nas mesmas 60 fotografias originais de validação. A configuração é
+congelada antes de abrir a reserva; não escolha parâmetros por seus resultados.
+
+As 62 capturas vêm da pasta agregada `Other_farms`: o nome não garante uma única
+fazenda nem independência geográfica. Todas são positivas, por isso o comparativo
+não estima a taxa de falsos alarmes em cenas vazias. A reavaliação das 60 imagens
+de Derval nesse quinto notebook deve aparecer separadamente como **exploratória**.
+
 | Etapa | O que investigar | Evidência esperada |
 |---|---|---|
 | Dados | Origem, licença, imagens, anotações e separação entre partições | Resumo da auditoria e exemplos anotados |
 | Baseline | Detecção genérica de bovinos vistos de cima | Previsões, métricas e casos de erro |
 | Fine-tuning | Efeito do ajuste ao conjunto | Configuração, checkpoint selecionado e comparação controlada |
 | Recortes | Efeito da escala de entrada e da deduplicação | Comparação com imagem inteira e inspeção da sobreposição |
+| Treino com recortes | Compatibilidade de escala e nova avaliação após uma hipótese | Comparativo reservado com COCO e limites da reserva |
 | Decisão | Benefício, custo e limites de cada configuração | Recomendação apoiada em tabela e exemplos |
 
 ## Perguntas sobre os dados
@@ -88,11 +107,18 @@ podem orientar a criação dos recortes de treinamento nem a seleção de parâm
 - Use a mesma regra documentada de associação entre caixas em todas as configurações.
 - Ao comparar imagem inteira e recortes, mantenha o mesmo checkpoint ajustado.
 - Identifique o SHA-256 dos pesos e o par experimental de cada resultado.
+- No quinto notebook, recorte somente treino e validação para o ajuste; não
+  acrescente Derval ou a reserva ao treinamento.
+- Separe o resultado exploratório em Derval do desafio de 62 capturas reservadas.
 - Declare qualquer alteração adicional que impeça atribuir o efeito a uma única mudança.
 
 Se um experimento posterior for motivado por um resultado do teste, identifique-o
 como exploração. Ele não constitui outra avaliação final independente sobre os
 mesmos dados.
+
+No quinto notebook, a nova estratégia também muda épocas, batch, mosaico e
+variação de escala. Uma eventual melhora não isola causalmente o efeito do
+recorte: a comparação avalia esse conjunto de decisões.
 
 ## Avalie detecção e contagem
 
@@ -127,6 +153,10 @@ Separe também imagens positivas e negativas. A taxa de contagem exata agregada
 pode ser alta porque muitas cenas não contêm bovinos anotados. Nos negativos,
 informe a fração de imagens que receberam ao menos um falso positivo.
 
+Na reserva do quinto notebook não há negativos. Declare a taxa de falso alarme
+em cenas vazias como **não estimável**, sem convertê-la em zero. Falsos positivos
+de caixas ainda podem ocorrer e ser medidos nas cenas positivas.
+
 Na medição de tempo, informe hardware, quantidade de imagens e o que entrou na
 medida. Para recortes, registre também quantos foram processados. Use o mesmo
 escopo de medição entre os métodos. Se não medir uma etapa, indique que ela não
@@ -157,7 +187,7 @@ Entregue uma pasta ou arquivo compactado contendo:
 - Registro do ambiente e das configurações de treino, inferência e avaliação.
 - Checkpoint ajustado ou referência estável para obtê-lo, acompanhado de seu hash.
 - Previsões e contagens por imagem, identificadas por configuração.
-- Tabela comparativa com hash dos pesos e par experimental de cada linha, e imagens
+- Tabelas comparativas com hash dos pesos, par experimental e conjunto avaliado em cada linha, e imagens
   anotadas usadas na análise de falhas.
 - Relatório curto com recomendação final e limitações do experimento.
 
@@ -181,7 +211,7 @@ final de cada notebook ou no README. Salve separadamente o notebook com saídas.
 | Auditoria e entendimento dos dados | 15 | Contagens verificadas, exemplos, escala dos animais, origem e limites dos rótulos |
 | Separação e protocolo experimental | 20 | Partições preservadas, risco de vazamento discutido e decisões tomadas sem usar o teste |
 | Comparação entre baseline e fine-tuning | 15 | Classe mapeada corretamente, configuração registrada e efeito do ajuste interpretado |
-| Recortes e deduplicação | 15 | Coordenadas consistentes, sobreposição examinada e custo/benefício comparado com imagem inteira |
+| Recortes e deduplicação | 15 | Coordenadas consistentes, custo/benefício, treino recortado sem teste e comparação reservada |
 | Avaliação e análise dos erros | 20 | Métricas de detecção e contagem, falhas concretas e conclusões compatíveis com os resultados |
 | Reprodução e recomendação final | 15 | Artefatos completos, ambiente identificável, percurso executável e decisão fundamentada |
 | **Total** | **100** | |
@@ -202,3 +232,7 @@ as demais variáveis controladas.
 Um estudo posterior pode reservar outros voos e fazendas. O teste em Derval é
 um caso de transferência para outra fazenda, sem demonstrar generalização para
 qualquer propriedade ou condição de coleta.
+
+Depois da hipótese do quinto notebook, Derval faz parte da análise exploratória.
+A reserva adiciona capturas não usadas na escolha daquela configuração, mas não
+substitui um estudo com separação geográfica verificável e cenas negativas.
