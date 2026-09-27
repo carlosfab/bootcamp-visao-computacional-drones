@@ -221,6 +221,8 @@ def notebook00():
     print("Total de caixas:", len(caixas))
     '''), code('''
     figura = desenhar(exemplo["image"], caixas, [], [], 0.25)
+    plt.title(f"{len(caixas)} bovinos anotados")
+    plt.gca().get_legend().remove()
     figura.savefig(SAIDA / "referencia_anotada.png", dpi=120)
     plt.show()
     plt.close(figura)
