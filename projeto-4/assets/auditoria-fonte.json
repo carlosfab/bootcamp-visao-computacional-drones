@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "source_doi": "10.5281/zenodo.11048412",
+  "source_images": 1385,
+  "matched_yolo_labels": 1385,
+  "source_flights": 25,
+  "positive_images": 366,
+  "present_empty_labels": 1019,
+  "source_yolo_boxes": 4747,
+  "class_box_counts": {
+    "0": 4747
+  },
+  "source_advertised_boxes": 4941,
+  "annotation_anomalies": [],
+  "uniquely_paired_voc_images": 1079,
+  "voc_yolo_count_differences": [
+    {
+      "image": "Cattle_drone_images/Jalogny/JPGImages/DJI_202307260838_039/DJI_20230726084333_0004_V.JPG",
+      "yolo_count": 14,
+      "voc_count": 15,
+      "voc_names": {
+        "cow": 14,
+        "red_squirrel": 1
+      }
+    }
+  ],
+  "scope": "Structural inventory and labels. Does not establish visual completeness of annotations."
+}

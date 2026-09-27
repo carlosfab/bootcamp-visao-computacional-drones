@@ -30,3 +30,10 @@ projeto-pop/
 /projeto-3/pesos/
 /projeto-3/resultados/
 /projeto-3/*.partial
+
+# Projeto 4: dados brutos, pesos e execuções locais
+/projeto-4/dados/
+/projeto-4/pesos/
+/projeto-4/resultados/
+/projeto-4/runs/
+/projeto-4/.venv/
