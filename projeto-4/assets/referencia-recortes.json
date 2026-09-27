@@ -1,0 +1,168 @@
+{
+  "archive": "referencia-recortes.zip",
+  "sha256": "72d37bf221b35eeaf372fe5465779626d4a70791aead4ac45f1d84ba99ed1521",
+  "bytes": 460147,
+  "scope": "Execução real do notebook 04, Colab T4; avaliação reservada após configuração congelada; caminhos /content são registros do runtime.",
+  "files": [
+    {
+      "path": "resultados/escala_compativel/ambiente.json",
+      "sha256": "d5a1fac063ebf0fd93060ed372d9799318242f9b06d0456516b8b2bb6c748a79",
+      "bytes": 250
+    },
+    {
+      "path": "resultados/escala_compativel/calibracao_ajustado.csv",
+      "sha256": "147311ffe517ccccb2b33b62662dd9ca219fac4c293a22d7be2990360a540cdb",
+      "bytes": 1666
+    },
+    {
+      "path": "resultados/escala_compativel/calibracao_coco.csv",
+      "sha256": "9b6cf799253b7f37be869a347e139eb3e6b6270bc059ea9120e43519cd7e2aea",
+      "bytes": 1222
+    },
+    {
+      "path": "resultados/escala_compativel/comparacao_reserva.csv",
+      "sha256": "9bb61cf69bd9be4a8d87ccc687d9b115f2c1ae554b27fd2682540b724a78e241",
+      "bytes": 534
+    },
+    {
+      "path": "resultados/escala_compativel/configuracao_congelada.json",
+      "sha256": "e7c8c0c8714e5cf843e3536587d25e17f7b72e3d620a6637fa38ce4717494fd6",
+      "bytes": 855
+    },
+    {
+      "path": "resultados/escala_compativel/configuracao_treino.json",
+      "sha256": "04b09e5479ef9c14f6e69fa75f03f23c68f29449588a0a9b04a5c3c1f19b37ce",
+      "bytes": 312
+    },
+    {
+      "path": "resultados/escala_compativel/derval_exploratorio/per_image.csv",
+      "sha256": "fe6374da1daa520333e2a68a8a577c72875b0d96f2940c19b5cbf9d7688d78c0",
+      "bytes": 11960
+    },
+    {
+      "path": "resultados/escala_compativel/derval_exploratorio/predictions.json",
+      "sha256": "0380aa45c42f9f89149b0323aeb0ff1cd39333ad6089451494f1a50d4ee1d536",
+      "bytes": 54030
+    },
+    {
+      "path": "resultados/escala_compativel/derval_exploratorio/resumo.json",
+      "sha256": "254aa7be051fdd55982eaf29904278776e556e0cd9531c77c94c22d7e94fd914",
+      "bytes": 1313
+    },
+    {
+      "path": "resultados/escala_compativel/janelas_reserva.csv",
+      "sha256": "bba5ad8b9fa97198d003821b6fed7dc11fb291f15ce9a1b586d7ae0f0d84783e",
+      "bytes": 3813
+    },
+    {
+      "path": "resultados/escala_compativel/manifesto_base.json",
+      "sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+      "bytes": 392165
+    },
+    {
+      "path": "resultados/escala_compativel/manifesto_recortes.json",
+      "sha256": "f7c01e1acd2514a9bc24d257082a954274a0ec71d702abc000ebb8de775092ca",
+      "bytes": 1275029
+    },
+    {
+      "path": "resultados/escala_compativel/manifesto_reserva.json",
+      "sha256": "9d98d88d780cc89b32785c70633ebb6d434a6ad371c6224a9e0d70d16f83f3e2",
+      "bytes": 72773
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_ajustado/per_image.csv",
+      "sha256": "b01e55ef4e1f2931d2ca4848fe22d79d3c16b77db95bc538a8a7560d8a729abd",
+      "bytes": 14944
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_ajustado/predictions.json",
+      "sha256": "ae62f4cbd3fad31da822d3fb12408a6ec11c5d0fcfe33918d85ca2181a069bec",
+      "bytes": 609324
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_ajustado/resumo.json",
+      "sha256": "682ac415172593f9c4193f3f057cf01ff5f5b4daa65852773c9ade2852facf9a",
+      "bytes": 1392
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_coco/per_image.csv",
+      "sha256": "c7f8d92f17b9f0f0d92452725fd7dae8572ff1c0d50ee9cc3212e9159c20831d",
+      "bytes": 13421
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_coco/predictions.json",
+      "sha256": "f4a48dd93a26acce78abee2edcb7dd0af769f8f73282b2b0dbacb306ecdf925a",
+      "bytes": 166465
+    },
+    {
+      "path": "resultados/escala_compativel/reserva_coco/resumo.json",
+      "sha256": "f7a485ad22619310e8ddfdcd373acdf80c9e52ef68c92d250a334ce699154fda",
+      "bytes": 1371
+    },
+    {
+      "path": "resultados/escala_compativel/treinamento_concluido.json",
+      "sha256": "e0e2742f61af1e4bae366f76f41b242bb097ecbd07a2ddca9cb302ed166be8a1",
+      "bytes": 582
+    },
+    {
+      "path": "resultados/escala_compativel/val_ajustado/per_image.csv",
+      "sha256": "1f4569202520317666c14925af2591642573972f2a6d54a8c3479d345e410ab6",
+      "bytes": 12228
+    },
+    {
+      "path": "resultados/escala_compativel/val_ajustado/predictions.json",
+      "sha256": "285de925d9729149a140063e1ad2bbc82678361ec9f37c3e91831209ddb6e348",
+      "bytes": 144399
+    },
+    {
+      "path": "resultados/escala_compativel/val_ajustado/resumo.json",
+      "sha256": "57414e7d90dccdc135fff87a4fc0554939735cfa6d5cb0ab5d54fa6f703f3af4",
+      "bytes": 1423
+    },
+    {
+      "path": "resultados/escala_compativel/val_coco/per_image.csv",
+      "sha256": "920f5a0a6ac6ebd48b0cc33fab39f35a1d2614874b8b591ff9bfe737668f37d8",
+      "bytes": 11737
+    },
+    {
+      "path": "resultados/escala_compativel/val_coco/predictions.json",
+      "sha256": "9f27c60dbdfe611dd02215f63c02c1d257c1a6cb4ac2ac5723ccb3981a0e3ae7",
+      "bytes": 48439
+    },
+    {
+      "path": "resultados/escala_compativel/val_coco/resumo.json",
+      "sha256": "bc5a04914062f0e53a8363ee5e096b38c8b32053afe814ea93584c9a9ee56963",
+      "bytes": 1434
+    },
+    {
+      "path": "resultados/treino/gado_recortes/args.yaml",
+      "sha256": "27226bb81cb16e24eb165596eb0bdcc84e4374534df8673f5fa92ee0f1f3ff14",
+      "bytes": 1612
+    },
+    {
+      "path": "resultados/treino/gado_recortes/results.csv",
+      "sha256": "a7aa4c7c83f4011f8cb22726b98f4dad0d73fb8d944fcb46abe072de27d38a00",
+      "bytes": 2539
+    },
+    {
+      "path": "resultados/validacao/04_publicacao.json",
+      "sha256": "9c24de1bb7e8ed0a320dfb056d5635d144a425d4b406d131b451df15533b5db9",
+      "bytes": 465
+    },
+    {
+      "path": "resultados/validacao/04_treino_com_recortes.json",
+      "sha256": "e2ac601a75af3ef9d5eec82566cb91c448207e4ced637978baafcc237cd7eafd",
+      "bytes": 424
+    },
+    {
+      "path": "resultados/validacao/04_treino_com_recortes.log",
+      "sha256": "bf7486b6027835c0e696e9cbd2a4adfcb28601cf2b0bdcfa21e98540ff02caeb",
+      "bytes": 230
+    },
+    {
+      "path": "resultados/validacao/ambiente_recortes.json",
+      "sha256": "6a42c19fb35ceef70a46e8f2795ffc9451e7153c5828af679c47ffd05e4035e6",
+      "bytes": 717
+    }
+  ]
+}

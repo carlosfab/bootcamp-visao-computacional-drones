@@ -117,7 +117,7 @@ def main():
     (RESULTS / 'execucoes.json').write_text(json.dumps(reports, indent=2))
     bundle = ROOT / 'validacao-gado.zip'
     with zipfile.ZipFile(bundle, 'w', zipfile.ZIP_DEFLATED) as z:
-        for path in ROOT.glob('*.ipynb'):
+        for path in [ROOT / report['notebook'] for report in reports]:
             z.write(path, path.relative_to(ROOT))
         for path in (ROOT / 'resultados').rglob('*'):
             if path.is_file() and path.suffix.lower() in {'.json', '.csv', '.png', '.log', '.yaml'}:

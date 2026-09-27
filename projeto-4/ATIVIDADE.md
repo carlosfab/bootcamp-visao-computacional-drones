@@ -86,16 +86,20 @@ desenvolvimento. Mostre pelo menos um caso em que a resolução possa dificultar
 detecção. As estatísticas de caixas do teste entram no relatório após a avaliação
 com as configurações congeladas.
 
-Treino e validação usam Mauron e Jalogny em datas separadas; o teste usa Derval,
-uma fazenda ausente do desenvolvimento. Confira os grupos de captura no manifesto.
+Treino e validação usam Mauron e Jalogny em datas separadas. No protocolo inicial
+dos notebooks 00–03, Derval era a fazenda reservada para teste. Seus resultados
+motivaram a hipótese do notebook 04; nessa etapa, Derval é exploratória e as
+62 novas capturas constituem a reserva. Confira os grupos no manifesto.
 Não há identificação individual dos bovinos, portanto datas diferentes podem
 mostrar os mesmos animais. As imagens foram reduzidas proporcionalmente para
 lado maior de até 2048 pixels e recomprimidas em JPEG; essa adaptação limita o
 detalhe disponível mesmo antes de alimentar a rede.
 
 Não confunda ausência de arquivos idênticos com ausência de cenas próximas.
-Recortes da mesma imagem devem permanecer na mesma partição. Dados de teste não
-podem orientar a criação dos recortes de treinamento nem a seleção de parâmetros.
+Recortes da mesma imagem devem permanecer na mesma partição. Nunca use imagens
+do teste para gerar recortes de treino. Se os resultados do teste orientarem uma
+nova hipótese, esse conjunto passa a ser exploratório: reserve novas capturas
+antes da avaliação final, como foi feito no notebook 04.
 
 ## Regras da comparação
 

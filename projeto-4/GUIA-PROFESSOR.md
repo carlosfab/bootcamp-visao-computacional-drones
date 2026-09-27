@@ -12,6 +12,14 @@ pela avaliação anterior em Derval e inclui 62 capturas adicionais reservadas d
 `Other_farms`, todas positivas. A reavaliação em Derval é exploratória; a reserva
 não possui garantia de independência geográfica.
 
+Na execução de referência, os cinco notebooks concluíram 81 células sem erros,
+em Colab T4. Na reserva adicional, COCO teve F1 de 0,019 e MAE de 21,55; o modelo
+treinado com recortes teve F1 de 0,675 e MAE de 5,77. Derval permaneceu difícil:
+F1 de 0,235 na reavaliação exploratória. Use esse contraste para discutir melhora
+local e limites de generalização, sem prometer contagem operacional. O treino
+inicial levou 4,4 minutos e o adicional 6,6 minutos; esses tempos não incluem
+toda a preparação. Evidências completas em [VALIDACAO.md](VALIDACAO.md).
+
 ## O problema que organiza a aula
 
 Uma equipe quer estimar quantos bovinos aparecem em fotografias aéreas e localizar
@@ -240,8 +248,8 @@ O ajuste usa 20 épocas, batch 16, `mosaic=0` e `scale=0.25`, além de entrada 6
 semente 42. Como várias decisões mudam, uma eventual melhora não pode ser
 atribuída exclusivamente ao recorte. A validação em recortes seleciona `best.pt`;
 a confiança é calibrada nas 60 fotografias originais de validação, com inferência
-em recortes. A referência COCO passa por esse mesmo percurso e tem seu próprio
-limiar calibrado.
+em recortes. A referência COCO permanece pré-treinada: compartilha apenas a
+inferência em recortes e a calibração de seu próprio limiar.
 
 A configuração é gravada antes da reavaliação de Derval e da abertura da reserva.
 As 62 capturas adicionais não haviam sido usadas para selecionar seus parâmetros.

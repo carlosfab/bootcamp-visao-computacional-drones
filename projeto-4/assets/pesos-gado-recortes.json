@@ -1,0 +1,19 @@
+{
+  "archive_sha256": "3bd617352cb903441aef799588be4adb8565e469f8b1a4a79418702b6c825c88",
+  "weights_sha256": "9734071b88c14c127071a7c7892afa04f0be173938aae9046580b0fa78556025",
+  "architecture": "YOLO11n",
+  "source": "Notebook 04; best.pt selecionado na validação de recortes.",
+  "license": "AGPL-3.0",
+  "base_weights": "Ultralytics YOLO11n COCO",
+  "initial_weights_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "dataset_manifest_sha256": "353aaa65c5d6faba80e1ce98e0d04779b347ec3ac85b86c19b3bfd8926eb136c",
+  "crop_manifest_sha256": "f7c01e1acd2514a9bc24d257082a954274a0ec71d702abc000ebb8de775092ca",
+  "reserve_manifest_sha256": "9d98d88d780cc89b32785c70633ebb6d434a6ad371c6224a9e0d70d16f83f3e2",
+  "training_completion_sha256": "e0e2742f61af1e4bae366f76f41b242bb097ecbd07a2ddca9cb302ed166be8a1",
+  "epochs_completed": 20,
+  "conf_ajustado": 0.4,
+  "conf_coco": 0.05,
+  "tile_size": 640,
+  "overlap": 0.2,
+  "global_nms_iou": 0.5
+}

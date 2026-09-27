@@ -241,7 +241,11 @@ def notebook04():
 
     Não ajuste a estratégia para melhorar a galeria da reserva e continue chamando-a de teste intocado. Depois que seus resultados orientam decisões, ela passa a fazer parte do desenvolvimento.
     ''')]
-    cells.append(backup_instructions())
+    backup = backup_instructions()
+    backup["source"] = backup["source"].replace(
+        "checkpoint de referência do notebook de recortes",
+        "checkpoint de referência do notebook 03")
+    cells.append(backup)
     return cells
 
 

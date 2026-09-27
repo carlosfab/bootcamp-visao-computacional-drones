@@ -5,6 +5,12 @@ anotados em uma fotografia de drone e comparar três caminhos: detector genéric
 ajuste supervisionado e inferência em recortes. O ponto didático central é explicar
 como dados, escala aparente e protocolo de avaliação alteram a resposta.
 
+Após a execução desses caminhos, acrescentamos o treinamento com recortes na
+mesma escala da inferência. A motivação observada, a receita e as 62 capturas
+adicionais reservadas estão no [plano do novo experimento](PLANO-RECORTES.md).
+Derval passa a ter caráter exploratório nessa etapa; os resultados iniciais
+permanecem registrados.
+
 ## Por que ICAERUS é o conjunto principal
 
 O [ICAERUS v2, de Helary e Lebreton](https://zenodo.org/records/11048412), distribui

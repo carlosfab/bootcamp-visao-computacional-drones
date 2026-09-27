@@ -18,6 +18,14 @@ O primeiro notebook usa CPU. Os demais selecionam CUDA quando disponível e CPU 
 
 Os experimentos iniciais revelaram uma limitação real: recortar somente na inferência não melhorou o resultado em Derval. O [plano adicional](PLANO-RECORTES.md) registra a hipótese de compatibilizar a escala de treino e inferência. Os resultados anteriores são preservados como parte da análise.
 
+**Os cinco notebooks foram executados no Colab T4: 81 células de código, zero erros.**
+Na avaliação adicional de 62 capturas reservadas, o treinamento com recortes
+reduziu o MAE de contagem de **21,55 para 5,77 animais por imagem** e elevou o F1
+de **0,019 para 0,675** frente ao COCO, ambos usando inferência em recortes.
+A reavaliação exploratória de Derval continuou difícil (F1 de 0,235).
+O material ensina a medir essa melhora e reconhecer seus limites; não valida
+um censo operacional. Veja as métricas e evidências em [VALIDACAO.md](VALIDACAO.md).
+
 Os notebooks 01–03 contêm **dois experimentos pareados pelas mesmas imagens de teste**. Baseline versus fine-tuning mantém arquitetura e inferência e muda os pesos. Imagem inteira versus recortes, no notebook 03, mantém exatamente o mesmo checkpoint de referência. Esse checkpoint pode diferir do treinamento do aluno: identifique cada resultado pelo hash e não atribua diferenças entre checkpoints apenas ao tiling. O notebook 04 acrescenta outro treino e uma avaliação em novas capturas.
 
 ## Dados e pergunta de generalização
@@ -37,7 +45,7 @@ O teste pergunta como o sistema se comporta **nesta fazenda reservada**. Uma ún
 A [pesquisa de fontes](PESQUISA.md) compara essa escolha a alternativas, incluindo Roboflow. O [manifesto](assets/manifesto.json) documenta origem, partição, transformação e hashes de cada arquivo. A reconstrução parte de faixas verificadas do ZIP científico; o aluno recebe pacotes compactos prontos e não precisa baixar os 16,6 GB originais nem fornecer chave de API.
 
 O conjunto inicial ocupa **328 MB em nove partes ZIP**. O experimento adicional
-usa uma reserva de 62 fotos, com 1.355 caixas, proveniente de cinco voos da pasta
+usa **60,5 MB em duas partes ZIP**: 62 fotos, com 1.355 caixas, de cinco voos da pasta
 `Other_farms`. Todas são positivas. Essa pasta agrega origens e não comprova
 independência geográfica; a reserva avalia novas capturas deste acervo, não a
 capacidade de detectar ausência de bovinos. Como Derval já foi observada antes
@@ -104,6 +112,9 @@ Os recortes têm 640 pixels, sobreposição de 20% e NMS global com IoU 0,5. Ess
 - [Pesquisa e decisões](PESQUISA.md): comparação de bases e limitações.
 - [Referências](REFERENCIAS.md): dados, artigos e documentação.
 - [Validação](VALIDACAO.md): ambiente, execução, resultados e limites reais.
+- Pesos de referência e relatórios dos dois treinamentos acompanham `assets/`,
+  identificados por SHA-256. O notebook 04 mantém o treinamento completo como
+  parte da atividade; seus pesos salvos permitem conferir a execução de referência.
 
 ## Licenças e atribuição
 
